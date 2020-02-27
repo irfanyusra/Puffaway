@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vape_app/pages/loading.dart';
 import 'package:vape_app/pages/logging.dart';
 import 'package:vape_app/pages/logging_trigger.dart';
-
+import 'package:vape_app/pages/recommendation.dart';
 
 void main() => runApp(
   MaterialApp(
@@ -11,6 +11,7 @@ void main() => runApp(
       '/': (context) => Loading(),
       '/logging': (context)=> Logging(),
       '/logging_trigger': (context)=> LoggingTrigger(),
+      '/recommendations': (context)=> Recommendation(),
       //add more routes here
     },
   )
