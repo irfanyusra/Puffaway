@@ -151,8 +151,11 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                 color: Colors.blue,
                 child: Text('Next'),
                 onPressed: () {
-                  //TODO: Navigate to the next page and send thought and trigger as variables
-                  print(thoughtTextController.text);
+                  Navigator.pushNamed(context, '/recommendations', arguments: {
+                    'thoughts': thoughtTextController.text,
+                    'trigger': selectedTrigger,
+                  });
+//                  print(thoughtTextController.text);
                   setState(() {
                     thoughtTextController.text = thoughtTextController.text;
                     thoughts = thoughtTextController.text;
