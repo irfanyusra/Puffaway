@@ -3,20 +3,21 @@ import 'package:vape_app/pages/loading.dart';
 import 'package:vape_app/pages/logging.dart';
 import 'package:vape_app/pages/logging_trigger.dart';
 import 'package:vape_app/pages/recommendation_page.dart';
+import 'package:vape_app/pages/reflections_page.dart';
 
-void main() => runApp(
-  MaterialApp(
-    initialRoute : '/',
-    routes: {
-      '/': (context) => Loading(),
-      '/logging': (context)=> Logging(),
-      '/logging_trigger': (context)=> LoggingTrigger(),
-      '/recommendations': (context)=> Recommendation(),
-      //add more routes here
-    },
-  )
+void main() => runApp(MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Loading(),
+        '/logging': (context) => Logging(),
+        '/logging_trigger': (context) => LoggingTrigger(),
+        '/recommendations': (context) => Recommendation(),
+        '/reflections': (context) => Reflections(),
+        //add more routes here
+      },
+    )
 //    MyApp()
-);
+        );
 
 //class MyApp extends StatelessWidget {
 //  // This widget is the root of your application.

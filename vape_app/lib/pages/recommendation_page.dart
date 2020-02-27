@@ -10,7 +10,8 @@ class Recommendation extends StatefulWidget {
 class _RecommendationState extends State<Recommendation> {
   Map data = {};
   List<Recommendations> listRecommendations = [
-    Recommendations(trigger: "Select one", recom: "Please select a trigger next time"),
+    Recommendations(
+        trigger: "Select one", recom: "Please select a trigger next time"),
     Recommendations(trigger: "trigger1", recom: "dddddd \n dddsds"),
     Recommendations(trigger: "trigger2", recom: "dddddd2"),
     Recommendations(trigger: "trigger3", recom: "dddddd3"),
@@ -71,7 +72,7 @@ class _RecommendationState extends State<Recommendation> {
               ),
 
               Container(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: Alignment.topLeft,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.blueAccent),
                   borderRadius: BorderRadius.all(Radius.circular(
@@ -82,6 +83,7 @@ class _RecommendationState extends State<Recommendation> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Recommendation: \n ${rec.recom}',
+                    textAlign: TextAlign.left,
                     style: TextStyle(
                       color: Colors.black,
                       letterSpacing: 2.0,
@@ -90,11 +92,24 @@ class _RecommendationState extends State<Recommendation> {
                   ),
                 ),
               ),
+              //TODO: Make the button at the bottom of the page
               Container(
+                alignment: Alignment.bottomCenter,
                 child: FlatButton(
                   color: Colors.blue,
-                  child: Text('Next'),
-                  onPressed: () {},
+                  child: Text('Finish Log',
+                      style: TextStyle(
+                        fontSize: 20,
+                      )),
+                  onPressed: () {
+                    //go to the reflections page
+                    //sending all the variables for logging (trigger, thoughts, recommendation
+                    Navigator.pushNamed(context, '/reflections', arguments: {
+                      'thoughts': data['thoughts'],
+                      'trigger': data['trigger'],
+                      'recommendation': rec,
+                    });
+                  },
                 ),
               ),
 //

@@ -99,6 +99,7 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
               SizedBox(
                 height: 20.0,
               ),
+              //TODO: remove text container later
               Container(child: Text('Selected: $selectedTrigger')),
               SizedBox(
                 height: 25.0,
@@ -156,6 +157,8 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                     'trigger': selectedTrigger,
                   });
 //                  print(thoughtTextController.text);
+
+                  //TODO: Remove when the thought display is removed
                   setState(() {
                     thoughtTextController.text = thoughtTextController.text;
                     thoughts = thoughtTextController.text;
