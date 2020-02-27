@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:math';
+import 'package:vape_app/services/recommendations.dart';
 
 class Recommendation extends StatefulWidget {
   @override
@@ -9,12 +9,29 @@ class Recommendation extends StatefulWidget {
 
 class _RecommendationState extends State<Recommendation> {
   Map data = {};
+  List<Recommendations> listRecommendations = [
+    Recommendations(trigger: "Select one", recom: "Please select a trigger next time"),
+    Recommendations(trigger: "trigger1", recom: "dddddd \n dddsds"),
+    Recommendations(trigger: "trigger2", recom: "dddddd2"),
+    Recommendations(trigger: "trigger3", recom: "dddddd3"),
+    Recommendations(trigger: "trigger4", recom: "dddddd4")
+  ];
+  Recommendations rec;
+
+  Recommendations getRecommendation(String trig) {
+    rec = listRecommendations.where((Recommendations r) {
+      return r.trigger == trig;
+    }).first;
+    return rec;
+//   listRecommendations.
+  }
 
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
-    print(data);
-//  'Thoughts: ${data['thoughts']}',
+    //print(data);
+    getRecommendation(data['trigger']);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Recommendation'),
@@ -57,13 +74,14 @@ class _RecommendationState extends State<Recommendation> {
                 alignment: AlignmentDirectional(0.0, 0.0),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.blueAccent),
-                  borderRadius: BorderRadius.all(Radius.circular(5.0) //                 <--- border radius here
+                  borderRadius: BorderRadius.all(Radius.circular(
+                          5.0) //                 <--- border radius here
                       ),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Recommendation',
+                    'Recommendation: \n ${rec.recom}',
                     style: TextStyle(
                       color: Colors.black,
                       letterSpacing: 2.0,
