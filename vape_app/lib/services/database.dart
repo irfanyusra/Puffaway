@@ -22,12 +22,5 @@ class DatabaseService{
         'dateTime':new DateTime.now(),
   });
   }
-
-  //Get logs stream
-  Stream<QuerySnapshot> get logs{
-      return triggerCollection
-      .where('uid',isEqualTo:uid )
-      .orderBy('dateTime',descending: true)
-      .snapshots();
-    }
+  
 }
