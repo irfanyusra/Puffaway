@@ -15,10 +15,11 @@ class DatabaseService{
   }
 
   Future createTrigger(String trigger, String thought) async{
-      return await triggerCollection.document(uid).setData({
+      return await triggerCollection.document().setData({
+        'uid':uid,
         'trigger':trigger,
         'thought':thought,
-      });
-
+  });
   }
+  
 }
