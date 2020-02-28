@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vape_app/pages/all_logs.dart';
 import 'package:vape_app/pages/loading.dart';
 import 'package:vape_app/pages/logging.dart';
 import 'package:vape_app/pages/logging_trigger.dart';
@@ -13,6 +14,7 @@ void main() => runApp(MaterialApp(
         '/logging_trigger': (context) => LoggingTrigger(),
         '/recommendations': (context) => Recommendation(),
         '/reflections': (context) => Reflections(),
+        '/all_logs': (context) => AllLogs(),
         //add more routes here
       },
     )

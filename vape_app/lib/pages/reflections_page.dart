@@ -160,6 +160,7 @@ class _ReflectionsState extends State<Reflections> {
                       )),
                   onPressed: () {
                     //TODO: put everything in the log instance and make a log list
+//                    Navigator.pushNamed(context, '/all_logs');
                     print(stressorTextController.text);
                     print(progressTextController.text);
                   },

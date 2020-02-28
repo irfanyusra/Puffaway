@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:vape_app/services/recommendations.dart';
+import 'package:vape_app/Models/Recommendation.dart';
 
 class Recommendation extends StatefulWidget {
   @override

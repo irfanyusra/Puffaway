@@ -11,12 +11,27 @@ class _LoggingState extends State<Logging> {
     return Scaffold(
         body: Center(
       child: SafeArea(
-          child: FlatButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/logging_trigger');
-        },
-        color: Colors.blue,
-        child: Text('Log your trigger'),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/logging_trigger');
+            },
+            color: Colors.blue,
+            child: Text('Log your trigger'),
+          ),
+          FlatButton(
+            color: Colors.blue,
+            child: Text('All Logs'),
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                '/all_logs',
+              );
+            },
+          ),
+        ],
       )),
     ));
   }
