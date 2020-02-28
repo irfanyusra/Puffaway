@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'recommendation_page.dart';
 
 class LoggingTrigger extends StatefulWidget {
   @override
@@ -61,7 +62,7 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Log your trigger'),
+        title: Text('Log Session'),
         centerTitle: true,
       ),
       body: Padding(
@@ -152,10 +153,13 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                 color: Colors.blue,
                 child: Text('Next'),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/recommendations', arguments: {
+                  Navigator.push(context, new MaterialPageRoute<void>(
+                      builder: (context) => Recommendation()
+                  ));
+                  /*Navigator.pushNamed(context, '/recommendations', arguments: {
                     'thoughts': thoughtTextController.text,
                     'trigger': selectedTrigger,
-                  });
+                  });*/
 //                  print(thoughtTextController.text);
 
                   //TODO: Remove when the thought display is removed
