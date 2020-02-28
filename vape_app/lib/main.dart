@@ -9,7 +9,7 @@ import 'package:vape_app/pages/reflections_page.dart';
 void main() => runApp(MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => Loading(),
+        '/': (context) => Loading (),
         '/logging': (context) => Logging(),
         '/logging_trigger': (context) => LoggingTrigger(),
         '/recommendations': (context) => Recommendation(),

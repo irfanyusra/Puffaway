@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "636827494816",
+    "firebase_url": "https://puffaway-4ad71.firebaseio.com",
+    "project_id": "puffaway-4ad71",
+    "storage_bucket": "puffaway-4ad71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636827494816:android:187286671c9f73ab35dcc5",
+        "android_client_info": {
+          "package_name": "vapeapp.vape_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636827494816-1alt4ref63oukdetkklaem48lrlod629.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd72EnVqh5-9gBRW75jO9rk85hRNGmCPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636827494816-1alt4ref63oukdetkklaem48lrlod629.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
