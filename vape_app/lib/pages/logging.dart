@@ -30,6 +30,18 @@ class _LoggingState extends State<Logging> {
                 '/all_logs',
               );
             },
+
+          ),
+          FlatButton(
+            color: Colors.blue,
+            child: Text('Add trigger'),
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                '/add_trigger',
+              );
+            },
+
           ),
         ],
       )),
