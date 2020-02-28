@@ -151,16 +151,11 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
               ),
               FlatButton(
                 color: Colors.blue,
-                child: Text('Next'),
+                child: Text('Save'),
                 onPressed: () {
                   Navigator.push(context, new MaterialPageRoute<void>(
                       builder: (context) => Recommendation()
                   ));
-                  /*Navigator.pushNamed(context, '/recommendations', arguments: {
-                    'thoughts': thoughtTextController.text,
-                    'trigger': selectedTrigger,
-                  });*/
-//                  print(thoughtTextController.text);
 
                   //TODO: Remove when the thought display is removed
                   setState(() {

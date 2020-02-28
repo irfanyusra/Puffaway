@@ -154,7 +154,7 @@ class _ReflectionsState extends State<Reflections> {
                 alignment: Alignment.bottomCenter,
                 child: FlatButton(
                   color: Colors.blue,
-                  child: Text('Finish Reflection',
+                  child: Text('Save Reflection',
                       style: TextStyle(
                         fontSize: 20,
                       )),

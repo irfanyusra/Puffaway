@@ -31,7 +31,7 @@ class _RecommendationState extends State<Recommendation> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
     //print(data);
-    getRecommendation(data['trigger']);
+    getRecommendation("trigger1");        //NEED TO PUT DATABASE VAR
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +59,7 @@ class _RecommendationState extends State<Recommendation> {
 
               Container(
                 child: Text(
-                  'Based on the trigger, ${data['trigger']},  you selected, we recommend ',
+                  'Based on the trigger, ${'trigger1'},  you selected, we recommend ',            //NEED TO PUT DATABASE VAR
                   style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 2.0,
@@ -92,27 +92,6 @@ class _RecommendationState extends State<Recommendation> {
                   ),
                 ),
               ),
-              //TODO: Make the button at the bottom of the page
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: FlatButton(
-                  color: Colors.blue,
-                  child: Text('Finish Log',
-                      style: TextStyle(
-                        fontSize: 20,
-                      )),
-                  onPressed: () {
-                    //go to the reflections page
-                    //sending all the variables for logging (trigger, thoughts, recommendation
-                    Navigator.pushNamed(context, '/reflections', arguments: {
-                      'thoughts': data['thoughts'],
-                      'trigger': data['trigger'],
-                      'recommendation': rec,
-                    });
-                  },
-                ),
-              ),
-//
             ],
           ),
         ),
