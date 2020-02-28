@@ -19,6 +19,7 @@ class DatabaseService{
         'uid':uid,
         'trigger':trigger,
         'thought':thought,
+        'dateTime':new DateTime.now(),
   });
   }
   
