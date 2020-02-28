@@ -1,4 +1,4 @@
 class User{
-  String name;
-
+  final String uid;
+  User({this.uid});
 }
