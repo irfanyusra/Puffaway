@@ -30,7 +30,7 @@ class _RecommendationState extends State<Recommendation> {
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
-    //print(data);
+
     getRecommendation("trigger1");        //NEED TO PUT DATABASE VAR
 
     return Scaffold(

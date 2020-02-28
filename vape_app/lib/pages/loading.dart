@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'Home.dart';
 import 'dart:math';
+import 'package:vape_app/authenticate/sign_in.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _LoadingState extends State<Loading> {
     //simulate app loading delay to show the quote
     await Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(context, new MaterialPageRoute<void>(
-          builder: (context) => Home()
+          builder: (context) => SignIn()
       ));
     });
   }

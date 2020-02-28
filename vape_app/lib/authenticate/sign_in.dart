@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/auth.dart';
-
+import 'package:vape_app/pages/Home.dart';
 class SignIn extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
@@ -40,7 +40,9 @@ class _SignInState extends State<SignIn> {
                         ),
                         onPressed: () async{
                           dynamic result = await _auth.signInAnon(name);
-                          print(result);
+                          Navigator.pushReplacement(context, new MaterialPageRoute<void>(
+                          builder: (context) => Home()
+                          ));
                         }
             )
               ],)

@@ -15,10 +15,15 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
   @override
   List<String> triggers = [
     'Select one',
-    'trigger1',
-    'trigger2',
-    'trigger3',
-    'trigger4'
+    'Time of day',
+    'Wake-up routine',
+    'Boredom',
+    'Vape smell',
+    'Stress',
+    'Seeing someone vaping',
+    'Fatigue',
+    'Partying',
+    'Sex'
   ];
 
   List<DropdownMenuItem<String>> dropdownTriggerItems;
