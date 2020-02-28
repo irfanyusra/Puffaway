@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vape_app/authenticate/authenticate.dart';
 import 'package:vape_app/pages/all_logs.dart';
 import 'package:vape_app/pages/loading.dart';
 import 'package:vape_app/pages/logging.dart';
@@ -7,14 +8,15 @@ import 'package:vape_app/pages/recommendation_page.dart';
 import 'package:vape_app/pages/reflections_page.dart';
 
 void main() => runApp(MaterialApp(
-      initialRoute: '/',
+      initialRoute: '/authenticate',
       routes: {
-        '/': (context) => Loading (),
-        '/logging': (context) => Logging(),
-        '/logging_trigger': (context) => LoggingTrigger(),
-        '/recommendations': (context) => Recommendation(),
-        '/reflections': (context) => Reflections(),
-        '/all_logs': (context) => AllLogs(),
+        // '/': (context) => Loading (),
+        '/authenticate':(context) => Authenticate(),
+        // '/logging': (context) => Logging(),
+        // '/logging_trigger': (context) => LoggingTrigger(),
+        // '/recommendations': (context) => Recommendation(),
+        // '/reflections': (context) => Reflections(),
+        // '/all_logs': (context) => AllLogs(),
         //add more routes here
       },
     )
