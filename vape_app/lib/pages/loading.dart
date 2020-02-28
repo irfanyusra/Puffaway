@@ -14,7 +14,7 @@ class _LoadingState extends State<Loading> {
     'fdfdwwwwwww',
     'rereererere',
     'rereqqqqqq',
-    'It\'s addictive but you can\'t overcome it',
+    'It\'s addictive but you can overcome it',
   ]; //list of motivational quotes
   int randInt = (new Random().nextInt(quotes.length));
 

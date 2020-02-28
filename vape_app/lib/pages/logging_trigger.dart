@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vape_app/services/logs.dart';
 
 class LoggingTrigger extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class LoggingTrigger extends StatefulWidget {
 }
 
 class _LoggingTriggerState extends State<LoggingTrigger> {
+
+  final LogsService _log = LogsService();
   @override
   List<String> triggers = [
     'Select one',
@@ -151,11 +154,13 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
               FlatButton(
                 color: Colors.blue,
                 child: Text('Next'),
-                onPressed: () {
+                onPressed: () async {
+                  dynamic result = await _log.loggingVape(selectedTrigger,thoughtTextController.text);
                   Navigator.pushNamed(context, '/recommendations', arguments: {
                     'thoughts': thoughtTextController.text,
                     'trigger': selectedTrigger,
                   });
+
 //                  print(thoughtTextController.text);
 
                   //TODO: Remove when the thought display is removed

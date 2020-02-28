@@ -8,15 +8,15 @@ import 'package:vape_app/pages/recommendation_page.dart';
 import 'package:vape_app/pages/reflections_page.dart';
 
 void main() => runApp(MaterialApp(
-      initialRoute: '/authenticate',
+      initialRoute: '/',
       routes: {
-        // '/': (context) => Loading (),
-        '/authenticate':(context) => Authenticate(),
-        // '/logging': (context) => Logging(),
-        // '/logging_trigger': (context) => LoggingTrigger(),
-        // '/recommendations': (context) => Recommendation(),
-        // '/reflections': (context) => Reflections(),
-        // '/all_logs': (context) => AllLogs(),
+        '/': (context) => Loading (),
+        // '/authenticate':(context) => Authenticate(),
+        '/logging': (context) => Logging(),
+        '/logging_trigger': (context) => LoggingTrigger(),
+        '/recommendations': (context) => Recommendation(),
+        '/reflections': (context) => Reflections(),
+        '/all_logs': (context) => AllLogs(),
         //add more routes here
       },
     )
