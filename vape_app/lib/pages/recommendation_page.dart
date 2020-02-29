@@ -10,12 +10,16 @@ class Recommendation extends StatefulWidget {
 class _RecommendationState extends State<Recommendation> {
   Map data = {};
   List<Recommendations> listRecommendations = [
-    Recommendations(
-        trigger: "Select one", recom: "Please select a trigger next time"),
-    Recommendations(trigger: "trigger1", recom: "dddddd \n dddsds"),
-    Recommendations(trigger: "trigger2", recom: "dddddd2"),
-    Recommendations(trigger: "trigger3", recom: "dddddd3"),
-    Recommendations(trigger: "trigger4", recom: "dddddd4")
+    Recommendations(trigger: "Select one", recom: "Please select a trigger next time"),
+    Recommendations(trigger: "Time of day", recom: "Try planning somthing else you enjoy for this specific time of the day"),
+    Recommendations(trigger: "Wake-up routine", recom: "Drink a coffee instead if your looking for a pick me up"),
+    Recommendations(trigger: "Boredom", recom: "Watch some netflix"),
+    Recommendations(trigger: "Stress", recom: "try drinking some tea"),
+    Recommendations(trigger: "Vape smell", recom: "Try chewing some gum the taste will get the smell out of your head"),
+    Recommendations(trigger: "Seeing someone vaping", recom: "walk away"),
+    Recommendations(trigger: "Fatigue", recom: "Drink coffee"),
+    Recommendations(trigger: "Partying", recom: "Have another beer"),
+    Recommendations(trigger: "Sex", recom: "Do it again its more fun!")
   ];
   Recommendations rec;
 
@@ -30,8 +34,8 @@ class _RecommendationState extends State<Recommendation> {
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
-    //print(data);
-    getRecommendation("trigger1");        //NEED TO PUT DATABASE VAR
+
+    getRecommendation("Time of day");        //NEED TO PUT DATABASE VAR
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +63,7 @@ class _RecommendationState extends State<Recommendation> {
 
               Container(
                 child: Text(
-                  'Based on the trigger, ${'trigger1'},  you selected, we recommend ',            //NEED TO PUT DATABASE VAR
+                  'Based on the trigger, you selected, we recommend ',            //NEED TO PUT DATABASE VAR
                   style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 2.0,
