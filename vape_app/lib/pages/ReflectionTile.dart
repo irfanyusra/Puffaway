@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vape_app/Models/Log.dart';
+import 'package:vape_app/Models/Reflection.dart';
 
-class LogTile extends StatelessWidget {
-  final Log log;
-  LogTile({this.log});
+class ReflectionTile extends StatelessWidget {
+  final Reflection reflection;
+  ReflectionTile({this.reflection});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +14,10 @@ class LogTile extends StatelessWidget {
         child: ListTile(
           // leading: CircleAvatar(
           //   radius: 25.0,
-          
           //   backgroundColor: Colors.brown[0],
           // ),
-          title: Text(log.trigger),
-          subtitle: Text('Thought: ${log.thought}'),
+          title: Text('Stressor: ${reflection.stressor}'),
+          subtitle: Text('Progress: ${reflection.progress}'),
         ),
       ),
     );

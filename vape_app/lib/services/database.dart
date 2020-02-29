@@ -1,6 +1,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vape_app/Models/Log.dart';
+import 'package:vape_app/Models/Reflection.dart';
+import 'package:vape_app/pages/reflections_page.dart';
 
 class DatabaseService{
   //collection reference
@@ -37,13 +39,33 @@ class DatabaseService{
   List<Log> _logListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return Log(
-        trigger:doc.data['trigger']?? '',
+        trigger:doc.data['stressor']?? '',
         thought:doc.data['thought']??'',
         dateTime: doc.data['dateTime']
 
       );
     }).toList();
   }
+
+
+List<Reflection> _reflectionListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return Reflection(
+        stressor:doc.data['stressor']?? '',
+        progress:doc.data['progress']??'',
+        dateTime: doc.data['dateTime']
+
+      );
+    }).toList();
+  }
+
+  //Get reflections stream
+  Stream<List<Reflection>> get reflections{
+      return triggerCollection
+      .where('uid',isEqualTo:uid )
+      .orderBy('dateTime',descending: true)
+      .snapshots().map(_reflectionListFromSnapshot);
+    }
   //Get logs stream
   Stream<List<Log>> get logs{
       return triggerCollection
