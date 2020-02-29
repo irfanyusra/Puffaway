@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './all_logs.dart';
+import './diary.dart';
 import './logging_trigger.dart';
 import 'reflections_page.dart';
 

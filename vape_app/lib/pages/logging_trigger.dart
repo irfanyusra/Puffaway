@@ -27,7 +27,6 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
 
   List<DropdownMenuItem<String>> dropdownTriggerItems;
   String selectedTrigger;
-  String thoughts;
 
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
@@ -107,10 +106,6 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
               SizedBox(
                 height: 20.0,
               ),
-              //TODO: remove text container later
-              SizedBox(
-                height: 25.0,
-              ),
               Container(
                 child: Text(
                   'Another important step is writing down your thoughts. If there is anything special about this session please feel free to log this as well',
@@ -166,8 +161,6 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                           builder: (context) => Recommendation()));
 
                   setState(() {
-                    // thoughtTextController.text = thoughtTextController.text;
-                    thoughts = thoughtTextController.text; //TODO: dont think this is needed
                     thoughtTextController.text = "";
                     selectedTrigger = dropdownTriggerItems[0].value;
                   });
