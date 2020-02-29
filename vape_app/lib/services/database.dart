@@ -39,7 +39,7 @@ class DatabaseService{
   List<Log> _logListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return Log(
-        trigger:doc.data['stressor']?? '',
+        trigger:doc.data['trigger']?? '',
         thought:doc.data['thought']??'',
         dateTime: doc.data['dateTime']
 
