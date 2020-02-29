@@ -10,7 +10,6 @@ class LoggingTrigger extends StatefulWidget {
 }
 
 class _LoggingTriggerState extends State<LoggingTrigger> {
-
   final LogsService _log = LogsService();
   @override
   List<String> triggers = [
@@ -109,7 +108,6 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                 height: 20.0,
               ),
               //TODO: remove text container later
-              Container(child: Text('Selected: $selectedTrigger')),
               SizedBox(
                 height: 25.0,
               ),
@@ -129,7 +127,6 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
 
               Container(
                 height: 170,
-//                color: Colors.grey[300],
                 padding: EdgeInsets.all(10.0),
                 child: new ConstrainedBox(
                   constraints: BoxConstraints(
@@ -161,27 +158,20 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                 color: Colors.blue,
                 child: Text('Save'),
                 onPressed: () async {
-                  dynamic result = await _log.loggingVape(selectedTrigger,thoughtTextController.text);
-                  Navigator.push(context, new MaterialPageRoute<void>(
-                      builder: (context) => Recommendation()
-                  ));
+                  dynamic result = await _log.loggingVape(
+                      selectedTrigger, thoughtTextController.text);
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute<void>(
+                          builder: (context) => Recommendation()));
 
-                  //TODO: Remove when the thought display is removed
                   setState(() {
-                    thoughtTextController.text = thoughtTextController.text;
-                    thoughts = thoughtTextController.text;
+                    // thoughtTextController.text = thoughtTextController.text;
+                    thoughts = thoughtTextController.text; //TODO: dont think this is needed
+                    thoughtTextController.text = "";
+                    selectedTrigger = dropdownTriggerItems[0].value;
                   });
                 },
-              ),
-              Container(
-                child: Text(
-                  '${thoughtTextController.text}',
-                  style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2.0,
-                    fontSize: 18,
-                  ),
-                ),
               ),
             ],
           ),

@@ -60,11 +60,9 @@ class _ReflectionsState extends State<Reflections> {
                   ),
                 ),
               ),
-
               SizedBox(
-                height: 10.0,
+                height: 0.0,
               ),
-
               Container(
                 height: 150,
 //                color: Colors.grey[300],
@@ -95,9 +93,8 @@ class _ReflectionsState extends State<Reflections> {
                   ),
                 ),
               ),
-
               SizedBox(
-                height: 15.0,
+                height: 10.0,
               ),
               Container(
                 child: Padding(
@@ -112,11 +109,9 @@ class _ReflectionsState extends State<Reflections> {
                   ),
                 ),
               ),
-
               SizedBox(
-                height: 10.0,
+                height: 0.0,
               ),
-
               Container(
                 height: 150,
 //                color: Colors.grey[300],
@@ -149,7 +144,7 @@ class _ReflectionsState extends State<Reflections> {
               ),
 
               SizedBox(
-                height: 10.0,
+                height: 5.0,
               ),
               Container(
                 alignment: Alignment.bottomCenter,
@@ -161,6 +156,10 @@ class _ReflectionsState extends State<Reflections> {
                       )),
                   onPressed: () async {
                     await _log.loggingReflections(stressorTextController.text,progressTextController.text);
+                  setState(() {
+                    progressTextController.text = "";                    
+                    stressorTextController.text = "";                   
+                  });
                   },
                 ),
               ),
