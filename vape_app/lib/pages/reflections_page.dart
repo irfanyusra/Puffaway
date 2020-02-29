@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vape_app/services/logs.dart';
 
 class Reflections extends StatefulWidget {
   @override
@@ -21,10 +22,10 @@ class _ReflectionsState extends State<Reflections> {
 
   Map data = {};
 
+  final LogsService _log = LogsService();
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
-    print(data);
 
     return Scaffold(
       appBar: AppBar(
@@ -158,15 +159,11 @@ class _ReflectionsState extends State<Reflections> {
                       style: TextStyle(
                         fontSize: 20,
                       )),
-                  onPressed: () {
-                    //TODO: put everything in the log instance and make a log list
-//                    Navigator.pushNamed(context, '/all_logs');
-                    print(stressorTextController.text);
-                    print(progressTextController.text);
+                  onPressed: () async {
+                    await _log.loggingReflections(stressorTextController.text,progressTextController.text);
                   },
                 ),
               ),
-//
             ],
           ),
         ),
