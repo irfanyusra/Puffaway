@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/services/logs.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class LogTile extends StatefulWidget {
+  
   final Log log;
   const LogTile({Key key,this.log}):super(key:key);
   
@@ -39,8 +41,9 @@ class _LogTileState extends State<LogTile> {
             
             //   backgroundColor: Colors.brown[0],
             // ),
-            title: Text('Thought: ${widget.log.trigger}'),
-            subtitle: Text('Thought: ${widget.log.thought}'),
+
+            title: Text('Trigger: ${widget.log.trigger}'),
+            subtitle: Text('Thought: ${widget.log.thought}\n ${timeago.format(widget.log.dateTime.toDate())}'),
           ),
         ),
       )
