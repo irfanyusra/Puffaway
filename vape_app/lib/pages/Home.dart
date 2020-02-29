@@ -34,7 +34,6 @@ class _HomeState extends State<Home> {
               icon: Icon(Icons.collections_bookmark),
               title: Text('Diary')
           ),
-          
           BottomNavigationBarItem(
               icon: Icon(Icons.comment),
               //collections_bookmark,assessment, comment, book, import_contacts, note_add, settings
@@ -44,6 +43,7 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+  
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;

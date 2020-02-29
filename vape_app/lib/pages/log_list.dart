@@ -16,6 +16,7 @@ class _LogListState extends State<LogList> {
     if(logs!= null){
      getLogsLength = logs.length;
     }
+
     
     return ListView.builder(
             itemCount: getLogsLength,
@@ -23,7 +24,7 @@ class _LogListState extends State<LogList> {
               return LogTile(log:logs[index]);
             
 
-      //Dismissible(
+    // return Dismissible(
     //     background: Container(color: Colors.red),
     //     key: Key(list_logs[index].dateT.toString()),
     //     onDismissed: (direction) {

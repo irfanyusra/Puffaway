@@ -20,6 +20,7 @@ class DatabaseService{
 
   Future createTrigger(String trigger, String thought) async{
       return await triggerCollection.document().setData({
+
         'uid':uid,
         'trigger':trigger,
         'thought':thought,
@@ -35,10 +36,15 @@ class DatabaseService{
       'dateTime':DateTime.now()
     });
   }
-
+  
+  Future delete(var documentID  )async{
+    return await triggerCollection.document(documentID ).delete();
+  }
   List<Log> _logListFromSnapshot(QuerySnapshot snapshot){
+
     return snapshot.documents.map((doc){
       return Log(
+        documentID:doc.documentID,
         trigger:doc.data['trigger']?? '',
         thought:doc.data['thought']??'',
         dateTime: doc.data['dateTime']
@@ -72,5 +78,13 @@ List<Reflection> _reflectionListFromSnapshot(QuerySnapshot snapshot){
       .where('uid',isEqualTo:uid )
       .orderBy('dateTime',descending: true)
       .snapshots().map(_logListFromSnapshot);
-    }
+  }
+
+  //Get reflections stream
+  Stream<List<Reflection>> get reflectionLogs{
+      return triggerCollection
+      .where('uid',isEqualTo:uid )
+      .orderBy('dateTime',descending: true)
+      .snapshots().map(_reflectionListFromSnapshot);
+  }
 }
