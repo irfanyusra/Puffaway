@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/pages/Home.dart';
+import 'package:vape_app/shared/constants.dart';
+import 'package:vape_app/shared/loading.dart';
 class SignIn extends StatefulWidget {
   final Function toggleView;
   SignIn({this.toggleView});
@@ -13,6 +15,7 @@ class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();//Private variable calls functions from AuthService()
   final _formKey = GlobalKey<FormState>();//Used to identify the forms and hence validate it 
+  bool loading = false; // Anytime a sign in is clicked show the loading widget
 
   //Text field state
 
@@ -23,7 +26,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading?Loading():Scaffold(
       appBar: AppBar(
         elevation: 0.0,
         title: Text('Sign in to Puffaway'),
@@ -46,6 +49,9 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                //Decorate text field from constants file
+                //Text hint is email(the text that will hint to the user to type in email)
+                decoration: textInputDecoration.copyWith(hintText:'Email'),
                 //Used to validate email if it is empty
                 validator:(val)=>val.isEmpty?'Enter an email':null 
                 ,
@@ -56,6 +62,9 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                //Decorate text field from constants file
+                //Text hint is password(the text that will hint to the user to type in password)
+                decoration: textInputDecoration.copyWith(hintText:'Password'),
                 //Again, more boring validation
                 validator:(val)=>val.length<6?'Enter a password longer than 6 characters':null,
                 obscureText: true,
@@ -74,6 +83,9 @@ class _SignInState extends State<SignIn> {
                 onPressed: () async {
                   //Waits for validation from firebase then signs in user
                     if(_formKey.currentState.validate()){
+                      setState(() {
+                        loading = true;//Set the loading to true while waiting for firebases response
+                      });
                     dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                     if(result==null){
                       setState(() {
@@ -81,6 +93,7 @@ class _SignInState extends State<SignIn> {
                         //Error
                         // error = 'Incorrect credentials';
                         error = 'Vaping makes you forget, change your habit';
+                        loading = false;//Toggle it off after checking is complete
                       });
                 }}}
               ),
