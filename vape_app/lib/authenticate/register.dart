@@ -27,7 +27,7 @@ class _RegisterState extends State<Register> {
     return loading?Loading():Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: Text('Sign up to Puffaway'),
+        title: Text('Register to Puffaway'),
         actions: <Widget>[
             FlatButton.icon(
               //Allows user to toggle between pages
