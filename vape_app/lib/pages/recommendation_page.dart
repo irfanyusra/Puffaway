@@ -41,7 +41,7 @@ class _RecommendationState extends State<Recommendation> {
 
     return Scaffold(
       //Trying my own custom app bar widget to show logout everywhere
-       appBar: LogOutAppBar(
+      appBar: LogOutAppBar(
         title: Text('Recommendation'),
         centerTitle: true,
         auth:_auth,
