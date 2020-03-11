@@ -3,7 +3,6 @@ import 'package:vape_app/services/database.dart';
 
 class LogsService{
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  
   Future loggingVape(String trigger,String thought) async{
     try{
         final FirebaseUser user = await _auth.currentUser();

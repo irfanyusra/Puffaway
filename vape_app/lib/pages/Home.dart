@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vape_app/services/auth.dart';
 import './diary.dart';
 import './logging_trigger.dart';
 import 'reflections_page.dart';
@@ -11,6 +12,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final AuthService _auth = AuthService(); 
   int _currentIndex = 0;
   final List<Widget> _children = [
     LoggingTrigger(),
@@ -21,6 +24,16 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      elevation: 2.0,
+      actions: <Widget>[
+        FlatButton.icon(
+          icon:Icon(Icons.person),
+          label:Text('Logout'),
+          onPressed: () async {
+            await _auth.signOut();
+          },)
+      ],),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped, // new

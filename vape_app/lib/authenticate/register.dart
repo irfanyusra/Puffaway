@@ -1,42 +1,36 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/pages/Home.dart';
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
-  SignIn({this.toggleView});
+  Register({this.toggleView});
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
 
-
-  final AuthService _auth = AuthService();//Private variable calls functions from AuthService()
-  final _formKey = GlobalKey<FormState>();//Used to identify the forms and hence validate it 
-
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
   //Text field state
-
-  //Used to to retrieve email and password from text fields
   String email = '';
   String password = '';
-  String error = '';//Used for displaying errors retrieved from firebase
-
+  String error = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: Text('Sign in to Puffaway'),
-        //Widget used to allow user to toggle between register and sign in
+        title: Text('Sign up to Puffaway'),
         actions: <Widget>[
             FlatButton.icon(
-            icon:Icon(Icons.person),
-            label:Text('Register'),
-            onPressed:(){
-              //Toggle register screen
-              widget.toggleView();
-              }),
-    ],
+                icon:Icon(Icons.person),
+                label:Text('Sign in'),
+                onPressed:(){
+                  //Toggle Register
+                  widget.toggleView();}),
+        ],
       ),
        body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -46,21 +40,16 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
-                //Used to validate email if it is empty
-                validator:(val)=>val.isEmpty?'Enter an email':null 
-                ,
+                validator:(val)=>val.isEmpty?'Enter an email':null,
                 onChanged: (val) {
-                  //Retrieves the email from the form
                   setState(() => email = val);
                 },
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                //Again, more boring validation
                 validator:(val)=>val.length<6?'Enter a password longer than 6 characters':null,
                 obscureText: true,
                 onChanged: (val) {
-                  //retrieves the stupid password from the form
                   setState(() => password = val);
                 },
               ),
@@ -68,21 +57,21 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                 color: Colors.pink[400],
                 child: Text(
-                  'Sign In',
+                  'Register',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  //Waits for validation from firebase then signs in user
-                    if(_formKey.currentState.validate()){
-                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                  if(_formKey.currentState.validate()){
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                     if(result==null){
                       setState(() {
-                        //Change this later
-                        //Error
-                        // error = 'Incorrect credentials';
-                        error = 'Vaping makes you forget, change your habit';
+                        error = 'Please enter a valid email';
+
                       });
-                }}}
+                    }
+                  }
+                  
+                }
               ),
               SizedBox(height:12.0),
               Text(
