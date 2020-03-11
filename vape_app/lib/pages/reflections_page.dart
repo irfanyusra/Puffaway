@@ -160,6 +160,8 @@ class _ReflectionsState extends State<Reflections> {
                     progressTextController.text = "";                    
                     stressorTextController.text = "";                   
                   });
+                   Scaffold.of(context)
+              .showSnackBar(SnackBar(content: Text("Reflection added")));
                   },
                 ),
               ),
