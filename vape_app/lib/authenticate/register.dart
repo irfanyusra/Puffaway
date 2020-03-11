@@ -43,8 +43,9 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
-                //Imported from constants file
-                decoration:textInputDecoration,
+                //Imported from constants file 
+                //Adds the hint text based on coders preference
+                decoration:textInputDecoration.copyWith(hintText:'Email'),
                
                 validator:(val)=>val.isEmpty?'Enter an email':null,
                 onChanged: (val) {
@@ -53,6 +54,7 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                 decoration:textInputDecoration.copyWith(hintText:'Password'),
                 validator:(val)=>val.length<6?'Enter a password longer than 6 characters':null,
                 obscureText: true,
                 onChanged: (val) {
