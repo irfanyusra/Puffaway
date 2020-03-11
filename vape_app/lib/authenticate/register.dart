@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/auth.dart';
+import 'package:vape_app/shared/constants.dart';
 import 'package:vape_app/pages/Home.dart';
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -10,10 +11,11 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-
+  //Formkey used for form validation
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   //Text field state
+  //Email and password from input field is stored here
   String email = '';
   String password = '';
   String error = '';
@@ -25,6 +27,7 @@ class _RegisterState extends State<Register> {
         title: Text('Sign up to Puffaway'),
         actions: <Widget>[
             FlatButton.icon(
+              //Allows user to toggle between pages
                 icon:Icon(Icons.person),
                 label:Text('Sign in'),
                 onPressed:(){
@@ -40,6 +43,9 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                //Imported from constants file
+                decoration:textInputDecoration,
+               
                 validator:(val)=>val.isEmpty?'Enter an email':null,
                 onChanged: (val) {
                   setState(() => email = val);
