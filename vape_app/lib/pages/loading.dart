@@ -51,7 +51,6 @@ class _LoadingState extends State<Loading> {
                 ),
               ),
               SizedBox(height: 20),
-              //TODO: send the quote in for the log in page (or do we want different quotes)
               Text(
                 '${quotes[randInt]}',
                 textAlign: TextAlign.center,

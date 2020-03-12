@@ -15,7 +15,6 @@ class AllLogs extends StatefulWidget {
 }
 
 class _AllLogsState extends State<AllLogs> {
-  //TODO: delete btn for only the first log 
 
 
   @override
