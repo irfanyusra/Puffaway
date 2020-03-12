@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:math';
 import 'package:vape_app/pages/wrapper.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -44,19 +45,24 @@ class _LoadingState extends State<Loading> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Loading...',
-                style: TextStyle(
-                  fontSize: 20,
-                  letterSpacing: 2.0,
+              Container(
+                child: Center(
+                  child: SpinKitChasingDots(
+                    color: Colors.blue,
+                    size: 50.0,
+                  ),
                 ),
               ),
               SizedBox(height: 20),
-              Text(
-                '${quotes[randInt]}',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  letterSpacing: 2.0,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '${quotes[randInt]}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    letterSpacing: 2.0,
+                  ),
                 ),
               ),
             ],
