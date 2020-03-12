@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/auth.dart';
+import 'statistics.dart';
 import './diary.dart';
 import './logging_trigger.dart';
 import 'reflections_page.dart';
@@ -13,16 +14,20 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
-  final List<Widget> _children = [LoggingTrigger(), AllLogs(), Reflections()];
+  final List<Widget> _children = [Statistics(), LoggingTrigger(), AllLogs(), Reflections()];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         onTap: onTabTapped, // new
         currentIndex: _currentIndex,
         items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.assessment), title: Text('Stats')),
           BottomNavigationBarItem(
               icon: Icon(Icons.note_add), title: Text('Log')),
           BottomNavigationBarItem(
