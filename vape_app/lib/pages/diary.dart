@@ -25,17 +25,12 @@ class _AllLogsState extends State<AllLogs> {
           value:DatabaseService(uid:user.uid).logs,
           child: Scaffold(
             //Custom app bar 
-        appBar: LogOutAppBar(
-        title: Text('All Logs'),
-        centerTitle: true,
-        auth:_auth,
-        
+            appBar: LogOutAppBar(
+              title: Text('All Logs'),
+              centerTitle: true,
+              auth:_auth,
       ),
-        // appBar: AppBar(
-        //   title: Text('All Logs'),
-        //   centerTitle: true,
-        // ),
-        body:LogList())
+              body:LogList())
      
     );
   }
