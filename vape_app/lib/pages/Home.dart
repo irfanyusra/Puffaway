@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vape_app/services/auth.dart';
+import 'package:vape_app/shared/logout.dart';
 import './diary.dart';
 import './logging_trigger.dart';
 import 'reflections_page.dart';
@@ -12,11 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    LoggingTrigger(),
-    AllLogs(),
-    Reflections()
-  ];
+  final List<Widget> _children = [LoggingTrigger(), AllLogs(), Reflections()];
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +25,19 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.note_add),
-              title: Text('Log')
-          ),
+              icon: Icon(Icons.note_add), title: Text('Log')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.collections_bookmark),
-              title: Text('Diary')
-          ),
+              icon: Icon(Icons.collections_bookmark), title: Text('Diary')),
           BottomNavigationBarItem(
               icon: Icon(Icons.comment),
               //collections_bookmark,assessment, comment, book, import_contacts, note_add, settings
-              title: Text('Reflection')
-          )
+              title: Text('Reflection'))
         ],
       ),
     );
   }
-  
+
+  //Used to check which navigation bar item was pressed
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
