@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vape_app/services/auth.dart';
+import 'package:vape_app/shared/logout.dart';
 import 'recommendation_page.dart';
 import 'package:vape_app/services/logs.dart';
 
@@ -66,11 +68,19 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
   }
 
   Widget build(BuildContext context) {
+    final _auth = AuthService();
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Log Session'),
-        centerTitle: true,
+      //Trying my own custom app bar widget to show logout everywhere
+       appBar: LogOutAppBar(
+        title:Text('Log Session') ,
+        auth:_auth,
+        centerTitle: true
       ),
+      //  AppBar(
+      //   title: Text('Log Session'),
+      //   centerTitle: true,
+      // ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: SingleChildScrollView(

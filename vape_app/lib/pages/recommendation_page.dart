@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vape_app/Models/Recommendation.dart';
+import 'package:vape_app/services/auth.dart';
+import 'package:vape_app/shared/logout.dart';
 
 class Recommendation extends StatefulWidget {
   @override
@@ -34,14 +36,21 @@ class _RecommendationState extends State<Recommendation> {
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
-
+    final _auth = AuthService();
     getRecommendation("Time of day");        //NEED TO PUT DATABASE VAR
 
     return Scaffold(
-      appBar: AppBar(
+      //Trying my own custom app bar widget to show logout everywhere
+      appBar: LogOutAppBar(
         title: Text('Recommendation'),
         centerTitle: true,
+        auth:_auth,
+        
       ),
+      // appBar: AppBar(
+      //   title: Text('Recommendation'),
+      //   centerTitle: true,
+      // ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: SingleChildScrollView(

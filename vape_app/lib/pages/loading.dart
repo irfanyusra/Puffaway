@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:math';
-import 'package:vape_app/authenticate/sign_in.dart';
+import 'package:vape_app/pages/wrapper.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _LoadingState extends State<Loading> {
     //simulate app loading delay to show the quote
     await Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(context, new MaterialPageRoute<void>(
-          builder: (context) => SignIn()
+          builder: (context) => Wrapper()
       ));
     });
   }
@@ -51,7 +51,6 @@ class _LoadingState extends State<Loading> {
                 ),
               ),
               SizedBox(height: 20),
-              //TODO: send the quote in for the log in page (or do we want different quotes)
               Text(
                 '${quotes[randInt]}',
                 textAlign: TextAlign.center,

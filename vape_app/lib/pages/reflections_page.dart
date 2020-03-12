@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/services/logs.dart';
+import 'package:vape_app/shared/logout.dart';
 
 class Reflections extends StatefulWidget {
   @override
@@ -26,12 +28,19 @@ class _ReflectionsState extends State<Reflections> {
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
-
+    final _auth = AuthService();
     return Scaffold(
-      appBar: AppBar(
+      //Trying my own custom app bar widget to show logout everywhere
+       appBar: LogOutAppBar(
         title: Text('Reflection'),
         centerTitle: true,
+        auth:_auth,
+        
       ),
+      // appBar: AppBar(
+      //   title: Text('Reflection'),
+      //   centerTitle: true,
+      // ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: SingleChildScrollView(
