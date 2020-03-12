@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/auth.dart';
-import 'package:vape_app/shared/logout.dart';
 import './diary.dart';
 import './logging_trigger.dart';
 import 'reflections_page.dart';

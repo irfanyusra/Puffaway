@@ -7,7 +7,7 @@ import 'package:vape_app/pages/log_list.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/services/database.dart';
 import 'package:provider/provider.dart';
-import 'package:vape_app/shared/logout.dart';
+import 'package:vape_app/shared/ReusableFlatButton.dart';
 
 class AllLogs extends StatefulWidget {
   @override
@@ -24,17 +24,18 @@ class _AllLogsState extends State<AllLogs> {
     return StreamProvider<List<Log>>.value(
           value:DatabaseService(uid:user.uid).logs,
           child: Scaffold(
-            //Custom app bar 
-        appBar: LogOutAppBar(
-        title: Text('All Logs'),
-        centerTitle: true,
-        auth:_auth,
+        appBar: AppBar(
+          title: Text('All Logs'),
+          centerTitle: true,
+          actions: <Widget>[
+          ResuableFlatButton(
+           icon:Icon(Icons.person),
+          label:Text('Logout'),
+          onPressed: () async {
+            await _auth.signOut();}),
         
-      ),
-        // appBar: AppBar(
-        //   title: Text('All Logs'),
-        //   centerTitle: true,
-        // ),
+      ],
+        ),
         body:LogList())
      
     );
