@@ -40,6 +40,7 @@ class DatabaseService{
   Future delete(var documentID  )async{
     return await triggerCollection.document(documentID ).delete();
   }
+
   List<Log> _logListFromSnapshot(QuerySnapshot snapshot){
 
     return snapshot.documents.map((doc){
@@ -54,7 +55,7 @@ class DatabaseService{
   }
 
 
-List<Reflection> _reflectionListFromSnapshot(QuerySnapshot snapshot){
+  List<Reflection> _reflectionListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return Reflection(
         stressor:doc.data['stressor']?? '',

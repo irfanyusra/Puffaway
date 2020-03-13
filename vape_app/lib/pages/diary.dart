@@ -22,22 +22,21 @@ class _AllLogsState extends State<AllLogs> {
     final user = Provider.of<User>(context);
     final _auth = AuthService();
     return StreamProvider<List<Log>>.value(
-          value:DatabaseService(uid:user.uid).logs,
-          child: Scaffold(
-        appBar: AppBar(
-          title: Text('All Logs'),
-          centerTitle: true,
-          actions: <Widget>[
-          ResuableFlatButton(
-           icon:Icon(Icons.person),
-          label:Text('Logout'),
-          onPressed: () async {
-            await _auth.signOut();}),
-        
-      ],
-        ),
-        body:LogList())
-     
+        value:DatabaseService(uid:user.uid).logs,
+        child: Scaffold(
+            appBar: AppBar(
+                title: Text('All Logs'),
+                centerTitle: true,
+                actions: <Widget>[
+                  ResuableFlatButton(
+                      icon:Icon(Icons.person),
+                      label:Text('Logout'),
+                      onPressed: () async {
+                      await _auth.signOut();
+                      }),
+                ],
+            ),
+            body:LogList())
     );
   }
 }
