@@ -12,6 +12,22 @@ class Statistics extends StatefulWidget {
   _StatisticsState createState() => _StatisticsState();
 }
 
+Map<String,dynamic> encodeMap(Map<DateTime,dynamic> map) {
+  Map<String,dynamic> newMap = {};
+  map.forEach((key,value) {
+    newMap[key.toString()] = map[key];
+  });
+  return newMap;
+}
+
+Map<DateTime,dynamic> decodeMap(Map<String,dynamic> map) {
+  Map<DateTime,dynamic> newMap = {};
+  map.forEach((key,value) {
+    newMap[DateTime.parse(key)] = map[key];
+  });
+  return newMap;
+}
+
 class _StatisticsState extends State<Statistics> {
   CalendarController _calendarController;
   @override
@@ -29,6 +45,7 @@ class _StatisticsState extends State<Statistics> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+    Map<DateTime, List<dynamic>> _events;
     return StreamProvider<List<Log>>.value(
       value: DatabaseService(uid:user.uid).logs,
       child: Scaffold(
