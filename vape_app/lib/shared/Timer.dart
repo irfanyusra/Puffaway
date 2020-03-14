@@ -13,7 +13,9 @@ class _timerState extends State<timer> {
   @override
   Widget build(BuildContext context) {
     String sDuration="";
+
     final logs = Provider.of<List<Log>>(context);
+
     if (logs != null) {
       var lastHitTime = DateTime.parse(
           logs.last.dateTime.toDate().toString()); //last log time goes here
@@ -28,16 +30,16 @@ class _timerState extends State<timer> {
         });
       });
     }
-      return Container(
-        alignment: Alignment.center,
-        child: Text(
-          sDuration,
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      );
-    }
 
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        sDuration,
+        style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
 }
