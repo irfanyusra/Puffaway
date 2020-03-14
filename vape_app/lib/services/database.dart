@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/Models/Reflection.dart';
+import 'package:vape_app/Models/pod.dart';
 import 'package:vape_app/pages/reflections_page.dart';
 
 class DatabaseService{
@@ -89,7 +90,6 @@ class DatabaseService{
       .orderBy('dateTime',descending: true)
       .snapshots().map(_logListFromSnapshot);
   }
-
   //Get reflections stream
   Stream<List<Reflection>> get reflectionLogs{
       return triggerCollection
@@ -97,4 +97,29 @@ class DatabaseService{
       .orderBy('dateTime',descending: true)
       .snapshots().map(_reflectionListFromSnapshot);
   }
+
+
+
+
+
+
+  //Map pod list and prepare it so that it returned
+  List<Pod> _podListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return Pod(
+        dateTime: doc.data['dateTime']
+
+      );
+    }).toList();
+  }
+
+  //Get information about pod
+  Stream<List<Pod>> get pods{
+      return triggerCollection
+      .where('uid',isEqualTo:uid )
+      .orderBy('dateTime',descending: true)
+      .snapshots().map(_podListFromSnapshot);
+  }
+
+
 }
