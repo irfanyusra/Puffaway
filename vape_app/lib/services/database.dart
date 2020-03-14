@@ -113,7 +113,7 @@ class DatabaseService{
     }).toList();
   }
 
-  //Get information about pod
+  //Get information about pod 
   Stream<List<Pod>> get pods{
       return triggerCollection
       .where('uid',isEqualTo:uid )
