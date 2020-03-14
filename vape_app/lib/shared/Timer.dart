@@ -18,17 +18,20 @@ class _timerState extends State<timer> {
 
     if (logs != null) {
       var lastHitTime = DateTime.parse(
-          logs.last.dateTime.toDate().toString()); //last log time goes here
+          logs.first.dateTime.toDate().toString()); //last log time goes here
       var current = new DateTime.now();
       var diff = current.difference(lastHitTime);
       sDuration = "${diff.inDays}d ${diff.inHours.remainder(24)}h ${diff
           .inMinutes.remainder(60)}m ${(diff.inSeconds.remainder(60))}s ";
 
-      Timer.periodic(Duration(seconds: 1), (v) {
-        setState(() {
-          current = DateTime.now(); // or BinaryTime see next step
-        });
+      Timer.periodic(Duration(seconds: 1), (v) async {
+        if (this.mounted) {
+          setState(() {
+            current = DateTime.now(); // or BinaryTime see next step
+          });
+        }
       });
+
     }
 
     return Container(
