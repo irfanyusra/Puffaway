@@ -7,24 +7,76 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vape_app/authenticate/register.dart';
+import 'package:vape_app/authenticate/sign_in.dart';
 
 import 'package:vape_app/main.dart';
 
 void main() {
-//  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-//    // Build our app and trigger a frame.
-//    await tester.pumpWidget(MyApp());
-//
-//    // Verify that our counter starts at 0.
-//    expect(find.text('0'), findsOneWidget);
-//    expect(find.text('1'), findsNothing);
-//
-//    // Tap the '+' icon and trigger a frame.
-//    await tester.tap(find.byIcon(Icons.add));
-//    await tester.pump();
-//
-//    // Verify that our counter has incremented.
-//    expect(find.text('0'), findsNothing);
-//    expect(find.text('1'), findsOneWidget);
-//  });
+  Widget makeTestable({Widget child}) {
+    return MaterialApp(
+      home: child,
+    );
+  }
+
+  var emailField = find.byKey(Key("email-field"));
+  var passwordField = find.byKey(Key("password-field"));
+  var signInButton = find.byKey(Key("signin-btn"));
+  var registerButton = find.byKey(Key("register-btn"));
+
+  group("sign in page test", () {
+    testWidgets("validates empty email and password",
+        (WidgetTester tester) async {
+      await tester.pumpWidget(makeTestable(child: SignIn()));
+      await tester.tap(signInButton);
+      await tester.pump();
+      expect(find.text("Enter an email"), findsOneWidget);
+      expect(find.text("Enter a password longer than 6 characters"),
+          findsOneWidget);
+    });
+
+    testWidgets(
+        "validates wrong email format and password that is less than 6 characters",
+        (WidgetTester tester) async {
+      await tester.pumpWidget(makeTestable(child: SignIn()));
+      await tester.enterText(emailField, "email");
+      await tester.tap(passwordField);
+      await tester.enterText(passwordField, "pass");
+      await tester.tap(signInButton);
+      await tester.pump();
+
+      expect(find.text("email"), findsOneWidget);
+      expect(find.text("Enter a Valid Email"), findsOneWidget);
+      expect(find.text("Enter a password longer than 6 characters"),
+          findsOneWidget);
+    });
+  });
+
+  group("register page test", () {
+    testWidgets("validates empty email and password",
+        (WidgetTester tester) async {
+      await tester.pumpWidget(makeTestable(child: Register()));
+      await tester.tap(registerButton);
+      await tester.pump();
+      expect(find.text("Enter an email"), findsOneWidget);
+      expect(find.text("Enter a password longer than 6 characters"),
+          findsOneWidget);
+    });
+
+    testWidgets(
+        "validates wrong email format and password that is less than 6 characters",
+        (WidgetTester tester) async {
+      await tester.pumpWidget(makeTestable(child: Register()));
+      await tester.enterText(emailField, "email");
+      await tester.tap(passwordField);
+      await tester.enterText(passwordField, "pass");
+      await tester.tap(registerButton);
+      await tester.pump();
+
+      expect(find.text("email"), findsOneWidget);
+      expect(find.text("Enter a Valid Email"), findsOneWidget);
+      expect(find.text("Enter a password longer than 6 characters"),
+          findsOneWidget);
+    });
+  });
 }

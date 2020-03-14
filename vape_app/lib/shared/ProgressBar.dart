@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vape_app/services/pods.dart';
 
 class ProgressBar extends StatefulWidget {
   @override
@@ -12,6 +13,8 @@ class _ProgressBarState extends State<ProgressBar> {
   double _progressValue;
   bool _loading;
 
+  final _pod = PodService();
+  
   @override
   void initState() {
     super.initState();
@@ -33,7 +36,8 @@ class _ProgressBarState extends State<ProgressBar> {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: FloatingActionButton( //finish pod
-                onPressed: () {
+                onPressed: () async {
+                  _pod.addPodFinishTime();
                   setState(() {
                     _loading = !_loading;
                     _updateProgress();
