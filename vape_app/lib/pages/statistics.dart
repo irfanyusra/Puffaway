@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/database.dart';
@@ -41,7 +40,14 @@ class _StatisticsState extends State<Statistics> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              timer(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                child: Center(child: Text("Time Since Last Hit", style: TextStyle(fontSize: 20))),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                child: timer(),
+              ),
               TableCalendar( calendarController: _calendarController),
             ],
           ),

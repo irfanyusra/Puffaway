@@ -12,14 +12,14 @@ class timer extends StatefulWidget {
 class _timerState extends State<timer> {
   @override
   Widget build(BuildContext context) {
-
-      final logs = Provider.of<List<Log>>(context);
-
+    String sDuration="";
+    final logs = Provider.of<List<Log>>(context);
+    if (logs != null) {
       var lastHitTime = DateTime.parse(
           logs.last.dateTime.toDate().toString()); //last log time goes here
       var current = new DateTime.now();
       var diff = current.difference(lastHitTime);
-      String sDuration = "${diff.inDays}d ${diff.inHours.remainder(24)}h ${diff
+      sDuration = "${diff.inDays}d ${diff.inHours.remainder(24)}h ${diff
           .inMinutes.remainder(60)}m ${(diff.inSeconds.remainder(60))}s ";
 
       Timer.periodic(Duration(seconds: 1), (v) {
@@ -27,7 +27,7 @@ class _timerState extends State<timer> {
           current = DateTime.now(); // or BinaryTime see next step
         });
       });
-
+    }
       return Container(
         alignment: Alignment.center,
         child: Text(
@@ -39,4 +39,5 @@ class _timerState extends State<timer> {
         ),
       );
     }
+
 }
