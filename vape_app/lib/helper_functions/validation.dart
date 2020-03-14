@@ -1,6 +1,15 @@
 class EmailFieldValidator {
   static String validate (String val){
-    return val.isEmpty?'Enter an email':null; 
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        RegExp regex = new RegExp(pattern);
+
+    if (val.isEmpty)
+    return 'Enter an email';
+    else if (!regex.hasMatch(val))
+      return 'Enter a Valid Email';
+    else
+      return null;
   }
 }
 

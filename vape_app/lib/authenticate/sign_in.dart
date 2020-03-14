@@ -50,6 +50,7 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                key: Key('email-field'),
                 //Decorate text field from constants file
                 //Text hint is email(the text that will hint to the user to type in email)
                 decoration: textInputDecoration.copyWith(hintText:'Email'),
@@ -62,6 +63,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                key: Key('password-field'),
                 //Decorate text field from constants file
                 //Text hint is password(the text that will hint to the user to type in password)
                 decoration: textInputDecoration.copyWith(hintText:'Password'),
@@ -75,6 +77,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               RaisedButton(
+                key: Key('signin-btn'),
                 color: Colors.blue[400],
                 child: Text(
                   'Sign In',
