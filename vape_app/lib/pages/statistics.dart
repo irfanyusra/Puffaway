@@ -1,10 +1,11 @@
-import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/database.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/Models/User.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:vape_app/shared/Calendar.dart';
+import 'package:vape_app/shared/ProgressBar.dart';
 import 'package:vape_app/shared/Timer.dart';
 
 class Statistics extends StatefulWidget {
@@ -13,22 +14,12 @@ class Statistics extends StatefulWidget {
 }
 
 class _StatisticsState extends State<Statistics> {
-  CalendarController _calendarController;
-  @override
-  void initState() {
-    super.initState();
-    _calendarController = CalendarController();
-  }
 
-  @override
-  void dispose() {
-    _calendarController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+
     return StreamProvider<List<Log>>.value(
       value: DatabaseService(uid:user.uid).logs,
       child: Scaffold(
@@ -48,11 +39,12 @@ class _StatisticsState extends State<Statistics> {
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
                 child: timer(),
               ),
-              TableCalendar( calendarController: _calendarController),
-            ],
+              ProgressBar(),
+              Calendar(),
+              ],
+            ),
           ),
         )
-      ),
     );
   }
 }
