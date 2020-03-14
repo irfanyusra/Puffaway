@@ -6,15 +6,24 @@ import 'package:vape_app/pages/reflections_page.dart';
 
 class DatabaseService{
   //collection reference
-  final CollectionReference nameCollection = Firestore.instance.collection('names');
+  final CollectionReference nameCollection = Firestore.instance.collection('names');//Not needed anymore
   final CollectionReference triggerCollection = Firestore.instance.collection('triggers');
   final CollectionReference reflectionCollection = Firestore.instance.collection('reflections');
+  final CollectionReference podCollection = Firestore.instance.collection('pod');
 
   final String uid;
   DatabaseService({this.uid});
   Future updateUserData(String name) async{
     return await nameCollection.document(uid).setData({
       'name':name,
+    });
+  }
+
+//Function to update the pod finish time once clicked
+  Future addPodFinishTime() async{
+    return await podCollection.document().setData({
+      'uid':uid,
+      'dateTime':new DateTime.now(),
     });
   }
 
