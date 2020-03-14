@@ -3,6 +3,7 @@ import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/pages/Home.dart';
 import 'package:vape_app/shared/constants.dart';
 import 'package:vape_app/shared/loading.dart';
+import 'package:vape_app/helper_functions/validation.dart';
 class SignIn extends StatefulWidget {
   final Function toggleView;
   SignIn({this.toggleView});
@@ -53,8 +54,7 @@ class _SignInState extends State<SignIn> {
                 //Text hint is email(the text that will hint to the user to type in email)
                 decoration: textInputDecoration.copyWith(hintText:'Email'),
                 //Used to validate email if it is empty
-                validator:(val)=>val.isEmpty?'Enter an email':null 
-                ,
+                validator: EmailFieldValidator.validate, //val.isEmpty?'Enter an email':null 
                 onChanged: (val) {
                   //Retrieves the email from the form
                   setState(() => email = val);
@@ -66,7 +66,7 @@ class _SignInState extends State<SignIn> {
                 //Text hint is password(the text that will hint to the user to type in password)
                 decoration: textInputDecoration.copyWith(hintText:'Password'),
                 //Again, more boring validation
-                validator:(val)=>val.length<6?'Enter a password longer than 6 characters':null,
+                validator:PasswordFieldValidator.validate,
                 obscureText: true,
                 onChanged: (val) {
                   //retrieves the stupid password from the form
