@@ -25,6 +25,19 @@ class _StatisticsState extends State<Statistics> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Dashboard'),
+          actions: <Widget>[
+            Padding(
+                padding: EdgeInsets.only(right:20.0),
+              child: GestureDetector(
+                onTap: (){},
+                child: Icon(
+                  Icons.settings,
+                  size: 26.0,
+                ),
+              ),
+            ),
+
+          ],
         ),
 
         body: SingleChildScrollView(

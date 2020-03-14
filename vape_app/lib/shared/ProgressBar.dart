@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +10,13 @@ class ProgressBar extends StatefulWidget {
 
 class _ProgressBarState extends State<ProgressBar> {
   double _progressValue;
+  bool _loading;
 
   @override
   void initState() {
     super.initState();
-    _progressValue = 0.0;
+    _loading = false;
+    _progressValue = 100;
   }
 
   @override
@@ -31,7 +35,8 @@ class _ProgressBarState extends State<ProgressBar> {
               child: FloatingActionButton( //finish pod
                 onPressed: () {
                   setState(() {
-                    _progressValue=100;
+                    _loading = !_loading;
+                    _updateProgress();
                   });
                 },
                 tooltip: 'Finish Pod',
@@ -41,6 +46,22 @@ class _ProgressBarState extends State<ProgressBar> {
           ],
         )
     );
+  }
+
+  void _updateProgress() {
+    const oneSec = const Duration(seconds: 1);
+    new Timer.periodic(oneSec, (Timer t) {
+      setState(() {
+        _progressValue -= 0.2;
+        // we "finish" downloading here
+        if (_progressValue.toStringAsFixed(1) == '0.0') {
+          _loading = false;
+          t.cancel();
+          _progressValue: 1.0;
+          return;
+        }
+      });
+    });
   }
 }
 
