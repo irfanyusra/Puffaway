@@ -4,6 +4,7 @@ import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/constants.dart';
 import 'package:vape_app/pages/Home.dart';
 import 'package:vape_app/shared/loading.dart';
+import 'package:vape_app/helper_functions/validation.dart';
 class Register extends StatefulWidget {
   final Function toggleView;
   Register({this.toggleView});
@@ -46,19 +47,20 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                key: Key('email-field'),
                 //Imported from constants file 
                 //Adds the hint text based on coders preference
                 decoration:textInputDecoration.copyWith(hintText:'Email'),
-               
-                validator:(val)=>val.isEmpty?'Enter an email':null,
+                validator:EmailFieldValidator.validate,
                 onChanged: (val) {
                   setState(() => email = val);
                 },
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                key: Key('password-field'),
                  decoration:textInputDecoration.copyWith(hintText:'Password'),
-                validator:(val)=>val.length<6?'Enter a password longer than 6 characters':null,
+                validator:PasswordFieldValidator.validate,
                 obscureText: true,
                 onChanged: (val) {
                   setState(() => password = val);
@@ -66,6 +68,7 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               RaisedButton(
+                key: Key("register-btn"),
                 color: Colors.blue[400],
                 child: Text(
                   'Register',
