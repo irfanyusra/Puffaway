@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'dart:async';
 
+import 'package:vape_app/pages/loading.dart';
+
 class timer extends StatefulWidget {
   @override
   _timerState createState() => _timerState();
@@ -14,7 +16,7 @@ class _timerState extends State<timer> {
   Widget build(BuildContext context) {
     String sDuration="";
     final logs = Provider.of<List<Log>>(context)??[];
-  
+      if(logs!=null){
       var lastHitTime= logs.length>0? DateTime.parse(
           logs.first.dateTime.toDate().toString()): new DateTime.now(); //last log time goes here
     
@@ -40,7 +42,10 @@ class _timerState extends State<timer> {
           fontSize: 30,
           fontWeight: FontWeight.w700,
         ),
-      ),
+      )
     );
+    } else {
+      return Loading();
+    }
   }
 }
