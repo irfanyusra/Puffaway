@@ -99,10 +99,6 @@ class DatabaseService{
   }
 
 
-
-
-
-
   //Map pod list and prepare it so that it returned
   List<Pod> _podListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){

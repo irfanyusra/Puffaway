@@ -5,7 +5,8 @@ import 'package:vape_app/Models/User.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:vape_app/shared/Calendar.dart';
-import 'package:vape_app/shared/ProgressBar.dart';
+import 'package:vape_app/PodLoader/PodPainter.dart';
+import 'package:vape_app/PodLoader/ProgressBar.dart';
 import 'package:vape_app/shared/Timer.dart';
 
 class Statistics extends StatefulWidget {
@@ -36,7 +37,6 @@ class _StatisticsState extends State<Statistics> {
                 ),
               ),
             ),
-
           ],
         ),
 
@@ -51,6 +51,15 @@ class _StatisticsState extends State<Statistics> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
                 child: timer(),
+              ),
+              Center(
+                child: CustomPaint(
+                  painter: PodPainter(),
+                  child: Container(
+                    height: 100,
+                    width: 50,
+                  ),
+                ),
               ),
               ProgressBar(),
               Calendar(),

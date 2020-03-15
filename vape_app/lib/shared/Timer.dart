@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'dart:async';
 
+import 'package:vape_app/pages/loading.dart';
+
 class timer extends StatefulWidget {
   @override
   _timerState createState() => _timerState();
@@ -12,7 +14,7 @@ class timer extends StatefulWidget {
 class _timerState extends State<timer> {
   @override
   Widget build(BuildContext context) {
-    String sDuration="";
+    String sDuration = "";
 
     final logs = Provider.of<List<Log>>(context);
 
@@ -32,17 +34,18 @@ class _timerState extends State<timer> {
         }
       });
 
-    }
-
-    return Container(
-      alignment: Alignment.center,
-      child: Text(
-        sDuration,
-        style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.w700,
+      return Container(
+        alignment: Alignment.center,
+        child: Text(
+          sDuration,
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Loading();
+    }
   }
 }
