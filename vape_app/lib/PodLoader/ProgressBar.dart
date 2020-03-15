@@ -7,8 +7,8 @@ import 'package:vape_app/services/database.dart';
 import 'package:vape_app/services/pods.dart';
 import 'package:vape_app/Models/pod.dart';
 import 'package:vape_app/Models/User.dart';
-
 import 'PodLevel.dart';
+
 class ProgressBar extends StatefulWidget {
   @override
   _ProgressBarState createState() => _ProgressBarState();
