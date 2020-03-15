@@ -32,6 +32,7 @@ class _AllLogsState extends State<AllLogs> {
           centerTitle: true,
           actions: <Widget>[
           ResuableFlatButton(
+            key: Key('toggle-logs-btn'),
             label: Text(''),
            icon:Icon(Icons.filter_list),//Used as later more filtering options will be added such as sort etc.
           //Allows user to change to reflections

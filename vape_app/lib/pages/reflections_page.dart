@@ -161,7 +161,7 @@ class _ReflectionsState extends State<Reflections> {
               Container(
                 alignment: Alignment.bottomCenter,
                 child: FlatButton(
-                  key: Key('save-reflections-btn'),
+                  key: Key('save-reflection-btn'),
                   color: Colors.blue,
                   child: Text('Save Reflection',
                       style: TextStyle(
