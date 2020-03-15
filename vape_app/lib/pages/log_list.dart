@@ -11,11 +11,9 @@ class LogList extends StatefulWidget {
 class _LogListState extends State<LogList> {
   @override
   Widget build(BuildContext context) {
-    final logs = Provider.of<List<Log>>(context);
-    var getLogsLength = 0;
-    if(logs!= null){
-     getLogsLength = logs.length;
-    }
+    final logs = Provider.of<List<Log>>(context)?? [];
+    var getLogsLength = logs.length;
+
 
     
     return ListView.builder(

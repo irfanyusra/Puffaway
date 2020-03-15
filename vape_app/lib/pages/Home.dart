@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vape_app/services/auth.dart';
 import 'statistics.dart';
 import './diary.dart';
+import './toggle_diary.dart';
 import './logging_trigger.dart';
 import 'reflections_page.dart';
 
@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
-  final List<Widget> _children = [Statistics(), LoggingTrigger(), AllLogs(), Reflections()];
+  final List<Widget> _children = [Statistics(), LoggingTrigger(),Diary(), Reflections()];
 
 
   @override

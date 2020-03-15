@@ -11,11 +11,9 @@ class ReflectionList extends StatefulWidget {
 class _ReflectionListState extends State<ReflectionList> {
   @override
   Widget build(BuildContext context) {
-    final reflections = Provider.of<List<Reflection>>(context);
-    var getReflectionsLength = 0;
-    if (reflections!= null) {
-     getReflectionsLength = reflections.length;
-    }
+    final reflections = Provider.of<List<Reflection>>(context)??[];
+    var getReflectionsLength = reflections.length;
+    
     return ListView.builder(
       itemCount: getReflectionsLength,
       itemBuilder: (context, index) {
