@@ -13,12 +13,11 @@ class _timerState extends State<timer> {
   @override
   Widget build(BuildContext context) {
     String sDuration="";
-
     final logs = Provider.of<List<Log>>(context);
-
-    if (logs != null) {
-      var lastHitTime = DateTime.parse(
-          logs.first.dateTime.toDate().toString()); //last log time goes here
+    var logsLength = logs==null?0:logs.length;
+      var lastHitTime= logsLength>0? DateTime.parse(
+          logs.first.dateTime.toDate().toString()): new DateTime.now(); //last log time goes here
+    
       var current = new DateTime.now();
       var diff = current.difference(lastHitTime);
       sDuration = "${diff.inDays}d ${diff.inHours.remainder(24)}h ${diff
@@ -32,8 +31,7 @@ class _timerState extends State<timer> {
         }
       });
 
-    }
-
+    
     return Container(
       alignment: Alignment.center,
       child: Text(
