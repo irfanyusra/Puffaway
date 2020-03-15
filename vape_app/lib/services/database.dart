@@ -36,6 +36,10 @@ class DatabaseService{
       'dateTime':DateTime.now()
     });
   }
+
+  Future deleteReflection(var documentID)async{
+    return await reflectionCollection.document(documentID).delete();
+  }
   
   Future delete(var documentID  )async{
     return await triggerCollection.document(documentID ).delete();
@@ -57,6 +61,7 @@ class DatabaseService{
 List<Reflection> _reflectionListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return Reflection(
+        documentID:doc.documentID,
         stressor:doc.data['stressor']?? '',
         progress:doc.data['progress']??'',
         dateTime: doc.data['dateTime']
@@ -67,7 +72,7 @@ List<Reflection> _reflectionListFromSnapshot(QuerySnapshot snapshot){
 
   //Get reflections stream
   Stream<List<Reflection>> get reflections{
-      return triggerCollection
+      return reflectionCollection
       .where('uid',isEqualTo:uid )
       .orderBy('dateTime',descending: true)
       .snapshots().map(_reflectionListFromSnapshot);
@@ -80,11 +85,4 @@ List<Reflection> _reflectionListFromSnapshot(QuerySnapshot snapshot){
       .snapshots().map(_logListFromSnapshot);
   }
 
-  //Get reflections stream
-  Stream<List<Reflection>> get reflectionLogs{
-      return triggerCollection
-      .where('uid',isEqualTo:uid )
-      .orderBy('dateTime',descending: true)
-      .snapshots().map(_reflectionListFromSnapshot);
-  }
 }

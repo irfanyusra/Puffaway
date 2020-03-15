@@ -35,4 +35,16 @@ class LogsService{
         return null;
     }
   }
+
+//Function to delete the reflection
+  Future deleteReflection(var documentID) async{
+     try{
+        final FirebaseUser user = await _auth.currentUser();
+        final uid = user.uid;
+        return await DatabaseService(uid:uid).deleteReflection(documentID);
+    }catch(e){
+        print(e.toString());
+        return null;
+    }
+  }
 }

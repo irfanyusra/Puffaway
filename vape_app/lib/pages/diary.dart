@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
 
 class AllLogs extends StatefulWidget {
+  final Function toggleDiary;
+  AllLogs({this.toggleDiary});
   @override
   _AllLogsState createState() => _AllLogsState();
 }
@@ -29,10 +31,12 @@ class _AllLogsState extends State<AllLogs> {
           centerTitle: true,
           actions: <Widget>[
           ResuableFlatButton(
-           icon:Icon(Icons.person),
-          label:Text('Logout'),
-          onPressed: () async {
-            await _auth.signOut();}),
+            label: Text(''),
+           icon:Icon(Icons.filter_list),//Used as later more filtering options will be added such as sort etc.
+          //Allows user to change to reflections
+          onPressed: () {
+            widget.toggleDiary();
+            }),
         
       ],
         ),

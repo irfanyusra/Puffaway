@@ -23,7 +23,6 @@ class _LogTileState extends State<LogTile> {
           onDismissed: (direction) {
           setState(() {
             // list_logs.removeAt(index);
-            print(widget.log.documentID);
              _log.deleteLogging(widget.log.documentID);
           });
 
