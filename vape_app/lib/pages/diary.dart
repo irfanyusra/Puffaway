@@ -27,6 +27,7 @@ class _AllLogsState extends State<AllLogs> {
           value:DatabaseService(uid:user.uid).logs,
           child: Scaffold(
         appBar: AppBar(
+          key: Key('trigger-log-page'),
           title: Text('Triggers Log'),
           centerTitle: true,
           actions: <Widget>[

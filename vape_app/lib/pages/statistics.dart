@@ -24,7 +24,7 @@ class _StatisticsState extends State<Statistics> {
       value: DatabaseService(uid:user.uid).logs,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Dashboard'),
+          title: Text('Dashboard', key: Key("dashboard"),),
         ),
 
         body: SingleChildScrollView(

@@ -27,13 +27,13 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.assessment), title: Text('Stats')),
+              icon: Icon(Icons.assessment, key: Key('stats-nav'),), title: Text('Stats')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.note_add), title: Text('Log')),
+              icon: Icon(Icons.note_add, key: Key('log-nav'),), title: Text('Log')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.collections_bookmark), title: Text('Diary')),
+              icon: Icon(Icons.collections_bookmark,  key: Key('diary-nav'),), title: Text('Diary')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.comment),
+              icon: Icon(Icons.comment,  key: Key('reflection-nav'),),
               //collections_bookmark,assessment, comment, book, import_contacts, note_add, settings
               title: Text('Reflection'))
         ],
