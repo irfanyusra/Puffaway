@@ -13,9 +13,9 @@ class _timerState extends State<timer> {
   @override
   Widget build(BuildContext context) {
     String sDuration="";
-    final logs = Provider.of<List<Log>>(context);
-    var logsLength = logs==null?0:logs.length;
-      var lastHitTime= logsLength>0? DateTime.parse(
+    final logs = Provider.of<List<Log>>(context)??[];
+  
+      var lastHitTime= logs.length>0? DateTime.parse(
           logs.first.dateTime.toDate().toString()): new DateTime.now(); //last log time goes here
     
       var current = new DateTime.now();
