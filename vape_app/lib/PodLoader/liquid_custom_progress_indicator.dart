@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vape_app/PodLoader/PodPainter.dart';
 import 'wave.dart';
 
 class LiquidCustomProgressIndicator extends ProgressIndicator {
@@ -41,33 +42,46 @@ class _LiquidCustomProgressIndicatorState
   @override
   Widget build(BuildContext context) {
     final pathBounds = widget.shapePath.getBounds();
-    return SizedBox(
-      width: pathBounds.width + pathBounds.left,
-      height: pathBounds.height + pathBounds.top,
-      child: ClipPath(
-        clipper: _CustomPathClipper(
-          path: widget.shapePath,
-        ),
-        child: CustomPaint(
-          painter: _CustomPathPainter(
-            color: widget._getBackgroundColor(context),
-            path: widget.shapePath,
+    return Center(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 50),
+            child: CustomPaint(
+              painter: PodPainter(),
+            ),
           ),
-          child: Stack(
-            children: <Widget>[
-              Positioned.fill(
-                left: pathBounds.left,
-                top: pathBounds.top,
-                child: Wave(
-                  value: widget.value,
-                  color: widget._getValueColor(context),
-                  direction: widget.direction,
+
+          SizedBox(
+            width: pathBounds.width + pathBounds.left,
+            height: pathBounds.height + pathBounds.top,
+            child: ClipPath(
+              clipper: _CustomPathClipper(
+                path: widget.shapePath,
+              ),
+              child: CustomPaint(
+                painter: _CustomPathPainter(
+                  color: widget._getBackgroundColor(context),
+                  path: widget.shapePath,
+                ),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                      left: pathBounds.left,
+                      top: pathBounds.top,
+                      child: Wave(
+                        value: widget.value,
+                        color: widget._getValueColor(context),
+                        direction: widget.direction,
+                      ),
+                    ),
+                    if (widget.center != null) Center(child: widget.center),
+                  ],
                 ),
               ),
-              if (widget.center != null) Center(child: widget.center),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

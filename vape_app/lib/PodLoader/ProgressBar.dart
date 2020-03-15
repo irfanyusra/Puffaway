@@ -7,7 +7,7 @@ import 'package:vape_app/services/database.dart';
 import 'package:vape_app/services/pods.dart';
 import 'package:vape_app/Models/pod.dart';
 import 'package:vape_app/Models/User.dart';
-import 'PodLevel.dart';
+import 'liquid_custom_progress_indicator.dart';
 
 class ProgressBar extends StatefulWidget {
   @override
@@ -28,6 +28,23 @@ class _ProgressBarState extends State<ProgressBar> {
     _progressValue = 1.0;
   }
 
+  Path _buildVapePath() {
+    return Path()
+      ..moveTo(0, 100*0.45)
+      ..lineTo(50*0.1, 100*0.45)
+      ..lineTo(50*0.25, 100*0.375)
+      ..lineTo(50*0.75, 100*0.375)
+      ..lineTo(50*0.9, 100*0.45)
+      ..lineTo(50, 100*0.45)
+      ..lineTo(50, 100*0.875)
+      ..lineTo(50*0.85, 100)
+      ..lineTo(50*0.15, 100)
+      ..lineTo(0, 100*0.875)
+      ..lineTo(0, 100*0.45)
+      ..lineTo(50*0.1, 100*0.45)
+      ..close();
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -38,19 +55,19 @@ class _ProgressBarState extends State<ProgressBar> {
           var podDates = snapshot.data;
           return Container(
               padding: EdgeInsets.all(16.0),
-              child: Column(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    height: 100,
-                    width: 50,
-                    child: LinearProgressIndicator(
+                    LiquidCustomProgressIndicator(
                       value: _progressValue,
+                      valueColor: AlwaysStoppedAnimation(Colors.amberAccent), // Defaults to the current Theme's accentColor.
+                      backgroundColor: Colors.grey.withOpacity(0.5), // Defaults to the current Theme's backgroundColor.
+                      direction: Axis.vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right).
+                      shapePath: _buildVapePath(), // A Path object used to draw the shape of the progress indicator.
                     ),
-                  ),
                   //Text('${(_progressValue * 100).round()}%'),
                   Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(left: 20),
                     child: FloatingActionButton( //finish pod
                       onPressed: () async {
                         _pod.addPodFinishTime();
