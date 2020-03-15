@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vape_app/helper_functions/validation.dart';
+
 
 void main() {
   group('Email', () {
@@ -41,4 +43,12 @@ void main() {
       expect(result, null);
     });
   });
+
+  //Check if logs are rendered
+  group('logs',(){
+    test('returns logs list',() async{
+    //final firestore = MockFirestoreInstance();
+    });
+  });
+
 }

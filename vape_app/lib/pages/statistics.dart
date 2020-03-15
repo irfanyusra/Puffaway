@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:vape_app/PodLoader/ProgressBar.dart';
+import 'package:vape_app/PodLoader/liquid_custom_progress_indicator.dart';
 import 'package:vape_app/services/database.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/Models/User.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:vape_app/shared/Calendar.dart';
-import 'package:vape_app/shared/ProgressBar.dart';
 import 'package:vape_app/shared/Timer.dart';
 
 class Statistics extends StatefulWidget {
@@ -15,7 +16,6 @@ class Statistics extends StatefulWidget {
 
 class _StatisticsState extends State<Statistics> {
 
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -24,7 +24,19 @@ class _StatisticsState extends State<Statistics> {
       value: DatabaseService(uid:user.uid).logs,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Dashboard', key: Key("dashboard"),),
+          title: Text('Dashboard',  key: Key("dashboard")),
+          actions: <Widget>[
+            Padding(
+                padding: EdgeInsets.only(right:20.0),
+              child: GestureDetector(
+                onTap: (){},
+                child: Icon(
+                  Icons.settings,
+                  size: 26.0,
+                ),
+              ),
+            ),
+          ],
         ),
 
         body: SingleChildScrollView(
@@ -32,11 +44,11 @@ class _StatisticsState extends State<Statistics> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                padding: const EdgeInsets.only(top: 20),
                 child: Center(child: Text("Time Since Last Hit", style: TextStyle(fontSize: 20))),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                padding: const EdgeInsets.only(top: 20),
                 child: timer(),
               ),
               ProgressBar(),
