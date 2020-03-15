@@ -96,4 +96,22 @@ class DatabaseService{
       .snapshots().map(_logListFromSnapshot);
   }
 
+  //Map pod list and prepare it so that it returned
+  List<Pod> _podListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return Pod(
+          dateTime: doc.data['dateTime']
+
+      );
+    }).toList();
+  }
+
+  //Get information about pod
+  Stream<List<Pod>> get pods{
+    return triggerCollection
+        .where('uid',isEqualTo:uid )
+        .orderBy('dateTime',descending: true)
+        .snapshots().map(_podListFromSnapshot);
+  }
+
 }
