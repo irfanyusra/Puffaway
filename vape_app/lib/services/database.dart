@@ -96,11 +96,11 @@ class DatabaseService{
       .snapshots().map(_logListFromSnapshot);
   }
 
-  //Map pod list and prepare it so that it returned
+    //Map pod to a list and prepare it for return
   List<Pod> _podListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return Pod(
-          dateTime: doc.data['dateTime']
+        dateTime: doc.data['dateTime']
 
       );
     }).toList();
