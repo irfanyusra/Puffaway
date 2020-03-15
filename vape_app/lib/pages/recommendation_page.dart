@@ -16,7 +16,7 @@ class _RecommendationState extends State<Recommendation> {
     Recommendations(trigger: "Time of day", recom: "Try planning somthing else you enjoy for this specific time of the day"),
     Recommendations(trigger: "Wake-up routine", recom: "Drink a coffee instead if your looking for a pick me up"),
     Recommendations(trigger: "Boredom", recom: "Watch some netflix"),
-    Recommendations(trigger: "Stress", recom: "try drinking some tea"),
+    Recommendations(trigger: "Stress", recom: "Try drinking some tea"),
     Recommendations(trigger: "Vape smell", recom: "Try chewing some gum the taste will get the smell out of your head"),
     Recommendations(trigger: "Seeing someone vaping", recom: "walk away"),
     Recommendations(trigger: "Fatigue", recom: "Drink coffee"),
