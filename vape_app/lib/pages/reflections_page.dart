@@ -88,6 +88,7 @@ class _ReflectionsState extends State<Reflections> {
                       child: SizedBox(
                         height: 130.0,
                         child: new TextField(
+                          key: Key('stressors-field'),
                           controller: stressorTextController,
                           maxLines: 10,
                           decoration: new InputDecoration(
@@ -137,6 +138,7 @@ class _ReflectionsState extends State<Reflections> {
                       child: SizedBox(
                         height: 120.0,
                         child: new TextField(
+                          key: Key('progress-field'),
                           controller: progressTextController,
                           maxLines: 10,
                           decoration: new InputDecoration(
@@ -159,6 +161,7 @@ class _ReflectionsState extends State<Reflections> {
               Container(
                 alignment: Alignment.bottomCenter,
                 child: FlatButton(
+                  key: Key('save-reflection-btn'),
                   color: Colors.blue,
                   child: Text('Save Reflection',
                       style: TextStyle(

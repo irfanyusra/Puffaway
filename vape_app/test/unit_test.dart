@@ -27,11 +27,21 @@ void main() {
       var result = EmailFieldValidator.validate('test');
       expect(result, 'Enter a Valid Email');
     });
+     test('bad email format returns error string ', () {
+      var result = EmailFieldValidator.validate('@gmail.com');
+      expect(result, 'Enter a Valid Email');
+    });
     //good test
     test('correct email format', () {
       var result = EmailFieldValidator.validate('test@test.com');
       expect(result, null);
     });
+
+       test('correct email format - subdomain', () {
+      var result = EmailFieldValidator.validate('test@gmail.co.uk');
+      expect(result, null);
+    });
+
   });
   group('Password', () {
     //bad or boundy test

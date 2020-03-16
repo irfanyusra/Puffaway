@@ -37,7 +37,7 @@ class _RecommendationState extends State<Recommendation> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
     final _auth = AuthService();
-    getRecommendation("Time of day");        //NEED TO PUT DATABASE VAR
+    getRecommendation("Time of day");        //TODO: NEED TO PUT DATABASE VAR
 
     return Scaffold(
       appBar: AppBar(

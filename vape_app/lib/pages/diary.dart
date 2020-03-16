@@ -27,10 +27,12 @@ class _AllLogsState extends State<AllLogs> {
           value:DatabaseService(uid:user.uid).logs,
           child: Scaffold(
         appBar: AppBar(
+          key: Key('trigger-log-page'),
           title: Text('Triggers Log'),
           centerTitle: true,
           actions: <Widget>[
           ResuableFlatButton(
+            key: Key('toggle-ref-logs-btn'),
             label: Text(''),
            icon:Icon(Icons.filter_list),//Used as later more filtering options will be added such as sort etc.
           //Allows user to change to reflections

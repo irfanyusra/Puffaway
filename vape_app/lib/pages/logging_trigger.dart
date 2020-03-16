@@ -72,6 +72,7 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
 
     return Scaffold(
       appBar: AppBar(
+        key: Key('log-trigger-page'),
         title: Text('Log Session'),
         centerTitle: true,
         actions: <Widget>[
@@ -146,6 +147,7 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                       child: SizedBox(
                         height: 150.0,
                         child: new TextField(
+                          key: Key('thought-field'),
                           controller: thoughtTextController,
                           maxLines: 10,
                           decoration: new InputDecoration(
@@ -162,6 +164,7 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                 ),
               ),
               FlatButton(
+                key: (Key('save-trigger-btn')),
                 color: Colors.blue,
                 child: Text('Save'),
                 onPressed: () async {
