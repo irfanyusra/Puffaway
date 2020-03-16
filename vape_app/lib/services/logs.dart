@@ -25,11 +25,11 @@ class LogsService{
     }
   }
   
-  Future deleteLogging(var documentID) async{
+  Future deleteLog(var documentID) async{
      try{
         final FirebaseUser user = await _auth.currentUser();
         final uid = user.uid;
-        return await DatabaseService(uid:uid).delete(documentID);
+        return await DatabaseService(uid:uid).deleteLog(documentID);
     }catch(e){
         print(e.toString());
         return null;

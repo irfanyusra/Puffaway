@@ -4,9 +4,9 @@ import 'package:vape_app/services/logs.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class LogTile extends StatefulWidget {
-  
+  final Function onDelete;
   final Log log;
-  const LogTile({Key key,this.log}):super(key:key);
+  const LogTile({Key key,this.log,this.onDelete}):super(key:key);
   
   @override
   _LogTileState createState() => _LogTileState();
@@ -21,13 +21,9 @@ class _LogTileState extends State<LogTile> {
         background: Container(color: Colors.red),
           key: Key(UniqueKey().toString()),
           onDismissed: (direction) {
-          setState(() {
-            // list_logs.removeAt(index);
-             _log.deleteLogging(widget.log.documentID);
-          });
-
+        widget.onDelete(widget.log.documentID,_log);
           Scaffold.of(context)
-              .showSnackBar(SnackBar(content: Text("log deleted")));
+              .showSnackBar(SnackBar(content: Text("log deleted"),duration:Duration(milliseconds:500)));
         },
         child: Padding(
         

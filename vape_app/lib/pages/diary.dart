@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vape_app/Logs/log_list.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/Models/User.dart';
-import 'package:vape_app/pages/log_list.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/services/database.dart';
 import 'package:provider/provider.dart';

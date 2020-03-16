@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vape_app/pages/recommendation_page.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
-import 'recommendation_page.dart';
 import 'package:vape_app/services/logs.dart';
 
-class LoggingTrigger extends StatefulWidget {
+class TriggerList extends StatefulWidget {
   @override
-  _LoggingTriggerState createState() => _LoggingTriggerState();
+  TriggerListState createState() => TriggerListState();
 }
 
-class _LoggingTriggerState extends State<LoggingTrigger> {
+class TriggerListState extends State<TriggerList> {
   final LogsService _log = LogsService();
   @override
   List<String> triggers = [

@@ -62,7 +62,7 @@ class DatabaseService {
     return await reflectionCollection.document(documentID).delete();
   }
 
-  Future delete(var documentID) async {
+  Future deleteLog(var documentID) async {
     return await logCollection.document(documentID).delete();
   }
 

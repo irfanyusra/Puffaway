@@ -12,8 +12,8 @@ import 'package:vape_app/authenticate/sign_in.dart';
 import 'package:vape_app/pages/reflections_page.dart';
 import 'package:vape_app/Models/Reflection.dart';
 import 'package:vape_app/pages/diary.dart';
-import 'package:vape_app/pages/logging_trigger.dart';
 import 'package:vape_app/pages/statistics.dart';
+import 'package:vape_app/triggers/triggers_list.dart';
 
 void main() {
   Widget makeTestable({Widget child}) {
