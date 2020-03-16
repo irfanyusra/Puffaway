@@ -72,7 +72,7 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
 
     return Scaffold(
       appBar: AppBar(
-        key: Key('log-page'),
+        key: Key('log-trigger-page'),
         title: Text('Log Session'),
         centerTitle: true,
         actions: <Widget>[
