@@ -49,7 +49,7 @@ class _ReflectionsState extends State<Reflections> {
             children: <Widget>[
               Container(
                 child: Text(
-                  'Every so often we need to revalue the things we do in our lives. Please take this time to write your thoughts about the prompts below',
+                  'Every so often we need to revalue the things we do in our lives.', //Please take this time to write your thoughts about the prompts below
                   style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 2.0,
@@ -58,7 +58,7 @@ class _ReflectionsState extends State<Reflections> {
                 ),
               ),
               SizedBox(
-                height: 15.0,
+                height: 30.0,
               ),
               Container(
                 child: Text(
@@ -105,7 +105,7 @@ class _ReflectionsState extends State<Reflections> {
                 ),
               ),
               SizedBox(
-                height: 10.0,
+                height: 20.0,
               ),
               Container(
                 child: Padding(
