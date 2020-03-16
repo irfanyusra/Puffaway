@@ -26,6 +26,7 @@ import 'package:vape_app/pages/recommendation_page.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
 import 'package:vape_app/services/logs.dart';
+import 'four_step_soln.dart';
 
 class SettingsHelper extends StatefulWidget {
   @override
@@ -280,7 +281,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
             color: Colors.blue,
             child: Text("View"),
             onPressed: () {
-              //link to instructions page
+              Navigator.push(context, new MaterialPageRoute<void>(builder: (context) => FourStepSoln()));
             },
           ),
 
