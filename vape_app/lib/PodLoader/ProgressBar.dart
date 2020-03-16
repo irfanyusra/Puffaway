@@ -48,17 +48,16 @@ class _ProgressBarState extends State<ProgressBar> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
 
-        stream: DatabaseService(uid: user.uid).pods,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            var startDateSec = snapshot.data.first.dateTime.seconds;
-            var endDateSec = startDateSec + (goal * 24 * 60 * 60);
-            var nowSec = DateTime
-                .now()
-                .millisecondsSinceEpoch / 1000; //time now in sec
-            var totalSec = endDateSec - startDateSec;
-            var totalSecLeft = endDateSec - nowSec;
+              LiquidCustomProgressIndicator(
+                  value: _progressValue,
+                  valueColor: AlwaysStoppedAnimation(Colors.amberAccent), // Defaults to the current Theme's accentColor.
+                  backgroundColor: Colors.grey.withOpacity(0.5), // Defaults to the current Theme's backgroundColor.
+                  direction: Axis.vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right).
+                  shapePath: _buildVapePath(), // A Path object used to draw the shape of the progress indicator.
+                ),
+              //Text('${(_progressValue * 100).round()}%'),
 
+<<<<<<< HEAD
             if(totalSecLeft / totalSec>0) {
               _progressValue = totalSecLeft / totalSec;
             }else{
@@ -91,6 +90,26 @@ class _ProgressBarState extends State<ProgressBar> {
       );
   }
 
+=======
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: FloatingActionButton( //finish pod
+                  onPressed: () async {
+                    _pod.addPodFinishTime();
+                    setState(() {
+                      _updateProgress();
+                    });
+                  },
+                  tooltip: 'Finish Pod',
+                  child: Icon(Icons.delete_outline),
+                ),
+              ),
+            ],
+          )
+      );
+  }
+
+>>>>>>> parent of e554d40... Updated juul pod loader
   void _updateProgress() {
     const oneDay = const Duration(seconds: 1);//updated bar every minute
     new Timer.periodic(oneDay, (Timer t) async {
