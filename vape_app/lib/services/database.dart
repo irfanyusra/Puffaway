@@ -1,9 +1,7 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/Models/Reflection.dart';
 import 'package:vape_app/Models/pod.dart';
-import 'package:vape_app/pages/reflections_page.dart';
 
 class DatabaseService{
   //collection reference
@@ -108,7 +106,7 @@ class DatabaseService{
 
   //Get information about pod
   Stream<List<Pod>> get pods{
-    return triggerCollection
+    return podCollection
         .where('uid',isEqualTo:uid )
         .orderBy('dateTime',descending: true)
         .snapshots().map(_podListFromSnapshot);
