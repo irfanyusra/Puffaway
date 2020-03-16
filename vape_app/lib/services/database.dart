@@ -23,12 +23,11 @@ class DatabaseService {
     });
   }
 
-
- // -------REFLECTIONS-------//
+  // -------REFLECTIONS-------//
 //References reflection collection in database (backend)
   final CollectionReference reflectionCollection =
       Firestore.instance.collection('Reflections');
- 
+
   List<Reflection> _reflectionListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Reflection(
@@ -48,8 +47,8 @@ class DatabaseService {
         .map(_reflectionListFromSnapshot);
   }
 
-    //Creater function for reflections
-    Future createReflection(String stressor, String progress) async {
+  //Creater function for reflections
+  Future createReflection(String stressor, String progress) async {
     return await reflectionCollection.document().setData({
       'uid': uid,
       'stressor': stressor,
@@ -62,7 +61,6 @@ class DatabaseService {
   Future deleteReflection(var documentID) async {
     return await reflectionCollection.document(documentID).delete();
   }
-
 
 // -------LOGS-------//
 //References log collection in database (backend)
@@ -99,11 +97,11 @@ class DatabaseService {
   }
 
 //Deletes log from database
- Future deleteLog(var documentID) async {
+  Future deleteLog(var documentID) async {
     return await logCollection.document(documentID).delete();
   }
 
- // -------TRIGGERS-------//
+  // -------TRIGGERS-------//
 //References trigger collection in database (backend)
   final CollectionReference triggerCollection =
       Firestore.instance.collection('Triggers');
@@ -111,7 +109,8 @@ class DatabaseService {
   //Map triggers to a list
   List<Trigger> _triggerListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return Trigger( documentID: doc.documentID,
+      return Trigger(
+          documentID: doc.documentID,
           trigger: doc.data['trigger'] ?? '',
           dateTime: doc.data['dateTime']);
     }).toList();
@@ -121,7 +120,7 @@ class DatabaseService {
   Stream<List<Trigger>> get triggers {
     return triggerCollection
         .where('uid', isEqualTo: uid)
-        .orderBy('dateTime')//Order by ascending dateTime
+        .orderBy('dateTime') //Order by ascending dateTime
         .snapshots()
         .map(_triggerListFromSnapshot);
   }
@@ -132,17 +131,18 @@ class DatabaseService {
         {'uid': uid, 'trigger': trigger, 'dateTime': new DateTime.now()});
   }
 
-
-
-
+  //Function to delete trigger
+    Future deleteTrigger(var documentID) async {
+    return await triggerCollection.document(documentID).delete();
+  }
 
 // -------PODS-------//
 //References pod collection in database (backend)
 
- final CollectionReference podCollection =
+  final CollectionReference podCollection =
       Firestore.instance.collection('Pods');
 
- //Map pod to a list and prepare it for return
+  //Map pod to a list and prepare it for return
   List<Pod> _podListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Pod(dateTime: doc.data['dateTime']);
@@ -165,5 +165,4 @@ class DatabaseService {
       'dateTime': new DateTime.now(),
     });
   }
-
 }
