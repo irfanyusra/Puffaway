@@ -256,7 +256,13 @@ class _SettingsHelperState extends State<SettingsHelper> {
             color: Colors.blue,
             child: Text("Remove"),
             onPressed: () {
-              _log.deleteTrigger(selectedTrigger);
+              var documentID;
+              //Search for trigger to delete
+              for(Trigger t in triggers){
+                if(selectedTrigger==t.trigger)
+                  documentID = t.documentID;
+              }
+              _log.deleteTrigger(documentID);
               setState(() {
                 selectedTrigger = dropdownTriggerItems[0].value;
               });
