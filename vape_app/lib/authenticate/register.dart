@@ -15,7 +15,6 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   //Default triggers
    List<String> triggers = [
-    'Select one',
     'Time of day',
     'Wake-up routine',
     'Boredom',

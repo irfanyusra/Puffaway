@@ -130,6 +130,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                       value: selectedTrigger,
                       items: dropdownTriggerItems,
                       onChanged: onChangeDropdownTriggerItem,
+                      hint:new Text("Select one")
                     ),
                   ),
                 ),
