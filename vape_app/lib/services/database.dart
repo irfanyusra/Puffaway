@@ -106,7 +106,7 @@ class DatabaseService {
  // -------TRIGGERS-------//
 //References trigger collection in database (backend)
   final CollectionReference triggerCollection =
-      Firestore.instance.collection('triggers');
+      Firestore.instance.collection('Triggers');
 
   //Map triggers to a list
   List<Trigger> _triggerListFromSnapshot(QuerySnapshot snapshot) {
