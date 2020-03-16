@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:vape_app/Models/User.dart';
 import 'package:vape_app/Models/pod.dart';
 import 'package:vape_app/services/database.dart';
-
 import 'loading.dart';
 
 class TimeSeriesBar extends StatefulWidget {
@@ -30,15 +29,15 @@ class _TimeSeriesBarState extends State<TimeSeriesBar> {
 
               //add all data
               for(var i=1; i<podDates.length; i++) {
-                var lastHitTime= DateTime.parse(
+                var podStartDate= DateTime.parse(
                     podDates[i-1].dateTime.toDate().toString());
 
-                var current = DateTime.parse(
+                var podEndDate = DateTime.parse(
                     podDates[i].dateTime.toDate().toString());
 
-                var diff = current.difference(lastHitTime);
+                var diff = podStartDate.difference(podEndDate);
 
-                data.add(new TimeSeriesData(current, diff.inDays));
+                data.add(new TimeSeriesData(podStartDate, diff.inDays));
 
               }
               _seriesData.add(
@@ -52,16 +51,32 @@ class _TimeSeriesBarState extends State<TimeSeriesBar> {
                 );
 
               return Container(
-                height: 200, width: 400,
-                  child: charts.TimeSeriesChart(
-                  _seriesData,
-                  animate: true,
-                  defaultRenderer: new charts.BarRendererConfig<DateTime>(),
-                  defaultInteractions: false,
-                  behaviors: [
-                    new charts.SelectNearest(),
-                    new charts.DomainHighlighter()
-                  ],
+                height: 300, width: 400,
+                  child: Center(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                        'How Long Pods Last',style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
+                        Expanded(
+                          child: charts.TimeSeriesChart(
+                          _seriesData,
+                          animate: true,
+                          defaultRenderer: new charts.BarRendererConfig<DateTime>(),
+                          defaultInteractions: false,
+                          behaviors: [
+                            new charts.SelectNearest(),
+                            new charts.DomainHighlighter(),
+                            new charts.ChartTitle('Pod Start Date',
+                                behaviorPosition: charts.BehaviorPosition.bottom,
+                                titleOutsideJustification:charts.OutsideJustification.middleDrawArea),
+                            new charts.ChartTitle('Pod Duration (Days)',
+                                behaviorPosition: charts.BehaviorPosition.start,
+                                titleOutsideJustification: charts.OutsideJustification.middleDrawArea)
+                          ],
+                        )
+                      )
+                    ]
+                  )
                 )
               );
             } else {
