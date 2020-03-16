@@ -13,6 +13,19 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  //Default triggers
+   List<String> triggers = [
+    'Select one',
+    'Time of day',
+    'Wake-up routine',
+    'Boredom',
+    'Vape smell',
+    'Stress',
+    'Seeing someone vaping',
+    'Fatigue',
+    'Partying',
+    'Sex'
+  ];
   //Formkey used for form validation
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
@@ -89,6 +102,8 @@ class _RegisterState extends State<Register> {
                         loading = false;//Loading is done after result is returned from firebase
 
                       });
+                    }else{
+                      await _auth.createDefaultTriggers(result,triggers);
                     }
                   }
                   

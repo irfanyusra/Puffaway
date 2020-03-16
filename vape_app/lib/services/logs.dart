@@ -7,7 +7,7 @@ class LogsService{
     try{
         final FirebaseUser user = await _auth.currentUser();
         final uid = user.uid;
-        await DatabaseService(uid:uid).createTrigger(trigger, thought);
+        await DatabaseService(uid:uid).createLog(trigger, thought);
     }catch(e){
         print(e.toString());
         return null;
