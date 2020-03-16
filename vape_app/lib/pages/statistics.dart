@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:vape_app/shared/Calendar.dart';
 import 'package:vape_app/shared/TimeSeriesBar.dart';
 import 'package:vape_app/shared/Timer.dart';
+import 'settings.dart';
 
 class Statistics extends StatefulWidget {
   @override
@@ -29,7 +30,9 @@ class _StatisticsState extends State<Statistics> {
             Padding(
                 padding: EdgeInsets.only(right:20.0),
               child: GestureDetector(
-                onTap: (){},
+                onTap: () async {
+                  Navigator.push(context, new MaterialPageRoute<void>(builder: (context) => Settings()));
+                },
                 child: Icon(
                   Icons.settings,
                   size: 26.0,
