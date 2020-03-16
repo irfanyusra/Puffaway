@@ -5,6 +5,7 @@ import 'package:vape_app/services/pods.dart';
 import 'liquid_custom_progress_indicator.dart';
 
 class ProgressBar extends StatefulWidget {
+
   @override
   _ProgressBarState createState() => _ProgressBarState();
 }
@@ -50,15 +51,17 @@ class _ProgressBarState extends State<ProgressBar> {
         stream: DatabaseService(uid: user.uid).pods,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            var startDateSec = snapshot.data.first.dateTime.seconds; //start date in seconds since epoch
-            var endDateSec = startDateSec + (goal * 24 * 60 * 60); //end date in sec since epoch
-            var nowSec = DateTime.now().millisecondsSinceEpoch / 1000; //time now in sec since epoch
-            var totalSec = endDateSec - startDateSec; //total seconds = total vape pod
-            var totalSecLeft = endDateSec - nowSec; //total sec left = vape pod liquid left
+            var startDateSec = snapshot.data.first.dateTime.seconds;
+            var endDateSec = startDateSec + (goal * 24 * 60 * 60);
+            var nowSec = DateTime
+                .now()
+                .millisecondsSinceEpoch / 1000; //time now in sec
+            var totalSec = endDateSec - startDateSec;
+            var totalSecLeft = endDateSec - nowSec;
 
-            if(totalSecLeft / totalSec>0) { //if the ratio is between 0-1 goal hasnt been met
-              _progressValue = totalSecLeft / totalSec; //progress value is ratio of time left to total time
-            }else{ // if ratio is <= 0 goal has been met
+            if(totalSecLeft / totalSec>0) {
+              _progressValue = totalSecLeft / totalSec;
+            }else{
               _progressValue = 0;
             }
               LiquidCustomProgressIndicator(
