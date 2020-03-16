@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'dart:async';
-import 'package:vape_app/shared/loading.dart';
+
+import 'package:vape_app/pages/loading.dart';
 
 class timer extends StatefulWidget {
   @override

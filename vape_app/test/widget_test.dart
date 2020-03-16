@@ -7,10 +7,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vape_app/Reflections/reflections_page.dart';
 import 'package:vape_app/authenticate/register.dart';
 import 'package:vape_app/authenticate/sign_in.dart';
 
-import 'package:vape_app/main.dart';
 
 void main() {
   Widget makeTestable({Widget child}) {
@@ -62,7 +62,6 @@ void main() {
       expect(find.text("Enter a password longer than 6 characters"),
           findsOneWidget);
     });
-
     testWidgets(
         "validates wrong email format and password that is less than 6 characters",
         (WidgetTester tester) async {
@@ -79,4 +78,27 @@ void main() {
           findsOneWidget);
     });
   });
+
+  group("reflections page", () {
+    testWidgets("validates that reflections is saved",
+        (WidgetTester tester) async {
+      await tester.pumpWidget(makeTestable(child: Reflections()));
+      await tester.enterText(
+          find.byKey(Key('stressors-field')), "random stressor");
+      await tester.enterText(
+          find.byKey(Key('progress-field')), "random progress");
+      await tester.tap(find.byKey(Key('save-reflection-btn')));
+      await tester.pump();
+      expect(find.text("Add your text here"), findsWidgets);
+      //TODO: save method called to the db
+    });
+  });
+
+  group("log trigger page", () {
+    testWidgets("validates that trigger log is saved",
+        (WidgetTester tester) async {
+      //TODO: save method called to the db
+    });
+  });
+
 }

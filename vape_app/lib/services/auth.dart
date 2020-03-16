@@ -10,12 +10,20 @@ class AuthService{
     return user!=null?User(uid:user.uid):null;
   }
 
+ 
+
+//CreateDefaultTriggers is a function which adds default triggers to the database
+Future createDefaultTriggers(User user,List<String> triggers) async{
+  for(String trigger in triggers)
+    await DatabaseService(uid:user.uid).createTrigger(trigger);
+}
   // auth change user stream
   Stream<User> get user {
     return _auth.onAuthStateChanged
       .map(_userFromFirebaseUser);
   }
 
+//Not used anymore
   Future signInAnon(String name) async {
     try{
       AuthResult result = await _auth.signInAnonymously();

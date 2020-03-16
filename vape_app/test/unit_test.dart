@@ -1,9 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vape_app/helper_functions/validation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mockito/mockito.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:vape_app/user_repository/user_repository.dart';
 
+
+class MockFirebaseAuth extends Mock implements FirebaseAuth {}
+
+class MockFirebaseUser extends Mock implements FirebaseUser {}
+
+class MockAuthResult extends Mock implements AuthResult {}
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('Email', () {
     //boundry test
     test('Empty email returns error string', () {
@@ -15,11 +27,21 @@ void main() {
       var result = EmailFieldValidator.validate('test');
       expect(result, 'Enter a Valid Email');
     });
+     test('bad email format returns error string ', () {
+      var result = EmailFieldValidator.validate('@gmail.com');
+      expect(result, 'Enter a Valid Email');
+    });
     //good test
     test('correct email format', () {
       var result = EmailFieldValidator.validate('test@test.com');
       expect(result, null);
     });
+
+       test('correct email format - subdomain', () {
+      var result = EmailFieldValidator.validate('test@gmail.co.uk');
+      expect(result, null);
+    });
+
   });
   group('Password', () {
     //bad or boundy test
@@ -34,11 +56,39 @@ void main() {
     });
   });
 
-  //Check if logs are rendered
-  group('logs',(){
-    test('returns logs list',() async{
-    //final firestore = MockFirestoreInstance();
+
+//Authentication testing
+  MockFirebaseAuth _auth = MockFirebaseAuth();
+  BehaviorSubject<MockFirebaseUser> _user = BehaviorSubject<MockFirebaseUser>();
+  when(_auth.onAuthStateChanged).thenAnswer((_){
+    return _user;
+  });
+  UserRepository _repo = UserRepository.instance(auth: _auth);
+  group('user repository test', (){
+    when(_auth.signInWithEmailAndPassword(email:"travisscott@email.com",password: "Kylie123")).thenAnswer((_)async{
+      _user.add(MockFirebaseUser());
+      return MockAuthResult();
+    });
+    when(_auth.signInWithEmailAndPassword(email:"travisscott@email.com",password: "Kendall123")).thenThrow((){
+      return null;
+    });
+    test("sign in with email and password", () async {
+      bool signedIn = await _repo.signIn("travisscott@email.com", "Kylie123");
+      expect(signedIn, true);
+      expect(_repo.status, Status.Authenticated);
+    });
+
+    test("sing in fails with incorrect email and password",() async {
+      bool signedIn = await _repo.signIn("travisscott@email.com", "Kendall123");
+      expect(signedIn, false);
+      expect(_repo.status, Status.Unauthenticated);
+    });
+
+    test('sign out', ()async{
+      await _repo.signOut();
+      expect(_repo.status, Status.Unauthenticated);
     });
   });
-
 }
+ 
+

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vape_app/Models/Reflection.dart';
 import 'package:vape_app/Models/User.dart';
-import 'package:vape_app/pages/reflection_list.dart';
+import 'package:vape_app/Reflections/reflection_list.dart';
 import 'package:vape_app/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
@@ -29,6 +29,7 @@ class _AllReflectionsState extends State<AllReflections> {
           centerTitle: true,
            actions: <Widget>[
           ResuableFlatButton(
+            key: Key('toggle-trig-logs-btn'),
             label: Text(''),
            icon:Icon(Icons.filter_list),//Used as later more filtering options will be added such as sort etc.
           //Allows user to change to reflections

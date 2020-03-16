@@ -1,31 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:vape_app/Models/Trigger.dart';
+import 'package:vape_app/pages/recommendation_page.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
-import 'recommendation_page.dart';
 import 'package:vape_app/services/logs.dart';
 
-class LoggingTrigger extends StatefulWidget {
+class LogsPageHelper extends StatefulWidget {
   @override
-  _LoggingTriggerState createState() => _LoggingTriggerState();
+  LogsPageHelperState createState() => LogsPageHelperState();
 }
 
-class _LoggingTriggerState extends State<LoggingTrigger> {
+class LogsPageHelperState extends State<LogsPageHelper> {
   final LogsService _log = LogsService();
-  @override
-  List<String> triggers = [
-    'Select one',
-    'Time of day',
-    'Wake-up routine',
-    'Boredom',
-    'Vape smell',
-    'Stress',
-    'Seeing someone vaping',
-    'Fatigue',
-    'Partying',
-    'Sex'
-  ];
+
+  // List<String> triggers = [
+  //   'Select one',
+  //   'Time of day',
+  //   'Wake-up routine',
+  //   'Boredom',
+  //   'Vape smell',
+  //   'Stress',
+  //   'Seeing someone vaping',
+  //   'Fatigue',
+  //   'Partying',
+  //   'Sex'
+  // ];
 
   List<DropdownMenuItem<String>> dropdownTriggerItems;
   String selectedTrigger;
@@ -43,18 +45,18 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
 
   @override
   void initState() {
-    dropdownTriggerItems = buildDropdownTriggerItems(triggers);
-    selectedTrigger = dropdownTriggerItems[0].value;
+    // dropdownTriggerItems = buildDropdownTriggerItems(triggers);
+    // selectedTrigger = dropdownTriggerItems[0].value;
     super.initState();
   }
 
   List<DropdownMenuItem<String>> buildDropdownTriggerItems(List triggers) {
     List<DropdownMenuItem<String>> items = List();
-    for (String t in triggers) {
+    for (Trigger t in triggers) {
       items.add(
         DropdownMenuItem(
-          value: t,
-          child: Text(t),
+          value: t.trigger,
+          child: Text(t.trigger),
         ),
       );
     }
@@ -68,10 +70,15 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
   }
 
   Widget build(BuildContext context) {
+    //Retrieve trigger using getter function
+    final triggers = Provider.of<List<Trigger>>(context) ?? [];
     final _auth = AuthService();
+
+    dropdownTriggerItems = buildDropdownTriggerItems(triggers);
 
     return Scaffold(
       appBar: AppBar(
+        key: Key('log-trigger-page'),
         title: Text('Log Session'),
         centerTitle: true,
         actions: <Widget>[
@@ -90,7 +97,20 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
             children: <Widget>[
               Container(
                 child: Text(
-                  'To quit a habit, it is crucial that you practice self awareness. Please help us help you by logging what triggered your session',
+                  'To quit a habit, it is crucial that you practice self awareness.',
+                  style: TextStyle(
+                    color: Colors.black,
+                    letterSpacing: 2.0,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30.0,
+              ),
+              Container(
+                child: Text(
+                  'What triggered your session?',
                   style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 2.0,
@@ -110,17 +130,18 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                       value: selectedTrigger,
                       items: dropdownTriggerItems,
                       onChanged: onChangeDropdownTriggerItem,
+                      hint:new Text("Select one")
                     ),
                   ),
                 ),
                 color: Colors.blue[100],
               ),
               SizedBox(
-                height: 20.0,
+                height: 40.0,
               ),
               Container(
                 child: Text(
-                  'Another important step is writing down your thoughts. If there is anything special about this session please feel free to log this as well',
+                  'What were you thinking or feeling?', //If there is anything special about this session please feel free to log this as well
                   style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 2.0,
@@ -146,6 +167,7 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                       child: SizedBox(
                         height: 150.0,
                         child: new TextField(
+                          key: Key('thought-field'),
                           controller: thoughtTextController,
                           maxLines: 10,
                           decoration: new InputDecoration(
@@ -162,10 +184,11 @@ class _LoggingTriggerState extends State<LoggingTrigger> {
                 ),
               ),
               FlatButton(
+                key: (Key('save-trigger-btn')),
                 color: Colors.blue,
                 child: Text('Save'),
                 onPressed: () async {
-                  dynamic result = await _log.loggingVape(
+                  dynamic result = await _log.documentLog(
                       selectedTrigger, thoughtTextController.text);
                   Navigator.push(
                       context,
