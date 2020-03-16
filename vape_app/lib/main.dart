@@ -18,3 +18,7 @@ class App extends StatelessWidget {
     );
   }
 }
+
+
+//to do unit and widget test: flutter test
+//for integration test: flutter drive --target=test_driver/app.dart
