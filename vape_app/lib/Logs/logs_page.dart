@@ -6,12 +6,12 @@ import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
 import 'package:vape_app/services/logs.dart';
 
-class TriggerList extends StatefulWidget {
+class LogsPage extends StatefulWidget {
   @override
-  TriggerListState createState() => TriggerListState();
+  LogsPageState createState() => LogsPageState();
 }
 
-class TriggerListState extends State<TriggerList> {
+class LogsPageState extends State<LogsPage> {
   final LogsService _log = LogsService();
   @override
   List<String> triggers = [
