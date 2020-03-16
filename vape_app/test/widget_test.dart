@@ -90,31 +90,18 @@ void main() {
           find.byKey(Key('stressors-field')), "random stressor");
       await tester.enterText(
           find.byKey(Key('progress-field')), "random progress");
-      await tester.tap(find.byKey(Key('save-reflections-btn')));
+      await tester.tap(find.byKey(Key('save-reflection-btn')));
       await tester.pump();
       expect(find.text("Add your text here"), findsWidgets);
       //TODO: save method called to the db
     });
   });
 
-group("log trigger page", () {
+  group("log trigger page", () {
     testWidgets("validates that trigger log is saved",
         (WidgetTester tester) async {
-   
       //TODO: save method called to the db
     });
   });
-
-  group("dashboard page", () {
-    testWidgets("validates time last hit decreasing",
-        (WidgetTester tester) async {
-      await tester.pumpWidget(makeTestable(child: Statistics()));
-      expect(find.text("Time Since Last Hit"), findsNothing);
-
-      //TODO: save method called to the db
-    });
-  });
-
-
 
 }
