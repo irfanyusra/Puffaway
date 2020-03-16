@@ -37,12 +37,14 @@ class _SettingsHelperState extends State<SettingsHelper> {
 
   List<DropdownMenuItem<String>> dropdownTriggerItems;
   String selectedTrigger;
-  
+
+  final triggerTextController = TextEditingController();
+
   @override
-  void initState() {
-    // dropdownTriggerItems = buildDropdownTriggerItems(_log.getAllTriggers());
-    // selectedTrigger = dropdownTriggerItems[0].value;
-    super.initState();
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    triggerTextController.dispose();
+    super.dispose();
   }
 
   List<DropdownMenuItem<String>> buildDropdownTriggerItems(List triggers) {
@@ -86,6 +88,50 @@ class _SettingsHelperState extends State<SettingsHelper> {
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: SingleChildScrollView(child: Column(children: <Widget>[
           Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 230, 0),
+            child: Text(
+              'Add a trigger',
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 2.0,
+                fontSize: 18,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            // height: 170,
+            // padding: EdgeInsets.all(10.0),
+            child: SizedBox(
+              // height: 150.0,
+              child: new TextField(
+                key: Key('thought-field'),
+                controller: triggerTextController,
+                maxLines: 2,
+                decoration: new InputDecoration(
+                  border: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(25.0),
+                    borderSide: new BorderSide(),
+                  ),
+                  hintText: 'Add your trigger here',
+                ),
+              ),
+            ),
+          ),
+          FlatButton(
+            key: (Key('save-trigger-btn')),
+            color: Colors.blue,
+            child: Text('Add'),
+            onPressed: () async {
+              await _log.createTrigger(triggerTextController.text);
+              setState(() {
+                triggerTextController.text = "";
+                selectedTrigger = dropdownTriggerItems[0].value;
+              });
+            },
+          ),
+          SizedBox(height: 30),
+          Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
             child: Text(
               'Remove a trigger',
@@ -97,7 +143,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
             ),
           ),
           SizedBox(
-            height: 20.0,
+            height: 10.0,
           ),
           Center(
             child: Container(
