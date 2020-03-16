@@ -249,19 +249,47 @@ class _SettingsHelperState extends State<SettingsHelper> {
               color: Colors.blue[100]
             ),
           ),
-        FlatButton(
-          color: Colors.blue,
-          child: Text("Remove"),
-          onPressed: () {
-            _log.deleteTrigger(selectedTrigger);
-            setState(() {
-              selectedTrigger = dropdownTriggerItems[0].value;
-            });
-          },
-        ),
-        SizedBox(
-          height: 20.0,
-        ),
+          FlatButton(
+            color: Colors.blue,
+            child: Text("Remove"),
+            onPressed: () {
+              _log.deleteTrigger(selectedTrigger);
+              setState(() {
+                selectedTrigger = dropdownTriggerItems[0].value;
+              });
+            },
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+
+          //INSTRUCTIONS//
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 250, 0),
+            child: Text(
+              'Instructions',
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 2.0,
+                fontSize: 18,
+              ),
+            ),
+          ),
+          SizedBox(height: 10.0),
+          FlatButton(
+            color: Colors.blue,
+            child: Text("View"),
+            onPressed: () {
+              //link to instructions page
+            },
+          ),
+
+          //ABOUT//
+          SizedBox(height: 30),
+          Center(
+            child: Text("Made with ♥️ by Team 50"),
+          ),
+          SizedBox(height: 10),
         ],),)
       ),
     );
