@@ -23,7 +23,7 @@ class _LogTileState extends State<LogTile> {
           widget.onDelete(widget.log.documentID, _log);
           Scaffold.of(context).showSnackBar(SnackBar(
               content: Text("log deleted"),
-              duration: Duration(milliseconds: 500)));
+              duration: Duration(milliseconds: 1000)));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0),

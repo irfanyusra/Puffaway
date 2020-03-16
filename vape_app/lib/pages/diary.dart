@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vape_app/Logs/all_logs.dart';
 import 'package:vape_app/Reflections/all_reflections.dart';
-import 'package:vape_app/pages/all_logs.dart';
 
 //Widgget used to allow navigation between the logs page and reflections page
 class Diary extends StatefulWidget {

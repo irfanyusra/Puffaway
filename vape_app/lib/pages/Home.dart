@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/Logs/logs_page.dart';
+import 'package:vape_app/Reflections/reflections_page.dart';
 import 'package:vape_app/pages/diary.dart';
 import 'statistics.dart';
-import 'reflections_page.dart';
 
 class Home extends StatefulWidget {
   @override

@@ -168,7 +168,7 @@ class LogsPageState extends State<LogsPage> {
                 color: Colors.blue,
                 child: Text('Save'),
                 onPressed: () async {
-                  dynamic result = await _log.loggingVape(
+                  dynamic result = await _log.documentLog(
                       selectedTrigger, thoughtTextController.text);
                   Navigator.push(
                       context,

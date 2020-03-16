@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vape_app/services/auth.dart';
-import 'package:vape_app/services/logs.dart';
+import 'package:vape_app/services/reflections.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
 
 class Reflections extends StatefulWidget {
@@ -24,7 +24,7 @@ class _ReflectionsState extends State<Reflections> {
 
   Map data = {};
 
-  final LogsService _log = LogsService();
+  final ReflectionsService _reflection = ReflectionsService();
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
@@ -168,13 +168,13 @@ class _ReflectionsState extends State<Reflections> {
                         fontSize: 20,
                       )),
                   onPressed: () async {
-                    await _log.loggingReflections(stressorTextController.text,progressTextController.text);
+                    await _reflection.documentReflection(stressorTextController.text,progressTextController.text);
                   setState(() {
                     progressTextController.text = "";                    
                     stressorTextController.text = "";                   
                   });
                    Scaffold.of(context)
-              .showSnackBar(SnackBar(content: Text("Reflection added")));
+              .showSnackBar(SnackBar(content: Text("Reflection added"),duration:Duration(milliseconds: 1000)));
                   },
                 ),
               ),
