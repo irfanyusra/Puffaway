@@ -73,7 +73,7 @@ class _ReflectionsState extends State<Reflections> {
               SizedBox(
                 height: 0.0,
               ),
-              Container(
+              Container( 
                 height: 150,
 //                color: Colors.grey[300],
                 padding: EdgeInsets.all(10.0),

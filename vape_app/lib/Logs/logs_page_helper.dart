@@ -75,7 +75,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
     final _auth = AuthService();
 
     dropdownTriggerItems = buildDropdownTriggerItems(triggers);
-    
+
     return Scaffold(
       appBar: AppBar(
         key: Key('log-trigger-page'),
@@ -97,7 +97,20 @@ class LogsPageHelperState extends State<LogsPageHelper> {
             children: <Widget>[
               Container(
                 child: Text(
-                  'To quit a habit, it is crucial that you practice self awareness. Please help us help you by logging what triggered your session',
+                  'To quit a habit, it is crucial that you practice self awareness.',
+                  style: TextStyle(
+                    color: Colors.black,
+                    letterSpacing: 2.0,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30.0,
+              ),
+              Container(
+                child: Text(
+                  'What triggered your session?',
                   style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 2.0,
@@ -117,17 +130,18 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                       value: selectedTrigger,
                       items: dropdownTriggerItems,
                       onChanged: onChangeDropdownTriggerItem,
+                      hint:new Text("Select one")
                     ),
                   ),
                 ),
                 color: Colors.blue[100],
               ),
               SizedBox(
-                height: 20.0,
+                height: 40.0,
               ),
               Container(
                 child: Text(
-                  'Another important step is writing down your thoughts. If there is anything special about this session please feel free to log this as well',
+                  'What were you thinking or feeling?', //If there is anything special about this session please feel free to log this as well
                   style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 2.0,
