@@ -20,7 +20,8 @@ void main() {
     // final triggerLogPage = find.byValueKey("trigger-log-page");
     final allTriggerLogsPage = find.byType("AllLogs");
     final thoughtText = "some thought";
-    final triggerExists = find.text("Trigger: Select one");
+    final triggerText = "";
+    final triggerExists = find.text("Trigger: "+triggerText);
     final thoughtExists =
         find.text("Thought: " + thoughtText + "\n a moment ago");
     final statsNav = find.byValueKey("stats-nav");
