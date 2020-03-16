@@ -24,10 +24,6 @@ class _ReflectionTileState extends State<ReflectionTile> {
       onDismissed: (direction) {
         widget.onDelete(widget.reflection.documentID, _reflection);
 
-        setState(() {
-          //Delete reflection once swiped
-        });
-
         Scaffold.of(context)
             .showSnackBar(SnackBar(content: Text("log deleted"),duration: Duration(milliseconds: 1000),));
       },
