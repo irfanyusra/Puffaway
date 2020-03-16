@@ -124,8 +124,9 @@ class _SettingsHelperState extends State<SettingsHelper> {
                   padding: const EdgeInsets.fromLTRB(115, 0, 0, 0),
                   child: TextField(
                     controller: nameTextController,
-                    onChanged: (text) {
+                    onChanged: (name) async{
                       //SEND NAME TO DB
+                      await _auth.updateUsername(name);
                     },
                   ),
                 )
@@ -167,8 +168,9 @@ class _SettingsHelperState extends State<SettingsHelper> {
                   padding: const EdgeInsets.fromLTRB(0, 0, 110, 0),
                   child: TextField(
                     controller: goalTextController,
-                    onChanged: (text) {
+                    onChanged: (goal) async {
                       //SEND GOAL TO DB
+                     await _auth.updateUserGoal(int.parse(goal));
                     },
                   ),
                 )
