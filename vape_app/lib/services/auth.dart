@@ -23,6 +23,7 @@ Future createDefaultTriggers(User user,List<String> triggers) async{
       .map(_userFromFirebaseUser);
   }
 
+//Not used anymore
   Future signInAnon(String name) async {
     try{
       AuthResult result = await _auth.signInAnonymously();
