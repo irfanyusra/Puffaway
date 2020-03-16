@@ -17,7 +17,6 @@ class _LogsPageState extends State<LogsPage> {
   Widget build(BuildContext context) {
     //Grab current user
     final user = Provider.of<User>(context);
-
     return StreamProvider<List<Trigger>>.value(
       value:DatabaseService(uid: user.uid).triggers,
       child:LogsPageHelper()

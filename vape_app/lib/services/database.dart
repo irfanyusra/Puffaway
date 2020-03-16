@@ -121,7 +121,7 @@ class DatabaseService {
   Stream<List<Trigger>> get triggers {
     return triggerCollection
         .where('uid', isEqualTo: uid)
-        .orderBy('dateTime', descending: true)
+        .orderBy('dateTime')//Order by ascending dateTime
         .snapshots()
         .map(_triggerListFromSnapshot);
   }

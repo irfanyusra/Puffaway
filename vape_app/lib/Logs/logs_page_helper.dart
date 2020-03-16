@@ -15,19 +15,19 @@ class LogsPageHelper extends StatefulWidget {
 
 class LogsPageHelperState extends State<LogsPageHelper> {
   final LogsService _log = LogsService();
-  
-  List<String> triggers = [
-    'Select one',
-    'Time of day',
-    'Wake-up routine',
-    'Boredom',
-    'Vape smell',
-    'Stress',
-    'Seeing someone vaping',
-    'Fatigue',
-    'Partying',
-    'Sex'
-  ];
+
+  // List<String> triggers = [
+  //   'Select one',
+  //   'Time of day',
+  //   'Wake-up routine',
+  //   'Boredom',
+  //   'Vape smell',
+  //   'Stress',
+  //   'Seeing someone vaping',
+  //   'Fatigue',
+  //   'Partying',
+  //   'Sex'
+  // ];
 
   List<DropdownMenuItem<String>> dropdownTriggerItems;
   String selectedTrigger;
@@ -45,18 +45,18 @@ class LogsPageHelperState extends State<LogsPageHelper> {
 
   @override
   void initState() {
-    dropdownTriggerItems = buildDropdownTriggerItems(triggers);
-    selectedTrigger = dropdownTriggerItems[0].value;
+    // dropdownTriggerItems = buildDropdownTriggerItems(triggers);
+    // selectedTrigger = dropdownTriggerItems[0].value;
     super.initState();
   }
 
   List<DropdownMenuItem<String>> buildDropdownTriggerItems(List triggers) {
     List<DropdownMenuItem<String>> items = List();
-    for (String t in triggers) {
+    for (Trigger t in triggers) {
       items.add(
         DropdownMenuItem(
-          value: t,
-          child: Text(t),
+          value: t.trigger,
+          child: Text(t.trigger),
         ),
       );
     }
@@ -74,8 +74,8 @@ class LogsPageHelperState extends State<LogsPageHelper> {
     final triggers = Provider.of<List<Trigger>>(context) ?? [];
     final _auth = AuthService();
 
-    // dropdownTriggerItems = buildDropdownTriggerItems(triggers);
-
+    dropdownTriggerItems = buildDropdownTriggerItems(triggers);
+    
     return Scaffold(
       appBar: AppBar(
         key: Key('log-trigger-page'),
