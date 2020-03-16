@@ -39,6 +39,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
   String selectedTrigger;
 
   final triggerTextController = TextEditingController();
+  final nameTextController = TextEditingController();
 
   @override
   void dispose() {
@@ -87,6 +88,60 @@ class _SettingsHelperState extends State<SettingsHelper> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: SingleChildScrollView(child: Column(children: <Widget>[
+          //PERSONAL INFORMATION//
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 155, 0),
+            child: Text(
+              'Personal information',
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 2.0,
+                fontSize: 18,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+            child: Row(children: <Widget>[
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 10, 50, 5),
+                  child: Text(
+                    "Name: ",
+                    style: TextStyle(
+                      color: Colors.black,
+                      letterSpacing: 2.0,
+                      fontSize: 14,
+                    )
+                  ),
+                )
+              ),
+              Flexible(
+                child: TextField(
+                  controller: nameTextController,
+                  onChanged: (text) {
+                    //SEND NAME TO DB
+                  },
+                )
+              )
+            ],),
+          ),
+
+          //GOAL//
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 230, 0),
+            child: Text(
+              'Set goal',
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 2.0,
+                fontSize: 18,
+              ),
+            ),
+          ),
+
+          //ADD TRIGGER//
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 230, 0),
             child: Text(
@@ -130,6 +185,8 @@ class _SettingsHelperState extends State<SettingsHelper> {
               });
             },
           ),
+
+          //REMOVE TRIGGER//
           SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
@@ -158,7 +215,6 @@ class _SettingsHelperState extends State<SettingsHelper> {
               color: Colors.blue[100]
             ),
           ),
-
         FlatButton(
           color: Colors.blue,
           child: Text("Remove"),
@@ -169,12 +225,9 @@ class _SettingsHelperState extends State<SettingsHelper> {
             });
           },
         ),
-
         SizedBox(
           height: 20.0,
         ),
-
-        
         ],),)
       ),
     );
