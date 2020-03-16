@@ -40,6 +40,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
 
   final triggerTextController = TextEditingController();
   final nameTextController = TextEditingController();
+  final goalTextController = TextEditingController();
 
   @override
   void dispose() {
@@ -106,9 +107,9 @@ class _SettingsHelperState extends State<SettingsHelper> {
             child: Row(children: <Widget>[
               Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 10, 50, 5),
+                  padding: const EdgeInsets.fromLTRB(30, 10, 0, 5),
                   child: Text(
-                    "Name: ",
+                    "Name:",
                     style: TextStyle(
                       color: Colors.black,
                       letterSpacing: 2.0,
@@ -118,11 +119,14 @@ class _SettingsHelperState extends State<SettingsHelper> {
                 )
               ),
               Flexible(
-                child: TextField(
-                  controller: nameTextController,
-                  onChanged: (text) {
-                    //SEND NAME TO DB
-                  },
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(115, 0, 0, 0),
+                  child: TextField(
+                    controller: nameTextController,
+                    onChanged: (text) {
+                      //SEND NAME TO DB
+                    },
+                  ),
                 )
               )
             ],),
@@ -130,7 +134,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
 
           //GOAL//
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 230, 0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 280, 0),
             child: Text(
               'Set goal',
               style: TextStyle(
@@ -139,6 +143,36 @@ class _SettingsHelperState extends State<SettingsHelper> {
                 fontSize: 18,
               ),
             ),
+          ),
+          SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+            child: Row(children: <Widget>[
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 10, 0, 5),
+                  child: Text(
+                    "Number of days the pod will last",
+                    style: TextStyle(
+                      color: Colors.black,
+                      letterSpacing: 2.0,
+                      fontSize: 14,
+                    )
+                  ),
+                )
+              ),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 110, 0),
+                  child: TextField(
+                    controller: goalTextController,
+                    onChanged: (text) {
+                      //SEND GOAL TO DB
+                    },
+                  ),
+                )
+              )
+            ],),
           ),
 
           //ADD TRIGGER//
