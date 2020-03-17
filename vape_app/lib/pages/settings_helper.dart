@@ -225,52 +225,52 @@ class _SettingsHelperState extends State<SettingsHelper> {
           ),
 
           //REMOVE TRIGGER//
-          SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
-            child: Text(
-              'Remove a trigger',
-              style: TextStyle(
-                color: Colors.black,
-                letterSpacing: 2.0,
-                fontSize: 18,
-              ),
-            ),
-          ),
+          // SizedBox(height: 30),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
+          //   child: Text(
+          //     'Remove a trigger',
+          //     style: TextStyle(
+          //       color: Colors.black,
+          //       letterSpacing: 2.0,
+          //       fontSize: 18,
+          //     ),
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 10.0,
+          // ),
+          // Center(
+          //   child: Container(
+          //     child: SizedBox(
+          //       // width: 200,
+          //       child: DropdownButton(
+          //         value: selectedTrigger,
+          //         items: dropdownTriggerItems,
+          //         onChanged: onChangeDropdownTriggerItem,
+          //       ),
+          //     ),
+          //     color: Colors.blue[100]
+          //   ),
+          // ),
+          // FlatButton(
+          //   color: Colors.blue,
+          //   child: Text("Remove"),
+          //   onPressed: () {
+          //     var documentID;
+          //     //Search for trigger to delete
+          //     for(Trigger t in triggers){
+          //       if(selectedTrigger==t.trigger)
+          //         documentID = t.documentID;
+          //     }
+          //     _log.deleteTrigger(documentID);
+          //     setState(() {
+          //       selectedTrigger = dropdownTriggerItems[0].value;
+          //     });
+          //   },
+          // ),
           SizedBox(
-            height: 10.0,
-          ),
-          Center(
-            child: Container(
-              child: SizedBox(
-                // width: 200,
-                child: DropdownButton(
-                  value: selectedTrigger,
-                  items: dropdownTriggerItems,
-                  onChanged: onChangeDropdownTriggerItem,
-                ),
-              ),
-              color: Colors.blue[100]
-            ),
-          ),
-          FlatButton(
-            color: Colors.blue,
-            child: Text("Remove"),
-            onPressed: () {
-              var documentID;
-              //Search for trigger to delete
-              for(Trigger t in triggers){
-                if(selectedTrigger==t.trigger)
-                  documentID = t.documentID;
-              }
-              _log.deleteTrigger(documentID);
-              setState(() {
-                selectedTrigger = dropdownTriggerItems[0].value;
-              });
-            },
-          ),
-          SizedBox(
-            height: 20.0,
+            height: 50.0,
           ),
 
           //INSTRUCTIONS//
