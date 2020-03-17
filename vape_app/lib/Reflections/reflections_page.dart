@@ -33,14 +33,14 @@ class _ReflectionsState extends State<Reflections> {
       appBar: AppBar(
         title: Text('Reflection'),
         centerTitle: true,
-        actions: <Widget>[
-        ResuableFlatButton(
-           icon:Icon(Icons.person),
-          label:Text('Logout'),
-          onPressed: () async {
-            await _auth.signOut();}),
+      //   actions: <Widget>[
+      //   ResuableFlatButton(
+      //      icon:Icon(Icons.person),
+      //     label:Text('Logout'),
+      //     onPressed: () async {
+      //       await _auth.signOut();}),
         
-      ],
+      // ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),

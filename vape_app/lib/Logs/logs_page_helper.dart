@@ -81,14 +81,14 @@ class LogsPageHelperState extends State<LogsPageHelper> {
         key: Key('log-trigger-page'),
         title: Text('Log Session'),
         centerTitle: true,
-        actions: <Widget>[
-          ResuableFlatButton(
-              icon: Icon(Icons.person),
-              label: Text('Logout'),
-              onPressed: () async {
-                await _auth.signOut();
-              }), //signout button
-        ],
+        // actions: <Widget>[
+        //   ResuableFlatButton(
+        //       icon: Icon(Icons.person),
+        //       label: Text('Logout'),
+        //       onPressed: () async {
+        //         await _auth.signOut();
+        //       }), //signout button
+        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),

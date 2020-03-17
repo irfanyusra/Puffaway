@@ -43,14 +43,14 @@ class _RecommendationState extends State<Recommendation> {
       appBar: AppBar(
         title: Text('Recommendation'),
         centerTitle: true,
-           actions: <Widget>[
-          ResuableFlatButton(
-           icon:Icon(Icons.person),
-          label:Text('Logout'),
-          onPressed: () async {
-            await _auth.signOut();}),
+      //      actions: <Widget>[
+      //     ResuableFlatButton(
+      //      icon:Icon(Icons.person),
+      //     label:Text('Logout'),
+      //     onPressed: () async {
+      //       await _auth.signOut();}),
         
-      ],
+      // ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
