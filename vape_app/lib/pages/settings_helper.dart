@@ -197,7 +197,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
               child: new TextField(
                 key: Key('thought-field'),
                 controller: triggerTextController,
-                maxLines: 2,
+                maxLines: 1,
                 decoration: new InputDecoration(
                   border: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(25.0),
@@ -222,7 +222,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
           ),
 
           //REMOVE TRIGGER//
-          SizedBox(height: 30),
+          SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
             child: Text(
@@ -261,7 +261,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
             },
           ),
           SizedBox(
-            height: 20.0,
+            height: 10.0,
           ),
 
           //INSTRUCTIONS//
