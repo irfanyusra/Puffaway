@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vape_app/Models/User.dart';
 import 'package:vape_app/Models/pod.dart';
 import 'package:vape_app/services/database.dart';
-import 'loading.dart';
+import 'package:vape_app/shared/loading.dart';
 
 class TimeSeriesBar extends StatefulWidget {
 
