@@ -52,6 +52,10 @@ class _SettingsHelperState extends State<SettingsHelper> {
     super.dispose();
   }
 
+  List<String> createTriggerStringList() {
+    List<String> triggers = List<String>();
+  }
+
   List<DropdownMenuItem<String>> buildDropdownTriggerItems(List triggers) {
     List<DropdownMenuItem<String>> items = List();
     for (Trigger t in triggers) {
