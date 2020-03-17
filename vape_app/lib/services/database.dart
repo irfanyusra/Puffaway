@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/Models/Reflection.dart';
 import 'package:vape_app/Models/Trigger.dart';
@@ -33,6 +32,7 @@ class DatabaseService {
     });
   }
 
+
 //Create default user, maybe used later
   Future createDefaultUser(String name,int goal) async{
     return await userCollection.document(uid).setData({
@@ -41,6 +41,7 @@ class DatabaseService {
       'goal':0
     });
   }
+
 
 
 // -------REFLECTIONS-------//

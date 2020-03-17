@@ -83,6 +83,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
           icon: Icon(Icons.person),
           label: Text("Logout"),
           onPressed: () async {
+            Navigator.pop(context);
             await _auth.signOut();
           },
         )
