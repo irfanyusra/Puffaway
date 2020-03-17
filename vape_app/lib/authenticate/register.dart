@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/auth.dart';
+import 'package:vape_app/services/pods.dart';
 import 'package:vape_app/shared/constants.dart';
 import 'package:vape_app/pages/Home.dart';
 import 'package:vape_app/shared/loading.dart';
@@ -25,8 +26,10 @@ class _RegisterState extends State<Register> {
     'Partying',
     'Sex'
   ];
-  //Formkey used for form validation
   final AuthService _auth = AuthService();
+  final PodService _pod = PodService();
+
+  //Formkey used for form validation
   final _formKey = GlobalKey<FormState>();
   //Text field state
   //Email and password from input field is stored here
@@ -103,6 +106,8 @@ class _RegisterState extends State<Register> {
                       });
                     }else{
                       await _auth.createDefaultTriggers(result,triggers);
+                      await _auth.createDefaultUser();
+                      await _pod.addPodFinishTime();
                     }
                   }
                   
