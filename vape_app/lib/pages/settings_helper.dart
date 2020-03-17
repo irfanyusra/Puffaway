@@ -227,60 +227,60 @@ class _SettingsHelperState extends State<SettingsHelper> {
               await _log.createTrigger(triggerTextController.text);
               setState(() {
                 triggerTextController.text = "";
-                selectedTrigger = dropdownTriggerItems[0].value;
+                // selectedTrigger = dropdownTriggerItems[0].value;
               });
             },
           ),
 
           //REMOVE TRIGGER//
-          SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
-            child: Text(
-              'Remove a trigger',
-              style: TextStyle(
-                color: Colors.black,
-                letterSpacing: 2.0,
-                fontSize: 18,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Center(
-            child: Container(
-              child: SizedBox(
-                // width: 200,
-                child: DropdownButton(
-                  value: selectedTrigger,
-                  items: dropdownTriggerItems,
-                  onChanged: (newValue) { onChangeDropdownTriggerItem(newValue); },
-                ),
-              ),
-              color: Colors.blue[100]
-            ),
-          ),
-          FlatButton(
-            color: Colors.blue,
-            child: Text("Remove"),
-            onPressed: () {
-              var documentID;
-              //Search for trigger to delete
-              for(Trigger t in triggers){
-                if(selectedTrigger==t.trigger)
-                  documentID = t.documentID;
-              }
-              _log.deleteTrigger(documentID);
-              setState(() {
-                selectedTrigger = dropdownTriggerItems[0].value;
-                // selectedTrigger = "test";
+          // SizedBox(height: 10),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
+          //   child: Text(
+          //     'Remove a trigger',
+          //     style: TextStyle(
+          //       color: Colors.black,
+          //       letterSpacing: 2.0,
+          //       fontSize: 18,
+          //     ),
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 10.0,
+          // ),
+          // Center(
+          //   child: Container(
+          //     child: SizedBox(
+          //       // width: 200,
+          //       child: DropdownButton(
+          //         value: selectedTrigger,
+          //         items: dropdownTriggerItems,
+          //         onChanged: (newValue) { onChangeDropdownTriggerItem(newValue); },
+          //       ),
+          //     ),
+          //     color: Colors.blue[100]
+          //   ),
+          // ),
+          // FlatButton(
+          //   color: Colors.blue,
+          //   child: Text("Remove"),
+          //   onPressed: () async {
+          //     var documentID;
+          //     //Search for trigger to delete
+          //     for(Trigger t in triggers){
+          //       if(selectedTrigger==t.trigger)
+          //         documentID = t.documentID;
+          //     }
+          //     await _log.deleteTrigger(documentID);
+          //     setState(() {
+          //       selectedTrigger = dropdownTriggerItems[0].value;
+          //       // selectedTrigger = "test";
 
-              });
-            },
-          ),
+          //     });
+          //   },
+          // ),
           SizedBox(
-            height: 10.0,
+            height: 30.0,
           ),
 
           //INSTRUCTIONS//
@@ -305,7 +305,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
           ),
 
           //ABOUT//
-          SizedBox(height: 30),
+          SizedBox(height: 80),
           Center(
             child: Text("Made with ♥️ by Team 50"),
           ),
