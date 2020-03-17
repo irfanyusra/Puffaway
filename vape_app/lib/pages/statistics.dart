@@ -20,6 +20,7 @@ class _StatisticsState extends State<Statistics> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+
     return StreamProvider<List<Log>>.value(
       value: DatabaseService(uid:user.uid).logs,
       child: Scaffold(

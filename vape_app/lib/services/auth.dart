@@ -7,7 +7,7 @@ class AuthService{
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   User _userFromFirebaseUser(FirebaseUser user){
-    return user!=null?User(uid:user.uid,):null;
+    return user!=null?User(uid:user.uid):null;
   }
 
 //Update name of user
@@ -36,13 +36,9 @@ Future createDefaultTriggers(User user,List<String> triggers) async{
 }
   // auth change user stream
   Stream<User> get user {
-
     return _auth.onAuthStateChanged
       .map(_userFromFirebaseUser);
   }
-
-  
-
 
 //Not used anymore
   Future signInAnon(String name) async {
