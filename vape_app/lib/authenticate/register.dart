@@ -103,7 +103,9 @@ class _RegisterState extends State<Register> {
                       });
                     }else{
                       await _auth.createDefaultTriggers(result,triggers);
+                      await _auth.createDefaultUser();
                     }
+
                   }
                   
                 }

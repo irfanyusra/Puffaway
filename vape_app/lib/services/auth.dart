@@ -23,10 +23,11 @@ class AuthService{
   }
 
 //CreateDefaultuser is a function that initializes the user collection upon registration
-Future createDefaultUser()async{
+Future createDefaultUser() async {
    FirebaseUser user = await _auth.currentUser();
   await DatabaseService(uid: user.uid).createDefaultUser('', 0);
 }
+
  
 
 //CreateDefaultTriggers is a function which adds default triggers to the database upon registration

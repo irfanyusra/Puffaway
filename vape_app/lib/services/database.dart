@@ -26,7 +26,7 @@ class DatabaseService {
     });
   }
 
-    Future updateUserGoal(int goal) async {
+  Future updateUserGoal(int goal) async {
     return await userCollection.document(uid).updateData({
       'uid':uid,
       'goal': goal,

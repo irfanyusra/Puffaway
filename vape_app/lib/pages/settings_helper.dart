@@ -43,6 +43,8 @@ class _SettingsHelperState extends State<SettingsHelper> {
   final nameTextController = TextEditingController();
   final goalTextController = TextEditingController();
 
+  String name;
+
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -53,10 +55,11 @@ class _SettingsHelperState extends State<SettingsHelper> {
   List<DropdownMenuItem<String>> buildDropdownTriggerItems(List triggers) {
     List<DropdownMenuItem<String>> items = List();
     for (Trigger t in triggers) {
+      print(t.trigger);
       items.add(
         DropdownMenuItem(
           value: t.trigger,
-          child: Text(t.trigger),
+          child: new Text(t.trigger),
         ),
       );
     }
@@ -74,6 +77,8 @@ class _SettingsHelperState extends State<SettingsHelper> {
     final _auth = AuthService();
     final triggers = Provider.of<List<Trigger>>(context) ?? [];
     dropdownTriggerItems = buildDropdownTriggerItems(triggers);
+
+    
 
     return Scaffold(appBar: AppBar(
       title: Text("Settings"),
@@ -124,7 +129,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                   padding: const EdgeInsets.fromLTRB(115, 0, 0, 0),
                   child: TextField(
                     controller: nameTextController,
-                    onChanged: (name) async{
+                    onChanged: (name) async {
                       //SEND NAME TO DB
                       await _auth.updateUsername(name);
                     },
@@ -246,7 +251,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                 child: DropdownButton(
                   value: selectedTrigger,
                   items: dropdownTriggerItems,
-                  onChanged: onChangeDropdownTriggerItem,
+                  onChanged: (newValue) { onChangeDropdownTriggerItem(newValue); },
                 ),
               ),
               color: Colors.blue[100]
@@ -265,6 +270,8 @@ class _SettingsHelperState extends State<SettingsHelper> {
               _log.deleteTrigger(documentID);
               setState(() {
                 selectedTrigger = dropdownTriggerItems[0].value;
+                // selectedTrigger = "test";
+
               });
             },
           ),
