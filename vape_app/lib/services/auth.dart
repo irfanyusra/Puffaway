@@ -10,9 +10,26 @@ class AuthService{
     return user!=null?User(uid:user.uid):null;
   }
 
+//Update name of user
+  Future updateUsername(String name) async {
+   FirebaseUser user = await _auth.currentUser();
+    return await DatabaseService(uid:user.uid).updateUsername(name);
+  }
+
+//Update goal of user
+  Future updateUserGoal(int goal) async {
+   FirebaseUser user = await _auth.currentUser();
+    return await DatabaseService(uid:user.uid).updateUserGoal(goal);
+  }
+
+//CreateDefaultuser is a function that initializes the user collection upon registration
+Future createDefaultUser()async{
+   FirebaseUser user = await _auth.currentUser();
+  await DatabaseService(uid: user.uid).createDefaultUser('', 0);
+}
  
 
-//CreateDefaultTriggers is a function which adds default triggers to the database
+//CreateDefaultTriggers is a function which adds default triggers to the database upon registration
 Future createDefaultTriggers(User user,List<String> triggers) async{
   for(String trigger in triggers)
     await DatabaseService(uid:user.uid).createTrigger(trigger);
@@ -29,7 +46,7 @@ Future createDefaultTriggers(User user,List<String> triggers) async{
       AuthResult result = await _auth.signInAnonymously();
       FirebaseUser user = result.user;
 
-      await DatabaseService(uid:user.uid).updateUserData(name);
+      await DatabaseService(uid:user.uid).updateUsername(name);
       
       return _userFromFirebaseUser(user);
     }catch(e){  
