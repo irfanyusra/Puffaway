@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:vape_app/Models/Goal.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/Models/Reflection.dart';
 import 'package:vape_app/Models/Trigger.dart';
@@ -32,6 +33,27 @@ class DatabaseService {
       'goal': goal,
     });
   }
+
+List<Goal> _goalListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Goal(
+
+          uid: doc.data['uid'] ?? '',
+          name: doc.data['name'] ?? '',
+          goal: doc.data['goal']??'',
+          );
+    }).toList();
+  }
+
+  //Get reflections stream
+  Stream<List<Goal>> get goals {
+    return userCollection
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map(_goalListFromSnapshot);
+  }
+
+
 
 //Create default user, maybe used later
   Future createDefaultUser(String name,int goal) async{
