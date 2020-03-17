@@ -16,7 +16,7 @@ class ProgressBar extends StatefulWidget {
 
 class _ProgressBarState extends State<ProgressBar> {
   double _progressValue;
-
+  var goal = 10;
 
   final _pod = PodService();
 
