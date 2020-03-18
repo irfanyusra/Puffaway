@@ -6,6 +6,6 @@ class User{
 class UserData{
   final String uid;
   final String name;
-  final int goal;
+  final String goal;
   UserData({this.uid,this.name,this.goal});
 }

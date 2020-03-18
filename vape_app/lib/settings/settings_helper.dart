@@ -15,7 +15,7 @@ import 'package:vape_app/Models/Trigger.dart';
 
 class SettingsHelper extends StatefulWidget {
   final String name;
-  final int goal;
+  final String goal;
   SettingsHelper({this.name,this.goal});
   @override
   _SettingsHelperState createState() => _SettingsHelperState();
@@ -44,7 +44,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
   void initState() {
     super.initState();
     nameTextController.text = widget.name;
-    goalTextController.text = widget.goal.toString();
+    goalTextController.text = widget.goal;
 
   }
 
@@ -181,7 +181,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                 onChanged: (goal) async {
                                   //SEND GOAL TO DB
                                   await _auth.updateUserData(
-                                      userData.name, int.parse(goal));
+                                      userData.name, goal);
                                 },
                               ),
                             ))
