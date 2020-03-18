@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/services/pods.dart';
 import 'package:vape_app/shared/constants.dart';
-import 'package:vape_app/pages/Home.dart';
 import 'package:vape_app/shared/loading.dart';
 import 'package:vape_app/helper_functions/validation.dart';
 class Register extends StatefulWidget {
@@ -106,7 +104,6 @@ class _RegisterState extends State<Register> {
                       });
                     }else{
                       await _auth.createDefaultTriggers(result,triggers);
-                      await _auth.createDefaultUser();
                       await _pod.addPodFinishTime();
                     }
                   }

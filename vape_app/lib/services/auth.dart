@@ -10,24 +10,14 @@ class AuthService{
     return user!=null?User(uid:user.uid,):null;
   }
 
-//Update name of user
-  Future updateUsername(String name) async {
-   FirebaseUser user = await _auth.currentUser();
-    return await DatabaseService(uid:user.uid).updateUsername(name);
+//Update the user data
+  Future updateUserData(String name,int goal) async{
+       FirebaseUser user = await _auth.currentUser();
+
+    return await DatabaseService(uid:user.uid).updateUserData(name, goal);
+
   }
 
-//Update goal of user
-  Future updateUserGoal(int goal) async {
-   FirebaseUser user = await _auth.currentUser();
-    return await DatabaseService(uid:user.uid).updateUserGoal(goal);
-  }
-
-//CreateDefaultuser is a function that initializes the user collection upon registration
-Future createDefaultUser()async{
-   FirebaseUser user = await _auth.currentUser();
-  await DatabaseService(uid: user.uid).createDefaultUser('', 0);
-}
- 
 
 //CreateDefaultTriggers is a function which adds default triggers to the database upon registration
 Future createDefaultTriggers(User user,List<String> triggers) async{
@@ -44,22 +34,23 @@ Future createDefaultTriggers(User user,List<String> triggers) async{
   
 
 
-//Not used anymore
-  Future signInAnon(String name) async {
-    try{
-      AuthResult result = await _auth.signInAnonymously();
-      FirebaseUser user = result.user;
+// //Not used anymore
+//   Future signInAnon(String name) async {
+//     try{
+//       AuthResult result = await _auth.signInAnonymously();
+//       FirebaseUser user = result.user;
 
-      await DatabaseService(uid:user.uid).updateUsername(name);
+//       await DatabaseService(uid:user.uid).updateUsername(name);
       
-      return _userFromFirebaseUser(user);
-    }catch(e){  
-      print(e.toString());
-      return null;
-    }
-  }
+//       return _userFromFirebaseUser(user);
+//     }catch(e){  
+//       print(e.toString());
+//       return null;
+//     }
+//   }
 
-  //sign in
+
+//   //sign in
    Future signInWithEmailAndPassword(String email, String password)async{
     try{
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -77,7 +68,9 @@ Future createDefaultTriggers(User user,List<String> triggers) async{
     try{
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-
+      
+      //Create a default user model upon registration
+      await updateUserData('', 0);
       return _userFromFirebaseUser(user);
     }catch(e){
       print(e.toString());

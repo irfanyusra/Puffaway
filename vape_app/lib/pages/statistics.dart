@@ -5,10 +5,10 @@ import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/Models/User.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:vape_app/settings/settings.dart';
 import 'package:vape_app/shared/Calendar.dart';
 import 'package:vape_app/shared/TimeSeriesBar.dart';
 import 'package:vape_app/shared/Timer.dart';
-import 'settings.dart';
 
 class Statistics extends StatefulWidget {
   @override
