@@ -103,8 +103,9 @@ class _RegisterState extends State<Register> {
 
                       });
                     }else{
-                      await _auth.createDefaultTriggers(result,triggers);
                       await _pod.addPodFinishTime();
+                      await _auth.createDefaultTriggers(result,triggers);
+                      
                     }
                   }
                   
