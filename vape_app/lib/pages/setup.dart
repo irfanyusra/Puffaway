@@ -44,125 +44,134 @@ class _SetupState extends State<Setup> {
         title: Text('Setup'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 25, 25, 20),
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                // style: new TextStyle(fontSize: 20.0),
-                key: Key('name-field'),
-                controller: nameTextController,
-                decoration: new InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(20.0),
-                    borderSide: new BorderSide(),
-                  ),
-                  hintText: 'Name',
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                onTap: () => _selectDate(context),
-                // style: new TextStyle(fontSize: 20.0),
-                key: Key('dob-field'),
-                focusNode: AlwaysDisabledFocusNode(),
-                controller: dobTextController,
-                decoration: new InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(20.0),
-                    borderSide: new BorderSide(),
-                  ),
-                  hintText: 'Date of Birth',
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                key: Key('goal-field'),
-                // style: new TextStyle(fontSize: 20.0),
-                keyboardType: TextInputType.number,
-                controller: goalTextController,
-                decoration: new InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(20.0),
-                    borderSide: new BorderSide(),
-                  ),
-                  hintText: 'Goal in days',
-                ),
-              ),
-              SizedBox(
-                height: 40.0,
-              ),
-              TextField(
-                key: Key('trigger-field'),
-                controller: triggerTextController,
-                decoration: new InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(20.0),
-                    borderSide: new BorderSide(),
-                  ),
-                  hintText: 'Add custom trigger',
-                  // suffixIcon: IconButton(
-                  //     icon: Icon(Icons.add),
-                  //     onPressed: () {
-                  //       triggerTextController.text = "";
-                  //       //add it to the database here
-                  //     }),
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                key: Key('recommendation-field'),
-                controller: recommendationTextController,
-                decoration: new InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(20.0),
-                    borderSide: new BorderSide(),
-                  ),
-                  hintText: 'Add custom recommendation',
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              FlatButton(
-                child: Text(
-                  'Add ',
-                  style: new TextStyle(fontSize: 20.0, color: Colors.blue),
-                ),
-                color: Colors.grey[200],
-                shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0),
-                    side: BorderSide(color: Colors.blue)),
-                onPressed: () => print("Add pressed"),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              FlatButton(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Next ',
-                      style: new TextStyle(fontSize: 20.0, color: Colors.blue),
+      body: Builder(
+        builder: (context) => Padding(
+          padding: const EdgeInsets.fromLTRB(25, 25, 25, 20),
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  // style: new TextStyle(fontSize: 20.0),
+                  key: Key('name-field'),
+                  controller: nameTextController,
+                  decoration: new InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(20.0),
+                      borderSide: new BorderSide(),
                     ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.blue,
-                    ),
-                  ],
+                    hintText: 'Name',
+                  ),
                 ),
-                onPressed: () => print("next pressed"),
-              ),
-            ],
+                SizedBox(
+                  height: 20.0,
+                ),
+                TextField(
+                  onTap: () => _selectDate(context),
+                  // style: new TextStyle(fontSize: 20.0),
+                  key: Key('dob-field'),
+                  focusNode: AlwaysDisabledFocusNode(),
+                  controller: dobTextController,
+                  decoration: new InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(20.0),
+                      borderSide: new BorderSide(),
+                    ),
+                    hintText: 'Date of Birth',
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                TextField(
+                  key: Key('goal-field'),
+                  // style: new TextStyle(fontSize: 20.0),
+                  keyboardType: TextInputType.number,
+                  controller: goalTextController,
+                  decoration: new InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(20.0),
+                      borderSide: new BorderSide(),
+                    ),
+                    hintText: 'Goal in days',
+                  ),
+                ),
+                SizedBox(
+                  height: 40.0,
+                ),
+                TextField(
+                  key: Key('trigger-field'),
+                  controller: triggerTextController,
+                  decoration: new InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(20.0),
+                      borderSide: new BorderSide(),
+                    ),
+                    hintText: 'Add custom trigger',
+                    // suffixIcon: IconButton(
+                    //     icon: Icon(Icons.add),
+                    //     onPressed: () {
+                    //       triggerTextController.text = "";
+                    //       //add it to the database here
+                    //     }),
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                TextField(
+                  key: Key('recommendation-field'),
+                  controller: recommendationTextController,
+                  decoration: new InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(20.0),
+                      borderSide: new BorderSide(),
+                    ),
+                    hintText: 'Add custom recommendation',
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                FlatButton(
+                  child: Text(
+                    'Add ',
+                    style: new TextStyle(fontSize: 20.0, color: Colors.blue),
+                  ),
+                  color: Colors.grey[200],
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0),
+                      side: BorderSide(color: Colors.blue)),
+                  onPressed: () {
+                    triggerTextController.text = "";
+                    recommendationTextController.text = "";
+                    print("Add pressed");
+                    Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text("Trigger added"),duration:Duration(milliseconds: 500)));
+                  },
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                FlatButton(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Next ',
+                        style:
+                            new TextStyle(fontSize: 20.0, color: Colors.blue),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.blue,
+                      ),
+                    ],
+                  ),
+                  onPressed: () => print("next pressed"),
+                ),
+              ],
+            ),
           ),
         ),
       ),
