@@ -21,6 +21,7 @@ class _SetupState extends State<Setup> {
   final goalTextController = TextEditingController();
   final dobTextController = TextEditingController();
   final triggerTextController = TextEditingController();
+  final recommendationTextController = TextEditingController();
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -94,7 +95,7 @@ class _SetupState extends State<Setup> {
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 40.0,
               ),
               TextField(
                 key: Key('trigger-field'),
@@ -105,13 +106,41 @@ class _SetupState extends State<Setup> {
                     borderSide: new BorderSide(),
                   ),
                   hintText: 'Add custom trigger',
-                  suffixIcon: IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        triggerTextController.text = "";
-                        //add it to the database here
-                      }),
+                  // suffixIcon: IconButton(
+                  //     icon: Icon(Icons.add),
+                  //     onPressed: () {
+                  //       triggerTextController.text = "";
+                  //       //add it to the database here
+                  //     }),
                 ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              TextField(
+                key: Key('recommendation-field'),
+                controller: recommendationTextController,
+                decoration: new InputDecoration(
+                  border: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(20.0),
+                    borderSide: new BorderSide(),
+                  ),
+                  hintText: 'Add custom recommendation',
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              FlatButton(
+                child: Text(
+                  'Add ',
+                  style: new TextStyle(fontSize: 20.0, color: Colors.blue),
+                ),
+                color: Colors.grey[200],
+                shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    side: BorderSide(color: Colors.blue)),
+                onPressed: () => print("Add pressed"),
               ),
               SizedBox(
                 height: 20.0,
@@ -125,8 +154,10 @@ class _SetupState extends State<Setup> {
                       'Next ',
                       style: new TextStyle(fontSize: 20.0, color: Colors.blue),
                     ),
-                    Icon(Icons.arrow_forward_ios,
-                    color: Colors.blue,),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.blue,
+                    ),
                   ],
                 ),
                 onPressed: () => print("next pressed"),
