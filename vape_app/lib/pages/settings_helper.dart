@@ -168,7 +168,6 @@ class _SettingsHelperState extends State<SettingsHelper> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 110, 0),
                   child: TextField(
-                    keyboardType: TextInputType.number,
                     controller: goalTextController,
                     onChanged: (goal) async {
                       //SEND GOAL TO DB
