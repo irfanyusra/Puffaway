@@ -123,18 +123,24 @@ class LogsPageHelperState extends State<LogsPageHelper> {
               ),
               //TODO: Make the trigger drop down rounded rect
               Container(
-                child: SizedBox(
-                  width: 200,
-                  child: Center(
-                    child: DropdownButton(
-                      value: selectedTrigger,
-                      items: dropdownTriggerItems,
-                      onChanged: onChangeDropdownTriggerItem,
-                      hint:new Text("Select one")
+                child: Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[100],
+                      borderRadius: BorderRadius.circular(15.0),
+                      border: Border.all(
+                          color: Colors.blue[100],
+                          style: BorderStyle.solid,
+                          width: 0.80),
                     ),
+                    child: DropdownButton(
+                        value: selectedTrigger,
+                        items: dropdownTriggerItems,
+                        onChanged: onChangeDropdownTriggerItem,
+                        hint: new Text("Select one")),
                   ),
                 ),
-                color: Colors.blue[100],
               ),
               SizedBox(
                 height: 40.0,
