@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vape_app/Models/User.dart';
@@ -212,7 +213,7 @@ class _SetupHelperState extends State<SetupHelper> {
                           //add dob --useSelectedDate
                           
                            await _auth.updateUserData(
-                                      nameTextController.text, goalTextController.text,selectedDate);
+                                      nameTextController.text, goalTextController.text,Timestamp.fromDate(selectedDate));
                         },
                       ),
                     ],

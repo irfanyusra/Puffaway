@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vape_app/Models/User.dart';
 import 'package:vape_app/authenticate/authenticate.dart';
 import 'package:vape_app/pages/Home.dart';
+import 'package:vape_app/setup/setup.dart';
 
 
 class Wrapper extends StatelessWidget {

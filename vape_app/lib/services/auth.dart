@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vape_app/Models/User.dart';
 import 'package:vape_app/services/database.dart';
@@ -11,7 +12,7 @@ class AuthService{
   }
 
 //Update the user data
-  Future updateUserData(String name,String goal,DateTime dob) async{
+  Future updateUserData(String name,String goal,Timestamp dob) async{
        FirebaseUser user = await _auth.currentUser();
 
     return await DatabaseService(uid:user.uid).updateUserData(name, goal,dob);
@@ -70,7 +71,7 @@ Future createDefaultTriggers(User user,List<String> triggers) async{
       FirebaseUser user = result.user;
       
       //Create a default user model upon registration
-      await updateUserData('', '');
+      await updateUserData('', '',Timestamp.fromDate(DateTime.now()));
       return _userFromFirebaseUser(user);
     }catch(e){
       print(e.toString());

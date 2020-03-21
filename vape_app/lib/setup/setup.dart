@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vape_app/Models/User.dart';
-import 'package:vape_app/pages/setup_helper.dart';
 import 'package:vape_app/services/database.dart';
-import 'package:vape_app/settings/settings_helper.dart';
+import 'package:vape_app/setup/setup_helper.dart';
 import 'package:vape_app/shared/loading.dart';
 
 
