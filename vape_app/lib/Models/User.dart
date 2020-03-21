@@ -7,5 +7,6 @@ class UserData{
   final String uid;
   final String name;
   final String goal;
-  UserData({this.uid,this.name,this.goal});
+  final DateTime dob;
+  UserData({this.uid,this.name,this.goal,this.dob});
 }

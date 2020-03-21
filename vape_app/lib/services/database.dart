@@ -19,11 +19,12 @@ class DatabaseService {
       Firestore.instance.collection('Users');
 
 //updateUserData is a function which will update the user data
-  Future updateUserData(String name, String goal) async {
+  Future updateUserData(String name, String goal,DateTime dob) async {
     return await userCollection.document(uid).setData({
       'uid':uid,
       'name': name,
       'goal': goal,
+      'dob':dob
     });
   }
 
@@ -31,7 +32,8 @@ class DatabaseService {
 UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
   return UserData(uid: uid,
   name:snapshot.data['name'],
-  goal:snapshot.data['goal']
+  goal:snapshot.data['goal'],
+  dob:snapshot.data['dob']
   );
 }
 
@@ -185,4 +187,10 @@ Stream<UserData> get userData{
       'dateTime': new DateTime.now(),
     });
   }
+
+// -------Recommendations-------//
+  final CollectionReference recommendationCollection =
+      Firestore.instance.collection('Recommendations');
+
+      
 }

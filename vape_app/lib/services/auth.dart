@@ -11,10 +11,10 @@ class AuthService{
   }
 
 //Update the user data
-  Future updateUserData(String name,String goal) async{
+  Future updateUserData(String name,String goal,DateTime dob) async{
        FirebaseUser user = await _auth.currentUser();
 
-    return await DatabaseService(uid:user.uid).updateUserData(name, goal);
+    return await DatabaseService(uid:user.uid).updateUserData(name, goal,dob);
 
   }
 
