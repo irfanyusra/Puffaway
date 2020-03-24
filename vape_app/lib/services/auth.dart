@@ -31,26 +31,7 @@ Future createDefaultTriggers(User user,List<String> triggers) async{
       .map(_userFromFirebaseUser);
   }
 
-  
-
-
-// //Not used anymore
-//   Future signInAnon(String name) async {
-//     try{
-//       AuthResult result = await _auth.signInAnonymously();
-//       FirebaseUser user = result.user;
-
-//       await DatabaseService(uid:user.uid).updateUsername(name);
-      
-//       return _userFromFirebaseUser(user);
-//     }catch(e){  
-//       print(e.toString());
-//       return null;
-//     }
-//   }
-
-
-//   //sign in
+    //sign in
    Future signInWithEmailAndPassword(String email, String password)async{
     try{
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
