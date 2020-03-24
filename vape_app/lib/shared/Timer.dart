@@ -21,8 +21,14 @@ class _timerState extends State<timer> {
     
       var current = new DateTime.now();
       var diff = current.difference(lastHitTime);
-      sDuration = "${diff.inDays}d ${diff.inHours.remainder(24)}h ${diff
-          .inMinutes.remainder(60)}m ${(diff.inSeconds.remainder(60))}s ";
+      if(diff.inDays>=1){
+        sDuration = "${diff.inDays}d ${diff.inHours.remainder(24)}h ${diff
+            .inMinutes.remainder(60)}m";
+      }else {
+        sDuration = "${diff.inHours.remainder(24)}h ${diff
+            .inMinutes.remainder(60)}m ${(diff.inSeconds.remainder(60))}s ";
+      }
+
 
       Timer.periodic(Duration(seconds: 1), (v) async {
         if (this.mounted) {
