@@ -66,7 +66,7 @@ class _ProgressBarState extends State<ProgressBar> {
             }
 
             return Container(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.only(top: 10),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

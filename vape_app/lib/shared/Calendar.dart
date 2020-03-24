@@ -55,6 +55,7 @@ class _CalendarState extends State<Calendar> {
     return TableCalendar(
         calendarController: _calendarController,
         events: _events,
+        initialCalendarFormat: CalendarFormat.week,
     );
   }
 }

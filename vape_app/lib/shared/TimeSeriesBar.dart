@@ -51,12 +51,12 @@ class _TimeSeriesBarState extends State<TimeSeriesBar> {
                 );
 
               return Container(
-                height: 300, width: 400,
+                height: 230, width: 400,
                   child: Center(
                     child: Column(
                       children: <Widget>[
                         Text(
-                        'How Long Pods Last',style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
+                        'How Long Pods Last',style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold),),
                         Expanded(
                           child: charts.TimeSeriesChart(
                           _seriesData,
@@ -68,10 +68,12 @@ class _TimeSeriesBarState extends State<TimeSeriesBar> {
                             new charts.DomainHighlighter(),
                             new charts.ChartTitle('Pod Start Date',
                                 behaviorPosition: charts.BehaviorPosition.bottom,
-                                titleOutsideJustification:charts.OutsideJustification.middleDrawArea),
+                                titleOutsideJustification:charts.OutsideJustification.middleDrawArea,
+                                titleStyleSpec: charts.TextStyleSpec(fontSize: 10)),
                             new charts.ChartTitle('Pod Duration (Days)',
                                 behaviorPosition: charts.BehaviorPosition.start,
-                                titleOutsideJustification: charts.OutsideJustification.middleDrawArea)
+                                titleOutsideJustification: charts.OutsideJustification.middleDrawArea,
+                                titleStyleSpec: charts.TextStyleSpec(fontSize: 10))
                           ],
                         )
                       )
