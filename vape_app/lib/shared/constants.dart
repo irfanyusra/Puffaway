@@ -17,8 +17,14 @@ const textInputDecoration = InputDecoration(
 );
 
 final Widget logOutIcon = FlatButton.icon(
-          icon:Icon(Icons.person),
-          label:Text('Logout'),
-          onPressed: () async {
-            await _auth.signOut();
-          });
+    icon: Icon(Icons.person),
+    label: Text('Logout'),
+    onPressed: () async {
+      await _auth.signOut();
+    });
+
+final Widget appIcon = Container(
+  height: 150.0,
+  width: 150.0,
+  child: Image(image: AssetImage('assets/icon.png')),
+);

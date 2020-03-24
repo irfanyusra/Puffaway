@@ -27,7 +27,9 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return loading?Loading():Scaffold(
+    return LayoutBuilder(
+    builder: (BuildContext context, BoxConstraints viewportConstraints) {
+      return loading?Loading():Scaffold(
       appBar: AppBar(
         elevation: 0.0,
         title: Text('Sign in to Puffaway'),
@@ -42,73 +44,86 @@ class _SignInState extends State<SignIn> {
               }),
     ],
       ),
-       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-        child: Form(
-          key:_formKey,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20.0),
-              TextFormField(
-                key: Key('email-field'),
-                //Decorate text field from constants file
-                //Text hint is email(the text that will hint to the user to type in email)
-                decoration: textInputDecoration.copyWith(hintText:'Email'),
-                //Used to validate email if it is empty
-                validator: EmailFieldValidator.validate, //val.isEmpty?'Enter an email':null 
-                onChanged: (val) {
-                  //Retrieves the email from the form
-                  setState(() => email = val);
-                },
-              ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                key: Key('password-field'),
-                //Decorate text field from constants file
-                //Text hint is password(the text that will hint to the user to type in password)
-                decoration: textInputDecoration.copyWith(hintText:'Password'),
-                //Again, more boring validation
-                validator:PasswordFieldValidator.validate,
-                obscureText: true,
-                onChanged: (val) {
-                  //retrieves the stupid password from the form
-                  setState(() => password = val);
-                },
-              ),
-              SizedBox(height: 20.0),
-              RaisedButton(
-                key: Key('signin-btn'),
-                color: Colors.blue[400],
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  //Waits for validation from firebase then signs in user
-                    if(_formKey.currentState.validate()){
-                      setState(() {
-                        loading = true;//Set the loading to true while waiting for firebases response
-                      });
-                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                    if(result==null){
-                      setState(() {
-                        //Change this later
-                        //Error
-                        // error = 'Incorrect credentials';
-                        error = 'Vaping makes you forget, change your habit';
-                        loading = false;//Toggle it off after checking is complete
-                      });
-                }}}
-              ),
-              SizedBox(height:12.0),
-              Text(
-                error,
-                style:TextStyle(color:Colors.red,fontSize:14.0)
-              )
-            ],
+       body: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+            minHeight: viewportConstraints.maxHeight,
           ),
-        ),
+          child: Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+            child: Form(
+              key:_formKey,
+              child: Column(
+                // mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // SizedBox(height: 20.0),
+                  appIcon,
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    key: Key('email-field'),
+                    //Decorate text field from constants file
+                    //Text hint is email(the text that will hint to the user to type in email)
+                    decoration: textInputDecoration.copyWith(hintText:'Email'),
+                    //Used to validate email if it is empty
+                    validator: EmailFieldValidator.validate, //val.isEmpty?'Enter an email':null 
+                    onChanged: (val) {
+                      //Retrieves the email from the form
+                      setState(() => email = val);
+                    },
+                  ),
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    key: Key('password-field'),
+                    //Decorate text field from constants file
+                    //Text hint is password(the text that will hint to the user to type in password)
+                    decoration: textInputDecoration.copyWith(hintText:'Password'),
+                    //Again, more boring validation
+                    validator:PasswordFieldValidator.validate,
+                    obscureText: true,
+                    onChanged: (val) {
+                      //retrieves the stupid password from the form
+                      setState(() => password = val);
+                    },
+                  ),
+                  SizedBox(height: 20.0),
+                  RaisedButton(
+                    key: Key('signin-btn'),
+                    color: Colors.blue[400],
+                    child: Text(
+                      'Sign In',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () async {
+                      //Waits for validation from firebase then signs in user
+                        if(_formKey.currentState.validate()){
+                          setState(() {
+                            loading = true;//Set the loading to true while waiting for firebases response
+                          });
+                        dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                        if(result==null){
+                          setState(() {
+                            //Change this later
+                            //Error
+                            // error = 'Incorrect credentials';
+                            error = 'Vaping makes you forget, change your habit';
+                            loading = false;//Toggle it off after checking is complete
+                          });
+                    }}}
+                  ),
+                  SizedBox(height:12.0),
+                  Text(
+                    error,
+                    style:TextStyle(color:Colors.red,fontSize:14.0)
+                  )
+                ],
+              ),
+            ),
+          ),
       ),
+       ),
+    );
+  }
     );
   }
 }
