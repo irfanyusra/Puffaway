@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vape_app/services/auth.dart';
 
 import 'Models/User.dart';
 
@@ -14,6 +15,7 @@ class MessageHandler extends StatefulWidget {
 class _MessageHandlerState extends State<MessageHandler> {
   final Firestore _db = Firestore.instance;
   final FirebaseMessaging _fcm = FirebaseMessaging();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -60,7 +62,7 @@ class _MessageHandlerState extends State<MessageHandler> {
     if (fcmToken != null) {
       var tokens = _db
           .collection('users')
-          .document(uid)
+          .document(user.uid)
           .collection('tokens')
           .document(fcmToken);
 

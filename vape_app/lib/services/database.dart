@@ -19,11 +19,12 @@ class DatabaseService {
       Firestore.instance.collection('Users');
 
 //updateUserData is a function which will update the user data
-  Future updateUserData(String name, String goal) async {
+  Future updateUserData(String name, String goal,String token) async {
     return await userCollection.document(uid).setData({
       'uid':uid,
       'name': name,
       'goal': goal,
+      'token':token
     });
   }
 
@@ -31,7 +32,8 @@ class DatabaseService {
 UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
   return UserData(uid: uid,
   name:snapshot.data['name'],
-  goal:snapshot.data['goal']
+  goal:snapshot.data['goal'],
+  token:snapshot.data['token']
   );
 }
 

@@ -137,7 +137,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                 onChanged: (name) async {
                                   //Update name in database
                                   await _auth.updateUserData(
-                                      name, userData.goal);
+                                      name, userData.goal,userData.token);
 
                                 },
                               ),
@@ -182,7 +182,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                 onChanged: (goal) async {
                                   //SEND GOAL TO DB
                                   await _auth.updateUserData(
-                                      userData.name, goal);
+                                      userData.name, goal,userData.token);
                                 },
                               ),
                             ))
