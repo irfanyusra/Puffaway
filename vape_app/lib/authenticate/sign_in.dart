@@ -66,6 +66,7 @@ class _SignInState extends State<SignIn> {
                           SizedBox(height: 20.0),
                           TextFormField(
                             key: Key('email-field'),
+                            style: fieldStyle,
                             //Decorate text field from constants file
                             //Text hint is email(the text that will hint to the user to type in email)
                             decoration:
@@ -81,6 +82,7 @@ class _SignInState extends State<SignIn> {
                           SizedBox(height: 20.0),
                           TextFormField(
                             key: Key('password-field'),
+                            style: fieldStyle,
                             //Decorate text field from constants file
                             //Text hint is password(the text that will hint to the user to type in password)
                             decoration: textInputDecoration.copyWith(
@@ -94,36 +96,41 @@ class _SignInState extends State<SignIn> {
                             },
                           ),
                           SizedBox(height: 20.0),
-                          RaisedButton(
-                              key: Key('signin-btn'),
-                              color: Colors.blue[400],
-                              child: Text(
-                                'Sign In',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () async {
-                                //Waits for validation from firebase then signs in user
-                                if (_formKey.currentState.validate()) {
-                                  setState(() {
-                                    loading =
-                                        true; //Set the loading to true while waiting for firebases response
-                                  });
-                                  dynamic result =
-                                      await _auth.signInWithEmailAndPassword(
-                                          email, password);
-                                  if (result == null) {
+                          buttonThemeAuth(
+                            context,
+                            RaisedButton(
+                                elevation: 5.0,
+                                key: Key('signin-btn'),
+                                color: Colors.blue[400],
+                                child: Text('Sign In',
+                                    textAlign: TextAlign.center,
+                                    style: fieldStyle.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                                onPressed: () async {
+                                  //Waits for validation from firebase then signs in user
+                                  if (_formKey.currentState.validate()) {
                                     setState(() {
-                                      //Change this later
-                                      //Error
-                                      // error = 'Incorrect credentials';
-                                      error =
-                                          'Vaping makes you forget, change your habit';
                                       loading =
-                                          false; //Toggle it off after checking is complete
+                                          true; //Set the loading to true while waiting for firebases response
                                     });
+                                    dynamic result =
+                                        await _auth.signInWithEmailAndPassword(
+                                            email, password);
+                                    if (result == null) {
+                                      setState(() {
+                                        //Change this later
+                                        //Error
+                                        // error = 'Incorrect credentials';
+                                        error =
+                                            'Vaping makes you forget, change your habit';
+                                        loading =
+                                            false; //Toggle it off after checking is complete
+                                      });
+                                    }
                                   }
-                                }
-                              }),
+                                }),
+                          ),
                           SizedBox(height: 12.0),
                           Text(error,
                               style:

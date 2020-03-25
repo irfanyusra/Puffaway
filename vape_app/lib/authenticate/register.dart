@@ -77,6 +77,7 @@ class _RegisterState extends State<Register> {
                           SizedBox(height: 20.0),
                           TextFormField(
                             key: Key('email-field'),
+                            style: fieldStyle,
                             //Imported from constants file
                             //Adds the hint text based on coders preference
                             decoration:
@@ -89,6 +90,7 @@ class _RegisterState extends State<Register> {
                           SizedBox(height: 20.0),
                           TextFormField(
                             key: Key('password-field'),
+                            style: fieldStyle,
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'Password'),
                             validator: PasswordFieldValidator.validate,
@@ -98,37 +100,42 @@ class _RegisterState extends State<Register> {
                             },
                           ),
                           SizedBox(height: 20.0),
-                          RaisedButton(
-                              key: Key("register-btn"),
-                              color: Colors.blue[400],
-                              child: Text(
-                                'Register',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState.validate()) {
-                                  setState(() {
-                                    //set loading to true when user presses register button
-                                    loading = true;
-                                  });
-                                  dynamic result =
-                                      await _auth.registerWithEmailAndPassword(
-                                          email, password);
-                                  if (result == null) {
+                          buttonThemeAuth(
+                            context,
+                            RaisedButton(
+                                key: Key("register-btn"),
+                                elevation: 5.0,
+                                color: Colors.blue[400],
+                                child: Text('Register',
+                                    textAlign: TextAlign.center,
+                                    style: fieldStyle.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                                onPressed: () async {
+                                  if (_formKey.currentState.validate()) {
                                     setState(() {
-                                      //Error as firebase returns an error
-                                      error = 'Please enter a valid email';
-
-                                      loading =
-                                          false; //Loading is done after result is returned from firebase
+                                      //set loading to true when user presses register button
+                                      loading = true;
                                     });
-                                  } else {
-                                    await _pod.addPodFinishTime();
-                                    await _auth.createDefaultTriggers(
-                                        result, triggers);
+                                    dynamic result = await _auth
+                                        .registerWithEmailAndPassword(
+                                            email, password);
+                                    if (result == null) {
+                                      setState(() {
+                                        //Error as firebase returns an error
+                                        error = 'Please enter a valid email';
+
+                                        loading =
+                                            false; //Loading is done after result is returned from firebase
+                                      });
+                                    } else {
+                                      await _pod.addPodFinishTime();
+                                      await _auth.createDefaultTriggers(
+                                          result, triggers);
+                                    }
                                   }
-                                }
-                              }),
+                                }),
+                          ),
                           SizedBox(height: 12.0),
                           Text(error,
                               style:
