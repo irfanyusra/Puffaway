@@ -2,9 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:vape_app/services/auth.dart';
-import '../Models/User.dart';
 
 class MessageHandler extends StatefulWidget {
   @override
@@ -57,8 +54,6 @@ class _MessageHandlerState extends State<MessageHandler> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
-
     return Container();
   }
 }
