@@ -6,8 +6,9 @@ import 'package:vape_app/shared/loading.dart';
 import 'package:vape_app/helper_functions/validation.dart';
 
 class Register extends StatefulWidget {
+  // function from authenticate file
   final Function toggleView;
-  Register({this.toggleView});
+  Register({this.toggleView}); 
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -30,18 +31,21 @@ class _RegisterState extends State<Register> {
 
   //Formkey used for form validation
   final _formKey = GlobalKey<FormState>();
-  //Text field state
+
   //Email and password from input field is stored here
   String email = '';
   String password = '';
   String error = '';
 
-  bool loading =
-      false; //Used for loading screen that appears when user clicks on register
+  //Used for loading screen that appears when user clicks on register
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
+    //layout builder used to put the content in the middle of the page
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
+      //loding is used when the app is loading or retrieving data from the database
       return loading
           ? Loading()
           : Scaffold(
@@ -50,7 +54,7 @@ class _RegisterState extends State<Register> {
                 title: Text('Register to Puffaway'),
                 actions: <Widget>[
                   FlatButton.icon(
-                      //Allows user to toggle between pages
+                      //Allows user to toggle between sign in and register page
                       icon: Icon(Icons.person),
                       label: Text('Sign in'),
                       onPressed: () {
@@ -60,6 +64,7 @@ class _RegisterState extends State<Register> {
                 ],
               ),
               body: SingleChildScrollView(
+                //used to put the context in this box in the middle of the screen
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minHeight: viewportConstraints.maxHeight,
@@ -72,16 +77,16 @@ class _RegisterState extends State<Register> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          // SizedBox(height: 20.0),
                           appIcon,
                           SizedBox(height: 20.0),
                           TextFormField(
                             key: Key('email-field'),
-                            style: fieldStyle,
                             //Imported from constants file
-                            //Adds the hint text based on coders preference
+                            style: fieldStyle,
+                            //Imported from constants file and Adds the hint text based on coders preference
                             decoration:
                                 textInputDecoration.copyWith(hintText: 'Email'),
+                            //validator in the validation file
                             validator: EmailFieldValidator.validate,
                             onChanged: (val) {
                               setState(() => email = val);
@@ -100,6 +105,7 @@ class _RegisterState extends State<Register> {
                             },
                           ),
                           SizedBox(height: 20.0),
+                          //from constant file 
                           buttonThemeAuth(
                             context,
                             RaisedButton(
@@ -124,9 +130,8 @@ class _RegisterState extends State<Register> {
                                       setState(() {
                                         //Error as firebase returns an error
                                         error = 'Please enter a valid email';
-
-                                        loading =
-                                            false; //Loading is done after result is returned from firebase
+                                        //Loading is done after result is returned from firebase
+                                        loading = false;
                                       });
                                     } else {
                                       await _pod.addPodFinishTime();
@@ -137,9 +142,10 @@ class _RegisterState extends State<Register> {
                                 }),
                           ),
                           SizedBox(height: 12.0),
-                          Text(error,
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 14.0))
+                          Text(
+                            error,
+                            style: TextStyle(color: Colors.red, fontSize: 14.0),
+                          ),
                         ],
                       ),
                     ),

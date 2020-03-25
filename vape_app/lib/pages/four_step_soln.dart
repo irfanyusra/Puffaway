@@ -106,7 +106,7 @@ class _FourStepSolnState extends State<FourStepSoln> {
                     height: 20.0,
                   ),
                 ]),
-              ),            
+              ),
               SizedBox(
                 height: 20.0,
               ),
@@ -259,14 +259,13 @@ class _FourStepSolnState extends State<FourStepSoln> {
                   SizedBox(
                     height: 20.0,
                   ),
-
                 ]),
               ),
               SizedBox(
                 height: 20.0,
               ),
 
-    //Refocus
+              //Refocus
               Container(
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
@@ -337,13 +336,12 @@ class _FourStepSolnState extends State<FourStepSoln> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  
                 ]),
               ),
               SizedBox(
                 height: 20.0,
               ),
-        
+
               SizedBox(
                 height: 20.0,
               ),
