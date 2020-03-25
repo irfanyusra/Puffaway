@@ -7,6 +7,7 @@ import 'package:vape_app/pages/recommendation_page.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
 import 'package:vape_app/services/logs.dart';
+import 'package:vape_app/shared/constants.dart';
 
 class LogsPageHelper extends StatefulWidget {
   @override
@@ -189,23 +190,33 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                   ),
                 ),
               ),
-              FlatButton(
-                key: (Key('save-trigger-btn')),
-                color: Colors.blue,
-                child: Text('Save'),
-                onPressed: () async {
-                  dynamic result = await _log.documentLog(
-                      selectedTrigger, thoughtTextController.text);
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute<void>(
-                          builder: (context) => Recommendation()));
+              Container(
+                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: buttonThemeAuth(
+                  context,
+                  FlatButton(
+                    
+                    key: (Key('save-trigger-btn')),
+                    color: Colors.blue,
+                    child: Text('Log Trigger',
+                        textAlign: TextAlign.center,
+                        style: fieldStyle.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                    onPressed: () async {
+                      dynamic result = await _log.documentLog(
+                          selectedTrigger, thoughtTextController.text);
+                      Navigator.push(
+                          context,
+                          new MaterialPageRoute<void>(
+                              builder: (context) => Recommendation()));
 
-                  setState(() {
-                    thoughtTextController.text = "";
-                    selectedTrigger = dropdownTriggerItems[0].value;
-                  });
-                },
+                      setState(() {
+                        thoughtTextController.text = "";
+                        selectedTrigger = dropdownTriggerItems[0].value;
+                      });
+                    },
+                  ),
+                ),
               ),
             ],
           ),

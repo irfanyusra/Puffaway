@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/services/reflections.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
+import 'package:vape_app/shared/constants.dart';
 
 class Reflections extends StatefulWidget {
   @override
@@ -33,14 +34,14 @@ class _ReflectionsState extends State<Reflections> {
       appBar: AppBar(
         title: Text('Reflection'),
         centerTitle: true,
-      //   actions: <Widget>[
-      //   ResuableFlatButton(
-      //      icon:Icon(Icons.person),
-      //     label:Text('Logout'),
-      //     onPressed: () async {
-      //       await _auth.signOut();}),
-        
-      // ],
+        //   actions: <Widget>[
+        //   ResuableFlatButton(
+        //      icon:Icon(Icons.person),
+        //     label:Text('Logout'),
+        //     onPressed: () async {
+        //       await _auth.signOut();}),
+
+        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
@@ -73,7 +74,7 @@ class _ReflectionsState extends State<Reflections> {
               SizedBox(
                 height: 0.0,
               ),
-              Container( 
+              Container(
                 height: 150,
 //                color: Colors.grey[300],
                 padding: EdgeInsets.all(10.0),
@@ -154,28 +155,33 @@ class _ReflectionsState extends State<Reflections> {
                   ),
                 ),
               ),
-
               SizedBox(
                 height: 5.0,
               ),
               Container(
                 alignment: Alignment.bottomCenter,
-                child: FlatButton(
-                  key: Key('save-reflection-btn'),
-                  color: Colors.blue,
-                  child: Text('Save Reflection',
-                      style: TextStyle(
-                        fontSize: 20,
-                      )),
-                  onPressed: () async {
-                    await _reflection.documentReflection(stressorTextController.text,progressTextController.text);
-                  setState(() {
-                    progressTextController.text = "";                    
-                    stressorTextController.text = "";                   
-                  });
-                   Scaffold.of(context)
-              .showSnackBar(SnackBar(content: Text("Reflection added"),duration:Duration(milliseconds: 1000)));
-                  },
+                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: buttonThemeAuth(
+                  context,
+                  FlatButton(
+                    key: Key('save-reflection-btn'),
+                    color: Colors.blue,
+                    child: Text('Save Reflection',
+                        style: fieldStyle.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                    onPressed: () async {
+                      await _reflection.documentReflection(
+                          stressorTextController.text,
+                          progressTextController.text);
+                      setState(() {
+                        progressTextController.text = "";
+                        stressorTextController.text = "";
+                      });
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text("Reflection added"),
+                          duration: Duration(milliseconds: 1000)));
+                    },
+                  ),
                 ),
               ),
             ],
