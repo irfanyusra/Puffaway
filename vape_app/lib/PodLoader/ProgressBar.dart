@@ -50,8 +50,11 @@ class _ProgressBarState extends State<ProgressBar> {
     
     return StreamBuilder<List<Pod>>(
         stream: DatabaseService(uid: user.uid).pods,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
+        builder: (context, AsyncSnapshot snapshot) {
+          if(snapshot.hasError)
+            return Loading();
+          else if (snapshot.connectionState==ConnectionState.active && snapshot.data.length!=0) {
+            print(snapshot);
             var startDateSec = snapshot.data.first.dateTime.seconds;
             var endDateSec = startDateSec + (goal * 24 * 60 * 60);
             var nowSec =

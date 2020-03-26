@@ -45,7 +45,6 @@ class _LoadingState extends State<Loading> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              MessageHandler(),
               Container(
                 child: Center(
                   child: SpinKitChasingDots(
