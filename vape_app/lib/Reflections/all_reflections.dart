@@ -16,28 +16,30 @@ class AllReflections extends StatefulWidget {
 }
 
 class _AllReflectionsState extends State<AllReflections> {
+  //TODO: delete btn
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
 
     return StreamProvider<List<Reflection>>.value(
-      value: DatabaseService(uid: user.uid).reflections,
-      child: Scaffold(
-          appBar: AppBar(
-              title: Text('Reflections Log'),
-              centerTitle: true,
-              actions: <Widget>[
-                ResuableFlatButton(
-                  key: Key('toggle-trig-logs-btn'),
-                  label: Text(''),
-                  icon: Icon(Icons.filter_list),
-                  //Allows user to change to reflections
-                  onPressed: () {
-                    widget.toggleDiary();
-                  },
-                ),
-              ]),
-          body: ReflectionList()),
+          value:DatabaseService(uid:user.uid).reflections,
+          child: Scaffold(
+        appBar: AppBar(
+          title: Text('Reflections Log'),
+          centerTitle: true,
+           actions: <Widget>[
+          ResuableFlatButton(
+            key: Key('toggle-trig-logs-btn'),
+            label: Text(''),
+           icon:Icon(Icons.filter_list),//Used as later more filtering options will be added such as sort etc.
+          //Allows user to change to reflections
+          onPressed: () {
+            widget.toggleDiary();
+            }),
+            ]
+        ),
+        body:ReflectionList()),
+     
     );
   }
 }

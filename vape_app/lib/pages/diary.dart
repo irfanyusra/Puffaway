@@ -10,19 +10,17 @@ class Diary extends StatefulWidget {
 
 class _DiaryState extends State<Diary> {
   //Variable that acts like flag that allows for navigation between pages
-  bool showLogs = true;
+bool showLogs = true;
 
-//Used to toggle showLogs -- toggling between logs and reflections 
-  void toggleDiary() {
-    setState(() {
-      showLogs = !showLogs;
-    });
-  }
+//Used to toggle showLogs
+void toggleDiary(){
+  setState(() {
+    showLogs = !showLogs;
+  });
+}
 
   @override
   Widget build(BuildContext context) {
-    return showLogs
-        ? AllLogs(toggleDiary: toggleDiary)
-        : AllReflections(toggleDiary: toggleDiary);
+    return showLogs?AllLogs(toggleDiary:toggleDiary):AllReflections(toggleDiary: toggleDiary);
   }
 }

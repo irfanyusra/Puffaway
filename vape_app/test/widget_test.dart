@@ -1,4 +1,5 @@
 // This is a basic Flutter widget test.
+//
 // To perform an interaction with a widget in your test, use the WidgetTester
 // utility that Flutter provides. For example, you can send tap and scroll
 // gestures. You can also use WidgetTester to find child widgets in the widget
@@ -9,6 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vape_app/Reflections/reflections_page.dart';
 import 'package:vape_app/authenticate/register.dart';
 import 'package:vape_app/authenticate/sign_in.dart';
+
 
 void main() {
   Widget makeTestable({Widget child}) {
@@ -98,4 +100,5 @@ void main() {
       //TODO: save method called to the db
     });
   });
+
 }

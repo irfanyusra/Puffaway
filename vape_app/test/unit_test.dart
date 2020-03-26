@@ -6,8 +6,11 @@ import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:vape_app/user_repository/user_repository.dart';
 
+
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
+
 class MockFirebaseUser extends Mock implements FirebaseUser {}
+
 class MockAuthResult extends Mock implements AuthResult {}
 
 void main() {
@@ -24,7 +27,7 @@ void main() {
       var result = EmailFieldValidator.validate('test');
       expect(result, 'Enter a Valid Email');
     });
-    test('bad email format returns error string ', () {
+     test('bad email format returns error string ', () {
       var result = EmailFieldValidator.validate('@gmail.com');
       expect(result, 'Enter a Valid Email');
     });
@@ -34,10 +37,11 @@ void main() {
       expect(result, null);
     });
 
-    test('correct email format - subdomain', () {
+       test('correct email format - subdomain', () {
       var result = EmailFieldValidator.validate('test@gmail.co.uk');
       expect(result, null);
     });
+
   });
   group('Password', () {
     //bad or boundy test
@@ -52,23 +56,20 @@ void main() {
     });
   });
 
+
 //Authentication testing
   MockFirebaseAuth _auth = MockFirebaseAuth();
   BehaviorSubject<MockFirebaseUser> _user = BehaviorSubject<MockFirebaseUser>();
-  when(_auth.onAuthStateChanged).thenAnswer((_) {
+  when(_auth.onAuthStateChanged).thenAnswer((_){
     return _user;
   });
   UserRepository _repo = UserRepository.instance(auth: _auth);
-  group('user repository test', () {
-    when(_auth.signInWithEmailAndPassword(
-            email: "travisscott@email.com", password: "Kylie123"))
-        .thenAnswer((_) async {
+  group('user repository test', (){
+    when(_auth.signInWithEmailAndPassword(email:"travisscott@email.com",password: "Kylie123")).thenAnswer((_)async{
       _user.add(MockFirebaseUser());
       return MockAuthResult();
     });
-    when(_auth.signInWithEmailAndPassword(
-            email: "travisscott@email.com", password: "Kendall123"))
-        .thenThrow(() {
+    when(_auth.signInWithEmailAndPassword(email:"travisscott@email.com",password: "Kendall123")).thenThrow((){
       return null;
     });
     test("sign in with email and password", () async {
@@ -77,15 +78,17 @@ void main() {
       expect(_repo.status, Status.Authenticated);
     });
 
-    test("sing in fails with incorrect email and password", () async {
+    test("sing in fails with incorrect email and password",() async {
       bool signedIn = await _repo.signIn("travisscott@email.com", "Kendall123");
       expect(signedIn, false);
       expect(_repo.status, Status.Unauthenticated);
     });
 
-    test('sign out', () async {
+    test('sign out', ()async{
       await _repo.signOut();
       expect(_repo.status, Status.Unauthenticated);
     });
   });
 }
+ 
+

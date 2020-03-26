@@ -10,7 +10,6 @@ class LogList extends StatefulWidget {
 }
 
 class _LogListState extends State<LogList> {
-
   //removeLog() is a function which removes a log once the log is swiped
   void removeLog(var documentID, LogsService log) async {
     await log.deleteLog(documentID);
@@ -18,7 +17,6 @@ class _LogListState extends State<LogList> {
 
   @override
   Widget build(BuildContext context) {
-    //getting the list from the stream defined in the parent widget "AllLogs"
     final logs = Provider.of<List<Log>>(context) ?? [];
     var getLogsLength = logs.length;
 
@@ -28,6 +26,7 @@ class _LogListState extends State<LogList> {
           return LogTile(
               log: logs[index],
               onDelete: (documentID, log) => removeLog(documentID, log));
+
         });
   }
 }

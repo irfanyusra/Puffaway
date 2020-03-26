@@ -1,4 +1,3 @@
-//TODO: fix all the text fields and buttons (after abdulaziz is done)
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,11 +17,11 @@ class AlwaysDisabledFocusNode extends FocusNode {
   bool get hasFocus => false;
 }
 
+
 class SettingsHelper extends StatefulWidget {
-  //Getting these from the Settings widget
   final String name;
   final String goal;
-  SettingsHelper({this.name, this.goal});
+  SettingsHelper({this.name,this.goal});
   @override
   _SettingsHelperState createState() => _SettingsHelperState();
 }
@@ -83,6 +82,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
     nameTextController.dispose();
     dobTextController.dispose();
     goalTextController.dispose();
+
     super.dispose();
   }
 
@@ -129,7 +129,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           //Grab the user data from the stream builder
-          List<Trigger> triggers = snapshot.data;
+          List<Trigger> triggers  = snapshot.data;
           dropdownTriggerItems = buildDropdownTriggerItems(triggers);
 
           return Scaffold(
@@ -180,6 +180,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                           },
                         ),
                       ),
+                      //test commit
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 7, 160, 0),
                         child: TextField(

@@ -4,10 +4,8 @@ import 'package:vape_app/services/logs.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class LogTile extends StatefulWidget {
-
-  final Log log;
-  // function from LogList passed down
   final Function onDelete;
+  final Log log;
   const LogTile({Key key, this.log, this.onDelete}) : super(key: key);
 
   @override
@@ -15,10 +13,9 @@ class LogTile extends StatefulWidget {
 }
 
 class _LogTileState extends State<LogTile> {
-  LogsService _log = LogsService(); //to access all the logs functions
+  LogsService _log = LogsService();
   @override
   Widget build(BuildContext context) {
-    //dismissible so it can be swipped of the screen
     return Dismissible(
         background: Container(color: Colors.red),
         key: Key(UniqueKey().toString()),

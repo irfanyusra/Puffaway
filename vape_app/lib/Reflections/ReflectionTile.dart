@@ -22,10 +22,9 @@ class _ReflectionTileState extends State<ReflectionTile> {
       key: Key(UniqueKey().toString()),
       onDismissed: (direction) {
         widget.onDelete(widget.reflection.documentID, _reflection);
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("log deleted"),
-          duration: Duration(milliseconds: 1000),
-        ));
+
+        Scaffold.of(context)
+            .showSnackBar(SnackBar(content: Text("log deleted"),duration: Duration(milliseconds: 1000),));
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),

@@ -18,12 +18,13 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     //Grab current user
     final user = Provider.of<User>(context);
-    if (user != null)
+    if (user != null){
       return StreamProvider<UserData>.value(
         value: DatabaseService(uid: user.uid).userData,
         child: UserDataSettings(),
-      );
-    else
+      );}
+    else{
       return Loading();
+    }
   }
 }

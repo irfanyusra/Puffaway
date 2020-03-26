@@ -1,6 +1,3 @@
-
-
-//to validate the email field 
 class EmailFieldValidator {
   static String validate (String val){
     Pattern pattern =
@@ -16,7 +13,6 @@ class EmailFieldValidator {
   }
 }
 
-//to validate the password field 
 class PasswordFieldValidator {
   static String validate (String val){
     return val.length<6?'Enter a password longer than 6 characters':null;

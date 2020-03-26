@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'dart:math';
 import 'package:vape_app/pages/wrapper.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:vape_app/services/MessageHandler.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -45,7 +44,6 @@ class _LoadingState extends State<Loading> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              MessageHandler(),
               Container(
                 child: Center(
                   child: SpinKitChasingDots(
