@@ -34,14 +34,14 @@ class _SettingsHelperState extends State<SettingsHelper> {
 
   List<DropdownMenuItem<String>> dropdownTriggerItems;
   String selectedTrigger;
+  String notifText = "Turn off notifications";
 
   final triggerTextController = TextEditingController();
   final nameTextController = TextEditingController();
   final goalTextController = TextEditingController();
+  final goalKey = GlobalKey<FormState>();
 
   bool triggerVisibility = false;
-
-  String notifText = "Turn off notifications";
 
   //calendar variables
   DateTime selectedDate = DateTime.now();
@@ -225,7 +225,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
   void initState() {
     super.initState();
     nameTextController.text = widget.name;
-    //dobTextController = widgent.dob;
+    //dobTextController = widget.dob;
     goalTextController.text = widget.goal;
   }
 
@@ -359,6 +359,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                         padding: const EdgeInsets.fromLTRB(10, 0, 50, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
                               child: Padding(
@@ -374,16 +375,28 @@ class _SettingsHelperState extends State<SettingsHelper> {
                             Flexible(
                               child: Padding(
                                 padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
-                                child: TextField(
-                                  keyboardType: TextInputType.number,
-                                  controller: goalTextController,
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                child: Form(
+                                  key: goalKey,
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.numberWithOptions(),
+                                    controller: goalTextController,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                      errorStyle: TextStyle(height: 0)
+                                    ),
+                                    onChanged: (goal) async {
+                                      //SEND GOAL TO DB
+                                      if (goalKey.currentState.validate()) {
+                                        await _auth.updateUserData(userData.name, goal, userData.token);
+                                      }
+                                    },
+                                    validator: (goal) {
+                                      if (!RegExp(r"^[1-9]+[0-9]*$").hasMatch(goal)) {
+                                        return '';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  onChanged: (goal) async {
-                                    //SEND GOAL TO DB
-                                    await _auth.updateUserData(userData.name, goal, userData.token);
-                                  },
                                 ),
                               ),
                             ),
