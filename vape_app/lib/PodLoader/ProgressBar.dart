@@ -17,7 +17,7 @@ class ProgressBar extends StatefulWidget {
 
 class _ProgressBarState extends State<ProgressBar> {
   double _progressValue;
-  var goal = 10;
+  var goal=10;
 
   final _pod = PodService();
 
@@ -47,7 +47,13 @@ class _ProgressBarState extends State<ProgressBar> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    
+    final userData = Provider.of<UserData>(context);
+
+    if(userData!=null) {
+      goal = int.tryParse(userData.goal);
+      if(goal==null) goal=10;
+    }
+
     return StreamBuilder<List<Pod>>(
         stream: DatabaseService(uid: user.uid).pods,
         builder: (context, AsyncSnapshot snapshot) {
