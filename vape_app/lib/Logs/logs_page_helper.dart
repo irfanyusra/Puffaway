@@ -177,13 +177,18 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                         style: fieldStyle.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold)),
                     onPressed: () async {
-              
+                      String trigger;
+                      _makePostRequest(selectedTrigger);
+    
                       dynamic result = await _log.documentLog(
                           selectedTrigger, thoughtTextController.text);
+                      setState(() {
+                        trigger = selectedTrigger;
+                      });
                       Navigator.push(
                           context,
                           new MaterialPageRoute<void>(
-                              builder: (context) => Recommendation()));
+                              builder: (context) => Recommendation(trigger:trigger)));
 
                       setState(() {
                         thoughtTextController.text = "";
@@ -200,18 +205,18 @@ class LogsPageHelperState extends State<LogsPageHelper> {
     );
   }
 
-    _makeGetRequest(String trigger) async {
-    Response response = await post(_localhost());
-    setState(() {
-      serverResponse = response.body;
-    });
+    _makePostRequest(String trigger) async {
+    Map<String, String> headers = {"Content-type": "application/json"};
+     String json = '{"trigger": "$trigger"}';
+    Response response = await post(_localhost(),headers: headers,body:json);
+    return response.body;
   }
 
   String _localhost() {
     if (Platform.isAndroid)
-      return 'http://10.0.2.2:5000';
+      return 'http://10.0.2.2:5000/predict';
     else // for iOS simulator
-      return 'http://localhost:5000';
+      return 'http://localhost:5000/predict';
   }
 }
 
