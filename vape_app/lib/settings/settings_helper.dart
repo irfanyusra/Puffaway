@@ -1,4 +1,5 @@
 //TODO: fix all the text fields and buttons (after abdulaziz is done)
+// import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
 import 'package:vape_app/services/logs.dart';
 import 'package:vape_app/Models/Trigger.dart';
+import 'package:vape_app/Models/Log.dart';
 
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
@@ -47,16 +49,150 @@ class _SettingsHelperState extends State<SettingsHelper> {
   final dobTextController = TextEditingController();
 
   //badges variables
-  String ach1 = 'badges/1.png';
+  List<String> achievementStrings = [ "badges/1g.png",
+                                      "badges/2g.png",
+                                      "badges/3g.png",
+                                      "badges/4g.png",
+                                      "badges/5g.png",
+                                      "badges/6g.png",
+                                      "badges/7g.png",
+                                      "badges/8g.png",
+                                      "badges/9g.png"];
+  bool achievementVisibility = false;
+  String achievementButton = "Show Achievements";
+
+  toggleAchievements() {
+    setState(() {
+      achievementVisibility = !achievementVisibility;
+
+      if (achievementVisibility) {
+        achievementButton = "Show Achievements";
+      } else {
+        achievementButton = "Hide Achievements";
+      }
+    });
+  }
+
+  setupBadges(logs) {
+    if (logs != null) {
+      setState(() {
+        var lastHitTime = logs.length > 0
+            ? DateTime.parse(logs.first.dateTime.toDate().toString())
+            : new DateTime.now(); //last log time goes here
+        var current = new DateTime.now();
+        var diff = current.difference(lastHitTime);
+        
+        if (diff.inDays > 181 ) {
+          achievementStrings = [  "badges/1.png",
+                                  "badges/2.png",
+                                  "badges/3.png",
+                                  "badges/4.png",
+                                  "badges/5.png",
+                                  "badges/6.png",
+                                  "badges/7.png",
+                                  "badges/8.png",
+                                  "badges/9.png"];
+        } else if (diff.inDays > 91) {
+          achievementStrings = [  "badges/1.png",
+                                  "badges/2.png",
+                                  "badges/3.png",
+                                  "badges/4.png",
+                                  "badges/5.png",
+                                  "badges/6.png",
+                                  "badges/7.png",
+                                  "badges/8.png",
+                                  "badges/9g.png"];
+        } else if (diff.inDays > 29) {
+          achievementStrings = [  "badges/1.png",
+                                  "badges/2.png",
+                                  "badges/3.png",
+                                  "badges/4.png",
+                                  "badges/5.png",
+                                  "badges/6.png",
+                                  "badges/7.png",
+                                  "badges/8g.png",
+                                  "badges/9g.png"];
+        } else if (diff.inDays > 20) {
+          achievementStrings = [  "badges/1.png",
+                                  "badges/2.png",
+                                  "badges/3.png",
+                                  "badges/4.png",
+                                  "badges/5.png",
+                                  "badges/6.png",
+                                  "badges/7g.png",
+                                  "badges/8g.png",
+                                  "badges/9g.png"];
+        } else if (diff.inDays > 13) {
+          achievementStrings = [  "badges/1.png",
+                                  "badges/2.png",
+                                  "badges/3.png",
+                                  "badges/4.png",
+                                  "badges/5.png",
+                                  "badges/6g.png",
+                                  "badges/7g.png",
+                                  "badges/8g.png",
+                                  "badges/9g.png"];
+        } else if (diff.inDays > 6) {
+          achievementStrings = [  "badges/1.png",
+                                  "badges/2.png",
+                                  "badges/3.png",
+                                  "badges/4.png",
+                                  "badges/5g.png",
+                                  "badges/6g.png",
+                                  "badges/7g.png",
+                                  "badges/8g.png",
+                                  "badges/9g.png"];
+        } else if (diff.inDays > 4) {
+          achievementStrings = [  "badges/1.png",
+                                  "badges/2.png",
+                                  "badges/3.png",
+                                  "badges/4g.png",
+                                  "badges/5g.png",
+                                  "badges/6g.png",
+                                  "badges/7g.png",
+                                  "badges/8g.png",
+                                  "badges/9g.png"];
+        } else if (diff.inDays > 2) {
+          achievementStrings = [  "badges/1.png",
+                                  "badges/2.png",
+                                  "badges/3g.png",
+                                  "badges/4g.png",
+                                  "badges/5g.png",
+                                  "badges/6g.png",
+                                  "badges/7g.png",
+                                  "badges/8g.png",
+                                  "badges/9g.png"];
+        } else if (diff.inDays > 0) {
+          achievementStrings = [  "badges/1.png",
+                                  "badges/2g.png",
+                                  "badges/3g.png",
+                                  "badges/4g.png",
+                                  "badges/5g.png",
+                                  "badges/6g.png",
+                                  "badges/7g.png",
+                                  "badges/8g.png",
+                                  "badges/9g.png"];
+        } else {
+          achievementStrings = [  "badges/1g.png",
+                                  "badges/2g.png",
+                                  "badges/3g.png",
+                                  "badges/4g.png",
+                                  "badges/5g.png",
+                                  "badges/6g.png",
+                                  "badges/7g.png",
+                                  "badges/8g.png",
+                                  "badges/9g.png"];
+        }
+      });
+    }
+  }
 
   toggleNotifications() {
     setState(() {
       if (notifText == "Turn off notifications") {
         notifText = "Turn on notifications";
-        ach1 = 'badges/1g.png';
       } else {
         notifText = "Turn off notifications";
-        ach1 = 'badges/1.png';
       }
     });
     
@@ -123,6 +259,8 @@ class _SettingsHelperState extends State<SettingsHelper> {
     final _auth = AuthService();
     final user = Provider.of<User>(context);
     final userData = Provider.of<UserData>(context);
+    final logs = Provider.of<List<Log>>(context) ?? [];
+    setupBadges(logs);
 
     return StreamBuilder<List<Trigger>>(
       stream: DatabaseService(uid: user.uid).triggers,
@@ -184,7 +322,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                         padding: const EdgeInsets.fromLTRB(10, 7, 160, 0),
                         child: TextField(
                           onTap: () => _selectDate(context),
-                          // style: new TextStyle(fontSize: 20.0),
+                          style: new TextStyle(fontSize: 20.0),
                           key: Key('dob-field'),
                           focusNode: AlwaysDisabledFocusNode(),
                           controller: dobTextController,
@@ -268,60 +406,78 @@ class _SettingsHelperState extends State<SettingsHelper> {
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                          child: Text("Achievements:",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16
+                          child: Container(
+                            width: 165,
+                            child: FlatButton(
+                              color: Colors.blue,
+                              child: Text(achievementButton),
+                              onPressed: toggleAchievements,
                             ),
                           ),
                         ),
                       ),
 
-                      SizedBox(height: 10,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              Image(image: AssetImage(ach1), height: 50,),
-                              Image(image: AssetImage('badges/2.png'), height: 50,),
-                              Image(image: AssetImage('badges/3.png'), height: 50,),
-                              Image(image: AssetImage('badges/4.png'), height: 50,),
-                          ]),
+                      // Visibility(
+                      //   visible: !triggerVisibility,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.fromLTRB(0, 8, 220, 0),
+                      //     child: FlatButton(
+                      //       color: Colors.blue,
+                      //       child: Text("Add custom trigger"),
+                      //       onPressed: toggleTrigger,
+                      //     ),
+                      //   ),
+                      // ),
 
-                          Container(
-                            width: 240,
-                            child: Row(
+                      
+                      Visibility(
+                        visible: achievementVisibility,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(height: 10,),
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
-                                Image(image: AssetImage('badges/5.png'), height: 55,),
-                                Image(image: AssetImage('badges/6.png'), height: 55,),
-                                Image(image: AssetImage('badges/7.png'), height: 55,),
+                                Image(image: AssetImage(achievementStrings[0]), height: 50,),
+                                Image(image: AssetImage(achievementStrings[1]), height: 50,),
+                                Image(image: AssetImage(achievementStrings[2]), height: 50,),
+                                Image(image: AssetImage(achievementStrings[3]), height: 50,),
                             ]),
-                          ),
-                          
-                          Container(
-                            width: 145,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Image(image: AssetImage('badges/8.png'), height: 60,),
-                                Image(image: AssetImage('badges/9.png'), height: 60,),
-                            ]),
-                          )
-                      ],),
+
+                            Container(
+                              width: 240,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Image(image: AssetImage(achievementStrings[4]), height: 55,),
+                                  Image(image: AssetImage(achievementStrings[5]), height: 55,),
+                                  Image(image: AssetImage(achievementStrings[6]), height: 55,),
+                              ]),
+                            ),
+                            
+                            Container(
+                              width: 145,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Image(image: AssetImage(achievementStrings[7]), height: 60,),
+                                  Image(image: AssetImage(achievementStrings[8]), height: 60,),
+                              ]),
+                            )
+                        ],),
+                      ),
 
 
                       //ADD A TRIGGER//
                       Visibility(
                         visible: !triggerVisibility,
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 8, 220, 0),
+                          padding: const EdgeInsets.fromLTRB(2, 0, 220, 0),
                           child: FlatButton(
                             color: Colors.blue,
                             child: Text("Add custom trigger"),
