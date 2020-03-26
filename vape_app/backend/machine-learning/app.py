@@ -13,8 +13,8 @@ def index():
 
 @app.route('/predict',methods=['POST'])
 def predict():
-    #final_feature = [request.form.values]
-    prediction = model.predict([request.form.values])
+    final_feature = [request.json['trigger']]
+    prediction = model.predict(final_feature)
     return prediction[0]
 
 if __name__ == "__main__":

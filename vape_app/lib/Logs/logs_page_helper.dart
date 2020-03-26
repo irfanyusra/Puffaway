@@ -177,9 +177,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                         style: fieldStyle.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold)),
                     onPressed: () async {
-                  _makeGetRequest();
-    
-                  print(serverResponse);
+              
                       dynamic result = await _log.documentLog(
                           selectedTrigger, thoughtTextController.text);
                       Navigator.push(
@@ -202,8 +200,8 @@ class LogsPageHelperState extends State<LogsPageHelper> {
     );
   }
 
-    _makeGetRequest() async {
-    Response response = await get(_localhost());
+    _makeGetRequest(String trigger) async {
+    Response response = await post(_localhost());
     setState(() {
       serverResponse = response.body;
     });
@@ -211,9 +209,9 @@ class LogsPageHelperState extends State<LogsPageHelper> {
 
   String _localhost() {
     if (Platform.isAndroid)
-      return 'http://10.0.2.2:3000';
+      return 'http://10.0.2.2:5000';
     else // for iOS simulator
-      return 'http://localhost:3000';
+      return 'http://localhost:5000';
   }
 }
 
