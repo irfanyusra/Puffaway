@@ -1,4 +1,3 @@
-//TODO: mmodularize text fields and btns
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vape_app/services/reflections.dart';
@@ -38,23 +37,15 @@ class _ReflectionsState extends State<Reflections> {
             children: <Widget>[
               Container(
                 child: Text(
-                  'Every so often we need to revalue the things we do in our lives. Please take this time to write your thoughts about the prompts below',
-                  style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2.0,
-                    fontSize: 18,
-                  ),
+                  'Every so often we need to revalue the things we do in our lives.',
+                  style: textStyle,
                 ),
               ),
               SizedBox(height: 15.0),
               Container(
                 child: Text(
                   'What stressors did you feel today?',
-                  style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2.0,
-                    fontSize: 18,
-                  ),
+                  style: textStyle,
                 ),
               ),
               Container(
@@ -73,14 +64,10 @@ class _ReflectionsState extends State<Reflections> {
                         child: new TextField(
                           key: Key('stressors-field'),
                           controller: stressorTextController,
+                          style: textFieldStyle,
                           maxLines: 10,
-                          decoration: new InputDecoration(
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
-                            ),
-                            hintText: 'Add your text here',
-                          ),
+                          decoration: inputDecoration.copyWith(
+                              hintText: 'Add your text here'),
                         ),
                       ),
                     ),
@@ -93,11 +80,7 @@ class _ReflectionsState extends State<Reflections> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text(
                     'How do you feel about your progress so far?',
-                    style: TextStyle(
-                      color: Colors.black,
-                      letterSpacing: 2.0,
-                      fontSize: 18,
-                    ),
+                    style: textStyle,
                   ),
                 ),
               ),
@@ -115,17 +98,12 @@ class _ReflectionsState extends State<Reflections> {
                       child: SizedBox(
                         height: 120.0,
                         child: new TextField(
-                          key: Key('progress-field'),
-                          controller: progressTextController,
-                          maxLines: 10,
-                          decoration: new InputDecoration(
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
-                            ),
-                            hintText: 'Add your text here',
-                          ),
-                        ),
+                            key: Key('progress-field'),
+                            style: textFieldStyle,
+                            controller: progressTextController,
+                            maxLines: 10,
+                            decoration: inputDecoration.copyWith(
+                                hintText: 'Add your text here')),
                       ),
                     ),
                   ),

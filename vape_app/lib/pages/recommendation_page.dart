@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vape_app/Models/Recommendation.dart';
 import 'package:vape_app/services/auth.dart';
-import 'package:vape_app/shared/ReusableFlatButton.dart';
+import 'package:vape_app/shared/constants.dart';
 
 class Recommendation extends StatefulWidget {
   @override
@@ -61,22 +61,14 @@ class _RecommendationState extends State<Recommendation> {
               Container(
                 child: Text(
                   'Sometimes vaping is a good way to deal with life, but noticing why you do it can help you determine a better alternative',
-                  style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2.0,
-                    fontSize: 18,
-                  ),
+                  style: textStyle,
                 ),
               ),
               SizedBox(height: 40.0),
               Container(
                 child: Text(
                   'Based on the trigger, you selected, we recommend ', //NEED TO PUT DATABASE VAR
-                  style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2.0,
-                    fontSize: 18,
-                  ),
+                  style: textStyle,
                 ),
               ),
               SizedBox(height: 20.0),
@@ -84,18 +76,14 @@ class _RecommendationState extends State<Recommendation> {
                 alignment: Alignment.topLeft,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.blueAccent),
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Recommendation: \n ${rec.recom}',
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Colors.black,
-                      letterSpacing: 2.0,
-                      fontSize: 18,
-                    ),
+                    style: textStyle,
                   ),
                 ),
               ),
