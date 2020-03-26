@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -5,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:vape_app/Models/Trigger.dart';
 import 'package:vape_app/pages/recommendation_page.dart';
 import 'package:vape_app/services/auth.dart';
-import 'package:vape_app/shared/ReusableFlatButton.dart';
+import 'package:http/http.dart';
 import 'package:vape_app/services/logs.dart';
 import 'package:vape_app/shared/constants.dart';
 
@@ -17,6 +18,7 @@ class LogsPageHelper extends StatefulWidget {
 class LogsPageHelperState extends State<LogsPageHelper> {
   final LogsService _log = LogsService();
 
+  String serverResponse = '';
   // List<String> triggers = [
   //   'Select one',
   //   'Time of day',
@@ -175,6 +177,9 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                         style: fieldStyle.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold)),
                     onPressed: () async {
+                  _makeGetRequest();
+                  print('hi');
+                  print(serverResponse);
                       dynamic result = await _log.documentLog(
                           selectedTrigger, thoughtTextController.text);
                       Navigator.push(
@@ -196,4 +201,20 @@ class LogsPageHelperState extends State<LogsPageHelper> {
       ),
     );
   }
+
+    _makeGetRequest() async {
+    Response response = await get(_localhost());
+    setState(() {
+      serverResponse = response.body;
+    });
+  }
+
+  String _localhost() {
+    if (Platform.isAndroid)
+      return 'http://10.0.2.2:3000';
+    else // for iOS simulator
+      return 'http://localhost:3000';
+  }
 }
+
+
