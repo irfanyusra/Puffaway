@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:vape_app/Models/User.dart';
+import 'package:vape_app/helper_functions/validation.dart';
 import 'package:vape_app/pages/four_step_soln.dart';
 import 'package:vape_app/services/database.dart';
 import 'package:vape_app/shared/constants.dart';
@@ -411,13 +412,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                                 userData.token);
                                           }
                                         },
-                                        validator: (goal) {
-                                          if (!RegExp(r"^[1-9]+[0-9]*$")
-                                              .hasMatch(goal)) {
-                                            return '';
-                                          }
-                                          return null;
-                                        },
+                                        validator: GoalFieldValidator.validate,
                                       ),
                                     ),
                                   ),
