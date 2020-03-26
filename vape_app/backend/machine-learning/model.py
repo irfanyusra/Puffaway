@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import pickle
 
 data = pd.read_csv('training_data.csv')
 data = data.rename(columns={'Category': 'category', 'Descript': 'message'})
@@ -47,7 +48,8 @@ for i, label in enumerate(target_names):
     top10 = np.argsort(clf.coef_[i])[-10:]
     print("%s: %s" % (label, " ".join(feature_names[top10])))
 '''
-print("accuracy score: " + str(model.score(X_test, y_test)))
+#print("accuracy score: " + str(model.score(X_test, y_test)))
 
-
-print(model.predict(['smell']))
+pickle.dump(model, open('model.pkl','wb'))
+model_pickle = pickle.load(open('model.pkl','rb'))
+print(model_pickle.predict(['smell']))
