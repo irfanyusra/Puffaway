@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/shared/constants.dart';
 
-//TODO: fix recommendations
+//TODO: fix backend 
+
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
