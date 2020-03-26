@@ -5,6 +5,7 @@ import 'package:vape_app/services/database.dart';
 import 'package:vape_app/shared/loading.dart';
 
 import 'UserDataSettings.dart';
+import 'achievements_helper.dart';
 
 //Widget used to get the triggers from the stream and send to LogsPageHelper()
 //Where the data will be displayed
@@ -21,7 +22,7 @@ class _SettingsState extends State<Settings> {
     if (user != null)
       return StreamProvider<UserData>.value(
         value: DatabaseService(uid: user.uid).userData,
-        child: UserDataSettings(),
+        child: AchievementsHelper(),
       );
     else
       return Loading();

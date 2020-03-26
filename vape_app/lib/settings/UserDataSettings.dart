@@ -13,6 +13,7 @@ class _UserDataSettingsState extends State<UserDataSettings> {
   @override
   Widget build(BuildContext context) {
     final userData = Provider.of<UserData>(context);
+    
     if (userData != null)
       return SettingsHelper(name: userData.name, goal: userData.goal);
     else
