@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/PodLoader/ProgressBar.dart';
 import 'package:vape_app/services/MessageHandler.dart';
+import 'package:vape_app/PodLoader/ProgressBarUserData.dart';
 import 'package:vape_app/services/database.dart';
 import 'package:vape_app/Models/Log.dart';
 import 'package:vape_app/Models/User.dart';
@@ -57,7 +58,7 @@ class _StatisticsState extends State<Statistics> {
                   padding: const EdgeInsets.only(top: 5),
                   child: timer(),
                 ),
-                ProgressBar(),
+                ProgressBarUserData(),
                 Calendar(),
                 TimeSeriesBar(),
                 MessageHandler(),
