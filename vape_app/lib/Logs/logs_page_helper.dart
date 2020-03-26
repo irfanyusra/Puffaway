@@ -7,6 +7,7 @@ import 'package:vape_app/pages/recommendation_page.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/ReusableFlatButton.dart';
 import 'package:vape_app/services/logs.dart';
+import 'package:vape_app/shared/constants.dart';
 
 class LogsPageHelper extends StatefulWidget {
   @override
@@ -81,14 +82,6 @@ class LogsPageHelperState extends State<LogsPageHelper> {
         key: Key('log-trigger-page'),
         title: Text('Log Session'),
         centerTitle: true,
-        // actions: <Widget>[
-        //   ResuableFlatButton(
-        //       icon: Icon(Icons.person),
-        //       label: Text('Logout'),
-        //       onPressed: () async {
-        //         await _auth.signOut();
-        //       }), //signout button
-        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
@@ -98,11 +91,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
               Container(
                 child: Text(
                   'To quit a habit, it is crucial that you practice self awareness.',
-                  style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2.0,
-                    fontSize: 18,
-                  ),
+                  style: textStyle,
                 ),
               ),
               SizedBox(
@@ -111,17 +100,12 @@ class LogsPageHelperState extends State<LogsPageHelper> {
               Container(
                 child: Text(
                   'What triggered your session?',
-                  style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2.0,
-                    fontSize: 18,
-                  ),
+                  style: textStyle,
                 ),
               ),
               SizedBox(
                 height: 20.0,
               ),
-              //TODO: Make the trigger drop down rounded rect
               Container(
                 child: Center(
                   child: Container(
@@ -148,17 +132,12 @@ class LogsPageHelperState extends State<LogsPageHelper> {
               Container(
                 child: Text(
                   'What were you thinking or feeling?', //If there is anything special about this session please feel free to log this as well
-                  style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2.0,
-                    fontSize: 18,
-                  ),
+                  style: textStyle,
                 ),
               ),
               SizedBox(
                 height: 20.0,
               ),
-
               Container(
                 height: 170,
                 padding: EdgeInsets.all(10.0),
@@ -175,37 +154,41 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                         child: new TextField(
                           key: Key('thought-field'),
                           controller: thoughtTextController,
+                          style: textFieldStyle,
                           maxLines: 10,
-                          decoration: new InputDecoration(
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
-                            ),
-                            hintText: 'Add your text here',
-                          ),
+                          decoration: inputDecoration.copyWith(hintText: 'Add your text here')
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              FlatButton(
-                key: (Key('save-trigger-btn')),
-                color: Colors.blue,
-                child: Text('Save'),
-                onPressed: () async {
-                  dynamic result = await _log.documentLog(
-                      selectedTrigger, thoughtTextController.text);
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute<void>(
-                          builder: (context) => Recommendation()));
+              Container(
+                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: buttonThemeAuth(
+                  context,
+                  FlatButton(
+                    key: (Key('save-trigger-btn')),
+                    color: Colors.blue,
+                    child: Text('Log Trigger',
+                        textAlign: TextAlign.center,
+                        style: fieldStyle.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                    onPressed: () async {
+                      dynamic result = await _log.documentLog(
+                          selectedTrigger, thoughtTextController.text);
+                      Navigator.push(
+                          context,
+                          new MaterialPageRoute<void>(
+                              builder: (context) => Recommendation()));
 
-                  setState(() {
-                    thoughtTextController.text = "";
-                    selectedTrigger = dropdownTriggerItems[0].value;
-                  });
-                },
+                      setState(() {
+                        thoughtTextController.text = "";
+                        selectedTrigger = dropdownTriggerItems[0].value;
+                      });
+                    },
+                  ),
+                ),
               ),
             ],
           ),

@@ -6,6 +6,6 @@ class Log {
   final String trigger;
   final String thought;
   final Timestamp dateTime;
-  Log({this.documentID,this.trigger,this.thought,this.dateTime});
 
+  Log({this.documentID,this.trigger,this.thought,this.dateTime});
 }

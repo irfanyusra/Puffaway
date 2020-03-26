@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/shared/constants.dart';
 
+//TODO: fix recommendations
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
@@ -51,49 +52,33 @@ class _SetupState extends State<Setup> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  // style: new TextStyle(fontSize: 20.0),
                   key: Key('name-field'),
+                  style: textFieldStyle,
                   controller: nameTextController,
-                  decoration: new InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      borderSide: new BorderSide(),
-                    ),
-                    hintText: 'Name',
-                  ),
+                  decoration: inputDecoration.copyWith(hintText: 'Name'),
                 ),
                 SizedBox(
                   height: 20.0,
                 ),
                 TextField(
                   onTap: () => _selectDate(context),
-                  // style: new TextStyle(fontSize: 20.0),
+                  style: textFieldStyle,
                   key: Key('dob-field'),
                   focusNode: AlwaysDisabledFocusNode(),
                   controller: dobTextController,
-                  decoration: new InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      borderSide: new BorderSide(),
-                    ),
-                    hintText: 'Date of Birth',
-                  ),
+                  decoration:
+                      inputDecoration.copyWith(hintText: 'Date of Birth'),
                 ),
                 SizedBox(
                   height: 20.0,
                 ),
                 TextField(
                   key: Key('goal-field'),
-                  // style: new TextStyle(fontSize: 20.0),
                   keyboardType: TextInputType.number,
+                  style: textFieldStyle,
                   controller: goalTextController,
-                  decoration: new InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      borderSide: new BorderSide(),
-                    ),
-                    hintText: 'Goal in days',
-                  ),
+                  decoration:
+                      inputDecoration.copyWith(hintText: 'Goal in days'),
                 ),
                 SizedBox(
                   height: 40.0,
@@ -101,57 +86,59 @@ class _SetupState extends State<Setup> {
                 TextField(
                   key: Key('trigger-field'),
                   controller: triggerTextController,
-                  decoration: new InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      borderSide: new BorderSide(),
-                    ),
+                  decoration: inputDecoration.copyWith(
                     hintText: 'Add custom trigger',
-                    // suffixIcon: IconButton(
-                    //     icon: Icon(Icons.add),
-                    //     onPressed: () {
-                    //       triggerTextController.text = "";
-                    //       //add it to the database here
-                    //     }),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                TextField(
-                  key: Key('recommendation-field'),
-                  controller: recommendationTextController,
-                  decoration: new InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      borderSide: new BorderSide(),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        triggerTextController.text = "";
+                        //add it to the database here
+                        print("Add pressed");
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text("Trigger added"),
+                            duration: Duration(milliseconds: 500)));
+                      },
                     ),
-                    hintText: 'Add custom recommendation',
                   ),
                 ),
                 SizedBox(
                   height: 20.0,
                 ),
-                FlatButton(
-                  child: Text(
-                    'Add ',
-                    style: new TextStyle(fontSize: 20.0, color: Colors.blue),
-                  ),
-                  color: Colors.grey[200],
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0),
-                      side: BorderSide(color: Colors.blue)),
-                  onPressed: () {
-                    triggerTextController.text = "";
-                    recommendationTextController.text = "";
-                    print("Add pressed");
-                    Scaffold.of(context)
-                    .showSnackBar(SnackBar(content: Text("Trigger added"),duration:Duration(milliseconds: 500)));
-                  },
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
+                // TextField(
+                //   key: Key('recommendation-field'),
+                //   controller: recommendationTextController,
+                //   decoration: new InputDecoration(
+                //     border: new OutlineInputBorder(
+                //       borderRadius: new BorderRadius.circular(20.0),
+                //       borderSide: new BorderSide(),
+                //     ),
+                //     hintText: 'Add custom recommendation',
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 20.0,
+                // ),
+                // FlatButton(
+                //   child: Text(
+                //     'Add ',
+                //     style: new TextStyle(fontSize: 20.0, color: Colors.blue),
+                //   ),
+                //   color: Colors.grey[200],
+                //   shape: RoundedRectangleBorder(
+                //       borderRadius: new BorderRadius.circular(10.0),
+                //       side: BorderSide(color: Colors.blue)),
+                //   onPressed: () {
+                //     triggerTextController.text = "";
+                //     recommendationTextController.text = "";
+                //     print("Add pressed");
+                //     Scaffold.of(context).showSnackBar(SnackBar(
+                //         content: Text("Trigger added"),
+                //         duration: Duration(milliseconds: 500)));
+                //   },
+                // ),
+                // SizedBox(
+                //   height: 20.0,
+                // ),
                 FlatButton(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
