@@ -81,12 +81,8 @@ class _SettingsHelperState extends State<SettingsHelper> {
   setupBadges(logs) {
     if (logs != null) {
       setState(() {
-        var lastHitTime = logs.length > 0
-            ? DateTime.parse(logs.first.dateTime.toDate().toString())
-            : new DateTime.now(); //last log time goes here
-        var current = new DateTime.now();
-        var diff = current.difference(lastHitTime);
 
+        var diff = differenceInTimeLastHitAndNow(logs);
         if (diff.inDays > 181) {
           achievementStrings = [
             "badges/1.png",
@@ -212,15 +208,15 @@ class _SettingsHelperState extends State<SettingsHelper> {
     }
   }
 
-  toggleNotifications() {
-    setState(() {
-      if (notifText == "Turn off notifications") {
-        notifText = "Turn on notifications";
-      } else {
-        notifText = "Turn off notifications";
-      }
-    });
-  }
+  // toggleNotifications() {
+  //   setState(() {
+  //     if (notifText == "Turn off notifications") {
+  //       notifText = "Turn on notifications";
+  //     } else {
+  //       notifText = "Turn off notifications";
+  //     }
+  //   });
+  // }
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -358,14 +354,14 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                   hintText: 'Date of Birth'),
                             ),
                             SizedBox(height: 15),
-                            buttonThemeAuth(
-                              context,
-                              RaisedButton(
-                                  elevation: 5.0,
-                                  color: Colors.blue,
-                                  child: Text(notifText),
-                                  onPressed: toggleNotifications),
-                            ),
+                            // buttonThemeAuth(
+                            //   context,
+                            //   RaisedButton(
+                            //       elevation: 5.0,
+                            //       color: Colors.blue,
+                            //       child: Text(notifText),
+                            //       onPressed: toggleNotifications),
+                            // ),
                             SizedBox(height: 30),
                             Center(
                               child: Text(
@@ -386,7 +382,6 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                               color: Colors.black,
                                               fontSize: 16,
                                             )),
-                                    //
                                   ),
                                 ),
                                 Flexible(
@@ -417,27 +412,6 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                     ),
                                   ),
                                 ),
-                                // Flexible(
-                                //   child: Padding(
-                                //     padding:
-                                //         const EdgeInsets.fromLTRB(50, 0, 0, 0),
-                                //     child: TextField(
-                                //       keyboardType: TextInputType.number,
-                                //       controller: goalTextController,
-                                //       decoration: InputDecoration(
-                                //         contentPadding:
-                                //             EdgeInsets.fromLTRB(0, 20, 0, 0),
-                                //       ),
-                                //       onChanged: (goal) async {
-                                //         //SEND GOAL TO DB
-                                //         await _auth.updateUserData(
-                                //             userData.name,
-                                //             goal,
-                                //             userData.token);
-                                //       },
-                                //     ),
-                                //   ),
-                                // ),
                                 Container(
                                   child: Padding(
                                     padding:
