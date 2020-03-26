@@ -178,7 +178,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                             color: Colors.white, fontWeight: FontWeight.bold)),
                     onPressed: () async {
                   _makeGetRequest();
-                  print('hi');
+    
                   print(serverResponse);
                       dynamic result = await _log.documentLog(
                           selectedTrigger, thoughtTextController.text);
