@@ -12,12 +12,21 @@ class Recommendation extends StatefulWidget {
 class _RecommendationState extends State<Recommendation> {
   Map data = {};
   List<Recommendations> listRecommendations = [
-    Recommendations(trigger: "Select one", recom: "Please select a trigger next time"),
-    Recommendations(trigger: "Time of day", recom: "Try planning somthing else you enjoy for this specific time of the day"),
-    Recommendations(trigger: "Wake-up routine", recom: "Drink a coffee instead if your looking for a pick me up"),
+    Recommendations(
+        trigger: "Select one", recom: "Please select a trigger next time"),
+    Recommendations(
+        trigger: "Time of day",
+        recom:
+            "Try planning somthing else you enjoy for this specific time of the day"),
+    Recommendations(
+        trigger: "Wake-up routine",
+        recom: "Drink a coffee instead if your looking for a pick me up"),
     Recommendations(trigger: "Boredom", recom: "Watch some netflix"),
     Recommendations(trigger: "Stress", recom: "Try drinking some tea"),
-    Recommendations(trigger: "Vape smell", recom: "Try chewing some gum the taste will get the smell out of your head"),
+    Recommendations(
+        trigger: "Vape smell",
+        recom:
+            "Try chewing some gum the taste will get the smell out of your head"),
     Recommendations(trigger: "Seeing someone vaping", recom: "walk away"),
     Recommendations(trigger: "Fatigue", recom: "Drink coffee"),
     Recommendations(trigger: "Partying", recom: "Have another beer"),
@@ -37,20 +46,12 @@ class _RecommendationState extends State<Recommendation> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
     final _auth = AuthService();
-    getRecommendation("Time of day");        //TODO: NEED TO PUT DATABASE VAR
+    getRecommendation("Time of day"); //TODO: NEED TO PUT DATABASE VAR
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Recommendation'),
         centerTitle: true,
-      //      actions: <Widget>[
-      //     ResuableFlatButton(
-      //      icon:Icon(Icons.person),
-      //     label:Text('Logout'),
-      //     onPressed: () async {
-      //       await _auth.signOut();}),
-        
-      // ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
@@ -67,13 +68,10 @@ class _RecommendationState extends State<Recommendation> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 40.0,
-              ),
-
+              SizedBox(height: 40.0),
               Container(
                 child: Text(
-                  'Based on the trigger, you selected, we recommend ',            //NEED TO PUT DATABASE VAR
+                  'Based on the trigger, you selected, we recommend ', //NEED TO PUT DATABASE VAR
                   style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 2.0,
@@ -81,17 +79,12 @@ class _RecommendationState extends State<Recommendation> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20.0,
-              ),
-
+              SizedBox(height: 20.0),
               Container(
                 alignment: Alignment.topLeft,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.blueAccent),
-                  borderRadius: BorderRadius.all(Radius.circular(
-                          5.0) //                 <--- border radius here
-                      ),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

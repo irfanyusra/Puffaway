@@ -1,3 +1,4 @@
+//TODO: fix all the text fields and buttons (after abdulaziz is done)
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,11 +13,11 @@ import 'package:vape_app/shared/ReusableFlatButton.dart';
 import 'package:vape_app/services/logs.dart';
 import 'package:vape_app/Models/Trigger.dart';
 
-
 class SettingsHelper extends StatefulWidget {
+  //Getting these from the Settings widget
   final String name;
   final String goal;
-  SettingsHelper({this.name,this.goal});
+  SettingsHelper({this.name, this.goal});
   @override
   _SettingsHelperState createState() => _SettingsHelperState();
 }
@@ -37,7 +38,6 @@ class _SettingsHelperState extends State<SettingsHelper> {
     triggerTextController.dispose();
     nameTextController.dispose();
     goalTextController.dispose();
-
     super.dispose();
   }
 
@@ -45,7 +45,6 @@ class _SettingsHelperState extends State<SettingsHelper> {
     super.initState();
     nameTextController.text = widget.name;
     goalTextController.text = widget.goal;
-
   }
 
   List<DropdownMenuItem<String>> buildDropdownTriggerItems(List triggers) {
@@ -70,17 +69,15 @@ class _SettingsHelperState extends State<SettingsHelper> {
   @override
   Widget build(BuildContext context) {
     final _auth = AuthService();
-   
     final user = Provider.of<User>(context);
-
     final userData = Provider.of<UserData>(context);
 
     return StreamBuilder<List<Trigger>>(
       stream: DatabaseService(uid: user.uid).triggers,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-//Grab the user data from the stream builder
-          List<Trigger> triggers  = snapshot.data;
+          //Grab the user data from the stream builder
+          List<Trigger> triggers = snapshot.data;
           dropdownTriggerItems = buildDropdownTriggerItems(triggers);
 
           return Scaffold(
@@ -137,8 +134,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                 onChanged: (name) async {
                                   //Update name in database
                                   await _auth.updateUserData(
-                                      name, userData.goal,userData.token);
-
+                                      name, userData.goal, userData.token);
                                 },
                               ),
                             ))
@@ -182,7 +178,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                 onChanged: (goal) async {
                                   //SEND GOAL TO DB
                                   await _auth.updateUserData(
-                                      userData.name, goal,userData.token);
+                                      userData.name, goal, userData.token);
                                 },
                               ),
                             ))

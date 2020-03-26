@@ -1,10 +1,7 @@
-//stressors and feeling
-
+//TODO: mmodularize text fields and btns
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/services/reflections.dart';
-import 'package:vape_app/shared/ReusableFlatButton.dart';
 import 'package:vape_app/shared/constants.dart';
 
 class Reflections extends StatefulWidget {
@@ -29,19 +26,10 @@ class _ReflectionsState extends State<Reflections> {
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
-    final _auth = AuthService();
     return Scaffold(
       appBar: AppBar(
         title: Text('Reflection'),
         centerTitle: true,
-        //   actions: <Widget>[
-        //   ResuableFlatButton(
-        //      icon:Icon(Icons.person),
-        //     label:Text('Logout'),
-        //     onPressed: () async {
-        //       await _auth.signOut();}),
-
-        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
@@ -58,9 +46,7 @@ class _ReflectionsState extends State<Reflections> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 15.0,
-              ),
+              SizedBox(height: 15.0),
               Container(
                 child: Text(
                   'What stressors did you feel today?',
@@ -71,12 +57,8 @@ class _ReflectionsState extends State<Reflections> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 0.0,
-              ),
               Container(
                 height: 150,
-//                color: Colors.grey[300],
                 padding: EdgeInsets.all(10.0),
                 child: new ConstrainedBox(
                   constraints: BoxConstraints(
@@ -105,9 +87,7 @@ class _ReflectionsState extends State<Reflections> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
+              SizedBox(height: 10.0),
               Container(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -121,12 +101,8 @@ class _ReflectionsState extends State<Reflections> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 0.0,
-              ),
               Container(
                 height: 150,
-//                color: Colors.grey[300],
                 padding: EdgeInsets.all(10.0),
                 child: new ConstrainedBox(
                   constraints: BoxConstraints(
@@ -155,9 +131,7 @@ class _ReflectionsState extends State<Reflections> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 5.0,
-              ),
+              SizedBox(height: 5.0),
               Container(
                 alignment: Alignment.bottomCenter,
                 margin: const EdgeInsets.only(left: 10.0, right: 10.0),

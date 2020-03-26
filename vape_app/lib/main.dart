@@ -10,14 +10,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
-        value:AuthService().user,
-          child: MaterialApp(
-              home: Loading(),
+      value: AuthService().user,
+      child: MaterialApp(
+        home: Loading(),
       ),
     );
   }
 }
-
 
 //to do unit and widget test: flutter test
 //for integration test: flutter drive --target=test_driver/app.dart

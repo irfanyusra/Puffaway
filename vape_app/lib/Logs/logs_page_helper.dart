@@ -122,7 +122,6 @@ class LogsPageHelperState extends State<LogsPageHelper> {
               SizedBox(
                 height: 20.0,
               ),
-              //TODO: Make the trigger drop down rounded rect
               Container(
                 child: Center(
                   child: Container(

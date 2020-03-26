@@ -20,13 +20,16 @@ class _MessageHandlerState extends State<MessageHandler> {
     _saveDeviceToken();
 
     _fcm.configure(
-      onMessage: (Map<String, dynamic> message) async { //when the app is open and running in the foreground
+      onMessage: (Map<String, dynamic> message) async {
+        //when the app is open and running in the foreground
         print("onMessage: $message");
       },
-      onLaunch: (Map<String, dynamic> message) async { //if the app is fully terminated and notification is clicked
+      onLaunch: (Map<String, dynamic> message) async {
+        //if the app is fully terminated and notification is clicked
         print("onLaunch: $message");
       },
-      onResume: (Map<String, dynamic> message) async { //if the app is closed but still running in the background and notification is clicked
+      onResume: (Map<String, dynamic> message) async {
+        //if the app is closed but still running in the background and notification is clicked
         print("onResume: $message");
       },
     );
@@ -41,14 +44,8 @@ class _MessageHandlerState extends State<MessageHandler> {
 
     // Save it to Firestore
     if (fcmToken != null) {
-      var tokens = _db
-          .collection('Users')
-          .document(user.uid);
-
-
-      await tokens.updateData({
-        'token': fcmToken
-      });
+      var tokens = _db.collection('Users').document(user.uid);
+      await tokens.updateData({'token': fcmToken});
     }
   }
 

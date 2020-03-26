@@ -51,7 +51,6 @@ class _LiquidCustomProgressIndicatorState
               painter: PodPainter(),
             ),
           ),
-
           SizedBox(
             width: pathBounds.width + pathBounds.left,
             height: pathBounds.height + pathBounds.top,

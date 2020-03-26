@@ -16,50 +16,52 @@ class Statistics extends StatefulWidget {
 }
 
 class _StatisticsState extends State<Statistics> {
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
     return StreamProvider<List<Log>>.value(
-      value: DatabaseService(uid:user.uid).logs,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Dashboard',  key: Key("dashboard")),
-          actions: <Widget>[
-            Padding(
-                padding: EdgeInsets.only(right:20.0),
-              child: GestureDetector(
-                onTap: () async {
-                  Navigator.push(context, new MaterialPageRoute<void>(builder: (context) => Settings()));
-                },
-                child: Icon(
-                  Icons.settings,
-                  size: 26.0,
+        value: DatabaseService(uid: user.uid).logs,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Dashboard', key: Key("dashboard")),
+            actions: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute<void>(
+                            builder: (context) => Settings()));
+                  },
+                  child: Icon(
+                    Icons.settings,
+                    size: 26.0,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Center(child: Text("Time Since Last Hit", style: TextStyle(fontSize: 20))),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: timer(),
-              ),
-              ProgressBar(),
-              Calendar(),
-              TimeSeriesBar(),
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Center(
+                      child: Text("Time Since Last Hit",
+                          style: TextStyle(fontSize: 20))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: timer(),
+                ),
+                ProgressBar(),
+                Calendar(),
+                TimeSeriesBar(),
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 }

@@ -48,5 +48,7 @@ Widget buttonThemeAuth(context, child) {
       child: child);
 }
 
-//font style for text fields
+//font style for authentication text fields
 final TextStyle fieldStyle = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+//font style for other text fields
+final TextStyle textFieldStyle = TextStyle(fontFamily: 'Montserrat', fontSize: 18.0);
