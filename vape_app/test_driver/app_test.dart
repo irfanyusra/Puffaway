@@ -7,7 +7,7 @@ void main() {
     final emailField = find.byValueKey("email-field");
     final passwordField = find.byValueKey("password-field");
     final signInButton = find.byValueKey("signin-btn");
-    final error = find.text("Vaping makes you forget, change your habit");
+    final error = find.text("Vaping makes you forget, please try again and change your habit");
     // final statsPage = find.byValueKey("dashboard");
     final statsPage = find.byType("Statistics");
     // final statsPage = find.text("Time Since Last Hit");
@@ -21,7 +21,7 @@ void main() {
     final allTriggerLogsPage = find.byType("AllLogs");
     final thoughtText = "some thought";
     final triggerText = "";
-    final triggerExists = find.text("Trigger: "+triggerText);
+    final triggerExists = find.text("Trigger: " + triggerText);
     final thoughtExists =
         find.text("Thought: " + thoughtText + "\n a moment ago");
     final statsNav = find.byValueKey("stats-nav");
@@ -46,9 +46,7 @@ void main() {
     });
 
     tearDownAll(() async {
-      if (driver != null) {
-        driver.close();
-      }
+      if (driver != null) driver.close();
     });
     test(
         "login fails with incorrect email and password, provides text feedback",
@@ -71,7 +69,7 @@ void main() {
       await driver.tap(emailField);
       await driver.enterText("test@testmail.com");
       await driver.tap(passwordField);
-      await driver.enterText("test123");
+      await driver.enterText("123456");
       await driver.tap(signInButton);
 
       // await driver.waitFor(statsPage);

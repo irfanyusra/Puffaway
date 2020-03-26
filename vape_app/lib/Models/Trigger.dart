@@ -5,6 +5,6 @@ class Trigger {
   final String documentID;
   final String trigger;
   final Timestamp dateTime;
-  Trigger({this.documentID,this.trigger,this.dateTime});
 
+  Trigger({this.documentID,this.trigger,this.dateTime});
 }

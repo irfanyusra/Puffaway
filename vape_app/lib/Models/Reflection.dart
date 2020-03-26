@@ -7,5 +7,4 @@ class Reflection {
   final Timestamp dateTime;
   
   Reflection({this.documentID,this.stressor,this.progress,this.dateTime});
-
 }

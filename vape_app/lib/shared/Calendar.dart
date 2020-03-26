@@ -12,7 +12,6 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-
   CalendarController _calendarController;
   Map<DateTime, List<dynamic>> _events;
 
@@ -20,7 +19,7 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     super.initState();
     _calendarController = CalendarController();
-    _events={};
+    _events = {};
   }
 
   @override
@@ -33,28 +32,26 @@ class _CalendarState extends State<Calendar> {
   Widget build(BuildContext context) {
     final logs = Provider.of<List<Log>>(context);
 
+    if (logs != null) {
+      setState(() {
+        for (var i = 0; i < logs.length; i++) {
+          var date = DateTime.parse(logs[i].dateTime.toDate().toString());
+          var formatter = new DateFormat('yyyy-MM-dd');
+          var formatted = DateTime.parse(formatter.format(date));
 
-      if(logs!=null) {
-        setState(() {
-          for (var i = 0; i < logs.length; i++) {
-            var date = DateTime.parse(logs[i].dateTime.toDate().toString());
-            var formatter = new DateFormat('yyyy-MM-dd');
-            var formatted = DateTime.parse(formatter.format(date));
-
-            if (_events[formatted] != null) {
-              _events[formatted].add("0");
-            } else {
-              _events[formatted] = ["0"];
-            }
-          }
-        });
-      }else {
-        Loading();
-      }
+          if (_events[formatted] != null)
+            _events[formatted].add("0");
+          else
+            _events[formatted] = ["0"];
+        }
+      });
+    } else
+      Loading();
 
     return TableCalendar(
-        calendarController: _calendarController,
-        events: _events,
+      calendarController: _calendarController,
+      events: _events,
+      initialCalendarFormat: CalendarFormat.week,
     );
   }
 }
