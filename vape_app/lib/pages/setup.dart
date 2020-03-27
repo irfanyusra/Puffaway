@@ -97,14 +97,12 @@ class _SetupState extends State<Setup> {
                   height: 40.0,
                 ),
                 TextField(
-                  key: Key('add-trigger-field'),
+                  key: Key('trigger-field'),
                   controller: triggerTextController,
                   decoration: inputDecoration.copyWith(
                     hintText: 'Add custom trigger',
                     suffixIcon: IconButton(
                       icon: Icon(Icons.add, key: Key("save-trigger-btn")),
-                      onPressed: () {
-                      icon: Icon(Icons.add),
                       onPressed: () async {
                         await _log.createTrigger(triggerTextController.text);
                         triggerTextController.text = "";

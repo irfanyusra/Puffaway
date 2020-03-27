@@ -131,7 +131,7 @@ class _RegisterState extends State<Register> {
                                     if (result == null) {
                                       setState(() {
                                         //Error as firebase returns an error
-                                        error = 'Please enter a valid email';
+                                        error = 'Email already in use, please use a different email';
                                         //Loading is done after result is returned from firebase
                                         loading = false;
                                       });

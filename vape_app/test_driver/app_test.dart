@@ -38,10 +38,10 @@ void main() {
     final progressExists = find.text("Progress: " + progressText + "\n a moment ago");
 
     final settingsNavBtn = find.byValueKey("settings-nav-btn");
-    //final addTriggerField = find.byValueKey("add-trigger-field");
+    final addTriggerField = find.byValueKey("add-trigger-field");
     final settingsPage = find.byType("Settings");
     //final triggerTest = "some trigger";
-    //final addTriggerBtn = find.byValueKey("save-trigger-btn");
+    final addTriggerBtn2 = find.byValueKey("save-trigger-btn");
     final logNav = find.byValueKey("log-nav");
     final logTriggerPage = find.byValueKey("log-trigger-page");
     final triggerDropdown = find.byValueKey("trigger-dropdown");
@@ -54,7 +54,7 @@ void main() {
     final dobField = find.byValueKey("dob-field");
     final goalField = find.byValueKey("goal-field");
     final goalTest = "5";
-    final addTriggerField = find.byValueKey("add-trigger-field");
+    final triggerField = find.byValueKey("trigger-field");
     final triggerTest = "some trigger";
     final addTriggerBtn = find.byValueKey("save-trigger-btn");
     final nextBtn = find.byValueKey("next-btn");
@@ -102,26 +102,34 @@ void main() {
       // await new Future.delayed(const Duration(seconds: 10));
     });
 
-*/
 
-    test("setup page saves values to settings", () async {
+*/
+    test("Register page fails with duplicate email, succeeds with unique email. Setup page saves values to settings and add trigger saves to dropdown", () async {
+
       //random number to create unique email
       Random random = new Random();
       int randomNumber = random.nextInt(100);
 
       await driver.waitFor(signInPage);
       await driver.runUnsynchronized(() async {
+        //register fails with duplicate email
         await driver.tap(registerBtn);
-        await new Future.delayed(const Duration(seconds: 2));
         await driver.tap(emailField);
-        await new Future.delayed(const Duration(seconds: 2));
-        await driver.enterText(randomNumber.toString() + "@123.com");
-        await new Future.delayed(const Duration(seconds: 2));
+        await driver.enterText("123@123.com");
         await driver.tap(passwordField);
-        await new Future.delayed(const Duration(seconds: 2));
+        await driver.enterText("123456");
+        await driver.tap(registerBtn);
+        await driver.waitFor(find.text("Email already in use, please use a different email"));
+        print("Register page fails with duplicate email test succeeded");
+
+        //register succeeds with unique email
+        await driver.tap(emailField);
+        await driver.enterText(randomNumber.toString() + "@123.com");
+        await driver.tap(passwordField);
         await driver.enterText("123456");
         await new Future.delayed(const Duration(seconds: 2));
         await driver.tap(registerBtn);
+        print("Register succeeded");
       });
 
       print("wating for setup page");
@@ -135,10 +143,12 @@ void main() {
         await driver.tap(find.text('OK'));
         await driver.tap(goalField);
         await driver.enterText(goalTest);
-        await driver.tap(addTriggerField);
+        await driver.tap(triggerField);
         await driver.enterText(triggerTest);
         await driver.tap(addTriggerBtn);
+        await new Future.delayed(const Duration(seconds: 2));
         await driver.tap(nextBtn);
+        print("enter settings succeeded");
       });
 
       print("waiting for dashboard");
@@ -151,13 +161,31 @@ void main() {
         await Future.delayed(Duration(seconds: 2));
       });
 
+      print("waiting for settings page");
       //settings page
       await driver.runUnsynchronized(() async {
         await driver.waitFor(settingsPage);
+        await driver.tap(find.text(nameTest));
+        print("correct name found");
+        await new Future.delayed(const Duration(seconds: 2));
+        //await driver.tap(find.text('2020-03-15'));
+        expect(find.text('2020-03-15'), anything);
+        print("correct date found");
+        await new Future.delayed(const Duration(seconds: 2));
+        await driver.tap(find.pageBack());
       });
 
-      // await new Future.delayed(const Duration(seconds: 3));
-      // await new Future.delayed(const Duration(seconds: 10));
+      //log trigger page
+      await driver.runUnsynchronized(() async {
+        await driver.waitFor(statsPage);
+        await driver.tap(logNav);
+        await driver.waitFor(logTriggerPage);
+        await driver.tap(triggerDropdown);
+        await Future.delayed(Duration(seconds: 2));
+        await driver.tap(triggerDropdownValue);
+        print("setup values saved successfully");
+      });
+
     });
 /*
     test("Adding Log", () async {
@@ -252,9 +280,17 @@ void main() {
         await driver.waitFor(statsPage);
       });
       await new Future.delayed(const Duration(seconds: 1));
-    });*/
+    });
 
-    /*test("Adding Trigger", () async {
+    test("Adding Trigger", () async {
+      await driver.tap(emailField);
+      await driver.enterText("123@123.com");
+      await driver.tap(passwordField);
+      await driver.enterText("123456");
+      await driver.tap(signInButton);
+
+      print("wating for stats page");
+
       //dashboard
       await driver.runUnsynchronized(() async {
         //on the dashboard
@@ -269,11 +305,9 @@ void main() {
       await driver.runUnsynchronized(() async {
         await driver.waitFor(settingsPage);
         await driver.tap(addTriggerField);
-        await Future.delayed(Duration(seconds: 2));
         await driver.enterText(triggerTest);
-        await Future.delayed(Duration(seconds: 2));
         // save the trigger
-        await driver.tap(addTriggerBtn);
+        await driver.tap(addTriggerBtn2);
         await Future.delayed(Duration(seconds: 2));
         //back from the settings page
         await driver.tap(find.pageBack());
