@@ -282,7 +282,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
   Widget build(BuildContext context) {
     final _auth = AuthService();
     var appBar = AppBar(
-        title: Text("User Settings"),
+        title: Text("Profile Settings"),
         centerTitle: true,
         actions: <Widget>[
           ResuableFlatButton(

@@ -144,45 +144,50 @@ class _SetupState extends State<Setup> {
                 SizedBox(
                   height: 20.0,
                 ),
-                // FlatButton(
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.end,
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: <Widget>[
-                //       Text(
-                //         'Next ',
-                //         style:
-                //             new TextStyle(fontSize: 20.0, color: Colors.blue),
-                //         key: Key("next-btn")
-                //       ),
-                //       onPressed: showHelp,
-                //     ),
-                FlatButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Next ',
-                        style:
-                            new TextStyle(fontSize: 20.0, color: Colors.blue),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    FlatButton(
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'Help ',
+                            style: TextStyle(fontSize: 20, color: Colors.blue),
+                          ),
+                          Icon(
+                            Icons.help_outline,
+                            color: Colors.blue,
+                          )
+                        ]
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.blue,
+                      onPressed: showHelp,
+                    ),
+                    FlatButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Next ',
+                            style: TextStyle(fontSize: 20.0, color: Colors.blue),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.blue,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  // ],
-                  // ),
-                  onPressed: () async {
-                    await _auth.updateUserData(
-                        nameTextController.text,
-                        goalTextController.text,
-                        dobTextController.text,
-                        userData.token);
-                    widget.toggleSetup();
-                  },
+                      onPressed: () async {
+                        await _auth.updateUserData(
+                            nameTextController.text,
+                            goalTextController.text,
+                            dobTextController.text,
+                            userData.token);
+                        widget.toggleSetup();
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
