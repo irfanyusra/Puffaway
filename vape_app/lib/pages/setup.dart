@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vape_app/services/logs.dart';
 import 'package:vape_app/shared/constants.dart';
 
 //TODO: fix recommendations
@@ -23,6 +24,7 @@ class _SetupState extends State<Setup> {
   final dobTextController = TextEditingController();
   final triggerTextController = TextEditingController();
   final recommendationTextController = TextEditingController();
+  LogsService _log = LogsService();
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -114,14 +116,9 @@ class _SetupState extends State<Setup> {
                   decoration: inputDecoration.copyWith(
                     hintText: 'Add custom trigger',
                     suffixIcon: IconButton(
-<<<<<<< HEAD
                       icon: Icon(Icons.add, key: Key("save-trigger-btn")),
                       onPressed: () async {
                         await _log.createTrigger(triggerTextController.text);
-=======
-                      icon: Icon(Icons.add),
-                      onPressed: () {
->>>>>>> parent of 51e652f... Merge branch 'master' of https://github.com/irfanyusra/SE3350
                         triggerTextController.text = "";
                         //add it to the database here
                         print("Add pressed");
@@ -135,53 +132,6 @@ class _SetupState extends State<Setup> {
                 SizedBox(
                   height: 20.0,
                 ),
-<<<<<<< HEAD
-                FlatButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Next ',
-                        style:
-                            new TextStyle(fontSize: 20.0, color: Colors.blue),
-                        key: Key("next-btn")
-=======
-                // TextField(
-                //   key: Key('recommendation-field'),
-                //   controller: recommendationTextController,
-                //   decoration: new InputDecoration(
-                //     border: new OutlineInputBorder(
-                //       borderRadius: new BorderRadius.circular(20.0),
-                //       borderSide: new BorderSide(),
-                //     ),
-                //     hintText: 'Add custom recommendation',
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 20.0,
-                // ),
-                // FlatButton(
-                //   child: Text(
-                //     'Add ',
-                //     style: new TextStyle(fontSize: 20.0, color: Colors.blue),
-                //   ),
-                //   color: Colors.grey[200],
-                //   shape: RoundedRectangleBorder(
-                //       borderRadius: new BorderRadius.circular(10.0),
-                //       side: BorderSide(color: Colors.blue)),
-                //   onPressed: () {
-                //     triggerTextController.text = "";
-                //     recommendationTextController.text = "";
-                //     print("Add pressed");
-                //     Scaffold.of(context).showSnackBar(SnackBar(
-                //         content: Text("Trigger added"),
-                //         duration: Duration(milliseconds: 500)));
-                //   },
-                // ),
-                // SizedBox(
-                //   height: 20.0,
-                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -200,7 +150,6 @@ class _SetupState extends State<Setup> {
                           ),
                           
                         ],
->>>>>>> parent of 51e652f... Merge branch 'master' of https://github.com/irfanyusra/SE3350
                       ),
                       onPressed: showHelp,
                     ),
@@ -211,8 +160,8 @@ class _SetupState extends State<Setup> {
                         children: <Widget>[
                           Text(
                             'Next ',
-                            style:
-                                new TextStyle(fontSize: 20.0, color: Colors.blue),
+                            style: TextStyle(fontSize: 20.0, color: Colors.blue),
+                            key: Key("next-btn")
                           ),
                           Icon(
                             Icons.arrow_forward_ios,
