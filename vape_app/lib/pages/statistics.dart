@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/PodLoader/ProgressBar.dart';
+import 'package:vape_app/pages/setup.dart';
 import 'package:vape_app/services/MessageHandler.dart';
 import 'package:vape_app/PodLoader/ProgressBarUserData.dart';
 import 'package:vape_app/services/database.dart';

@@ -308,6 +308,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                         padding: const EdgeInsets.fromLTRB(10, 0, 160, 0),
                         child: TextField(
                           controller: nameTextController,
+                          style: TextStyle(fontSize: 20),
                           decoration: InputDecoration(
                             hintText: 'Name',
                             contentPadding: EdgeInsets.fromLTRB(0, 20, 0, 0)
