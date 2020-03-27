@@ -5,8 +5,6 @@ import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/constants.dart';
 
 class Recommendation extends StatefulWidget {
-  final String trigger;
-  Recommendation({this.trigger});
   @override
   _RecommendationState createState() => _RecommendationState();
 }
@@ -29,7 +27,7 @@ class _RecommendationState extends State<Recommendation> {
         trigger: "Vape smell",
         recom:
             "Try chewing some gum the taste will get the smell out of your head"),
-    Recommendations(trigger: "Seeing someone vaping", recom: "Walk away"),
+    Recommendations(trigger: "Seeing someone vaping", recom: "walk away"),
     Recommendations(trigger: "Fatigue", recom: "Drink coffee"),
     Recommendations(trigger: "Partying", recom: "Have another beer"),
     Recommendations(trigger: "Sex", recom: "Do it again its more fun!")
@@ -48,7 +46,7 @@ class _RecommendationState extends State<Recommendation> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
     final _auth = AuthService();
-    rec =getRecommendation(widget.trigger); 
+    getRecommendation("Time of day"); //TODO: NEED TO PUT DATABASE VAR
 
     return Scaffold(
       appBar: AppBar(

@@ -3,9 +3,6 @@ import 'package:vape_app/authenticate/register.dart';
 import 'package:vape_app/authenticate/sign_in.dart';
 
 class Authenticate extends StatefulWidget {
-  final Function toggleSetup;
-  Authenticate({this.toggleSetup});
-
   @override
   _AuthenticateState createState() => _AuthenticateState();
 }
@@ -17,7 +14,6 @@ class _AuthenticateState extends State<Authenticate> {
   void toggleView() {
     //Toggle with a not
     setState(() => showSignIn = !showSignIn);
-    widget.toggleSetup();
   }
 
   @override

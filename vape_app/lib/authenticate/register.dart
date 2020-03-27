@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vape_app/pages/setup.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/services/pods.dart';
 import 'package:vape_app/shared/constants.dart';
@@ -9,8 +8,7 @@ import 'package:vape_app/helper_functions/validation.dart';
 class Register extends StatefulWidget {
   // function from authenticate file
   final Function toggleView;
-  Register({this.toggleView});
-
+  Register({this.toggleView}); 
   @override
   _RegisterState createState() => _RegisterState();
 }

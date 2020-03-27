@@ -10,10 +10,10 @@ class AuthService {
   }
 
 //Update the user data
-  Future updateUserData(String name, String goal, String dob, String token) async {
+  Future updateUserData(String name, String goal, String token) async {
     FirebaseUser user = await _auth.currentUser();
     return await DatabaseService(uid: user.uid)
-        .updateUserData(name, goal, dob, token);
+        .updateUserData(name, goal, token);
   }
 
 //CreateDefaultTriggers is a function which adds default triggers to the database upon registration
@@ -49,7 +49,7 @@ class AuthService {
       FirebaseUser user = result.user;
 
       //Create a default user model upon registration
-      await updateUserData('', '', '','');
+      await updateUserData('', '', '');
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
