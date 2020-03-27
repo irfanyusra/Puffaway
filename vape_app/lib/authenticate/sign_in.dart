@@ -5,7 +5,6 @@ import 'package:vape_app/shared/loading.dart';
 import 'package:vape_app/helper_functions/validation.dart';
 
 class SignIn extends StatefulWidget {
-
   // function from authenticate file
   final Function toggleView;
   SignIn({this.toggleView});
@@ -46,7 +45,6 @@ class _SignInState extends State<SignIn> {
                       onPressed: () {
                         //Toggle register screen
                         widget.toggleView();
-
                       }),
                 ],
               ),

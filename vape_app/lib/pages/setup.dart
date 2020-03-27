@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:vape_app/Models/User.dart';
-import 'package:vape_app/services/auth.dart';
-import 'package:vape_app/services/logs.dart';
-import 'package:vape_app/shared/loading.dart';
 import 'package:vape_app/shared/constants.dart';
 
-//TODO: fix backend
-
+//TODO: fix recommendations
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
 }
 
 class Setup extends StatefulWidget {
-  final Function toggleSetup;
-  Setup({this.toggleSetup});
-
   @override
   _SetupState createState() => _SetupState();
 }
@@ -74,10 +65,6 @@ class _SetupState extends State<Setup> {
 
   @override
   Widget build(BuildContext context) {
-    final _auth = AuthService();
-    final userData = Provider.of<UserData>(context);
-
-    final LogsService _log = LogsService();
     return Scaffold(
       appBar: AppBar(
         title: Text('Setup'),
@@ -127,11 +114,16 @@ class _SetupState extends State<Setup> {
                   decoration: inputDecoration.copyWith(
                     hintText: 'Add custom trigger',
                     suffixIcon: IconButton(
+<<<<<<< HEAD
                       icon: Icon(Icons.add, key: Key("save-trigger-btn")),
                       onPressed: () async {
                         await _log.createTrigger(triggerTextController.text);
+=======
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+>>>>>>> parent of 51e652f... Merge branch 'master' of https://github.com/irfanyusra/SE3350
                         triggerTextController.text = "";
-
+                        //add it to the database here
                         print("Add pressed");
                         Scaffold.of(context).showSnackBar(SnackBar(
                             content: Text("Trigger added"),
@@ -143,6 +135,7 @@ class _SetupState extends State<Setup> {
                 SizedBox(
                   height: 20.0,
                 ),
+<<<<<<< HEAD
                 FlatButton(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -153,6 +146,61 @@ class _SetupState extends State<Setup> {
                         style:
                             new TextStyle(fontSize: 20.0, color: Colors.blue),
                         key: Key("next-btn")
+=======
+                // TextField(
+                //   key: Key('recommendation-field'),
+                //   controller: recommendationTextController,
+                //   decoration: new InputDecoration(
+                //     border: new OutlineInputBorder(
+                //       borderRadius: new BorderRadius.circular(20.0),
+                //       borderSide: new BorderSide(),
+                //     ),
+                //     hintText: 'Add custom recommendation',
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 20.0,
+                // ),
+                // FlatButton(
+                //   child: Text(
+                //     'Add ',
+                //     style: new TextStyle(fontSize: 20.0, color: Colors.blue),
+                //   ),
+                //   color: Colors.grey[200],
+                //   shape: RoundedRectangleBorder(
+                //       borderRadius: new BorderRadius.circular(10.0),
+                //       side: BorderSide(color: Colors.blue)),
+                //   onPressed: () {
+                //     triggerTextController.text = "";
+                //     recommendationTextController.text = "";
+                //     print("Add pressed");
+                //     Scaffold.of(context).showSnackBar(SnackBar(
+                //         content: Text("Trigger added"),
+                //         duration: Duration(milliseconds: 500)));
+                //   },
+                // ),
+                // SizedBox(
+                //   height: 20.0,
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    FlatButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Help ",
+                            style: TextStyle(fontSize: 20, color: Colors.blue),
+                          ),
+                          Icon(
+                            Icons.help,
+                            color: Colors.blue,
+                          ),
+                          
+                        ],
+>>>>>>> parent of 51e652f... Merge branch 'master' of https://github.com/irfanyusra/SE3350
                       ),
                       onPressed: showHelp,
                     ),
@@ -172,13 +220,9 @@ class _SetupState extends State<Setup> {
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                  onPressed: () async {
-                    await _auth.updateUserData(
-                        nameTextController.text, goalTextController.text,dobTextController.text, userData.token);
-                    widget.toggleSetup();
-                  },
+                      onPressed: () => print("next pressed"),
+                    ),
+                  ],
                 ),
               ],
             ),
