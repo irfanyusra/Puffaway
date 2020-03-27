@@ -26,7 +26,9 @@ class SettingsHelper extends StatefulWidget {
   //Getting these from the Settings widget
   final String name;
   final String goal;
-  SettingsHelper({this.name, this.goal});
+  final String dob;
+
+  SettingsHelper({this.name, this.goal, this.dob});
   @override
   _SettingsHelperState createState() => _SettingsHelperState();
 }
@@ -47,7 +49,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
 
   //calendar variables
   DateTime selectedDate = DateTime.now();
-  String dob = "Date of Birth";
+  // String dob = "Date of Birth";
   final dobTextController = TextEditingController();
 
   //badges variables
@@ -81,7 +83,6 @@ class _SettingsHelperState extends State<SettingsHelper> {
   setupBadges(logs) {
     if (logs != null) {
       setState(() {
-
         var diff = differenceInTimeLastHitAndNow(logs);
         if (diff.inDays > 181) {
           achievementStrings = [
@@ -227,8 +228,8 @@ class _SettingsHelperState extends State<SettingsHelper> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
-        dob = "${selectedDate.toLocal()}".split(' ')[0];
-        dobTextController.text = dob;
+        dobTextController.text = "${selectedDate.toLocal()}".split(' ')[0];
+        
       });
   }
 
@@ -245,7 +246,10 @@ class _SettingsHelperState extends State<SettingsHelper> {
   void initState() {
     super.initState();
     nameTextController.text = widget.name;
-    //dobTextController = widget.dob;
+    dobTextController.text = widget.dob;
+    print(widget.dob);
+    print(dobTextController.text);
+
     goalTextController.text = widget.goal;
   }
 
@@ -276,6 +280,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = AuthService();
     var appBar = AppBar(
         title: Text("User Settings"),
         centerTitle: true,
@@ -285,7 +290,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
             label: Text("Logout"),
             onPressed: () async {
               Navigator.pop(context);
-              // await _auth.signOut();
+              await _auth.signOut();
             },
           )
         ]);
@@ -293,7 +298,6 @@ class _SettingsHelperState extends State<SettingsHelper> {
     var _notifySize = MediaQuery.of(context).padding.top;
     var _appBarSize = appBar.preferredSize.height;
 
-    final _auth = AuthService();
     final user = Provider.of<User>(context);
     final userData = Provider.of<UserData>(context);
     final logs = Provider.of<List<Log>>(context) ?? [];
@@ -339,8 +343,8 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                   hintText: 'Name'),
                               onChanged: (name) async {
                                 //Update name in database
-                                await _auth.updateUserData(
-                                    name, userData.goal, userData.token);
+                                await _auth.updateUserData(name, userData.goal,
+                                    userData.dob, userData.token);
                               },
                             ),
                             SizedBox(height: 10),
@@ -352,6 +356,12 @@ class _SettingsHelperState extends State<SettingsHelper> {
                               controller: dobTextController,
                               decoration: textInputDecoration.copyWith(
                                   hintText: 'Date of Birth'),
+                              onChanged: (dob) async {
+                                print("dob");
+                                //Update name in database
+                                await _auth.updateUserData(userData.name,
+                                    userData.goal, dob, userData.token);
+                              },
                             ),
                             SizedBox(height: 15),
                             // buttonThemeAuth(
@@ -404,6 +414,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                                             await _auth.updateUserData(
                                                 userData.name,
                                                 goal,
+                                                userData.dob,
                                                 userData.token);
                                           }
                                         },
