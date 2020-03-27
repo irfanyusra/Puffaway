@@ -52,6 +52,27 @@ void main() {
     });
   });
 
+   group('Goal', () {
+    //bad or boundy test
+    test('goal value equal to 0 returns error', () {
+      var result = GoalFieldValidator.validate('0');
+      expect(result, '');
+    });
+     test('goal value less than 1 returns error', () {
+      var result = GoalFieldValidator.validate('-1');
+      expect(result, '');
+    });
+    //good test
+    test('goal value equal to 1 returns null', () {
+      var result = GoalFieldValidator.validate('1');
+      expect(result, null);
+    });
+    test('goal value greater than 1 returns null', () {
+      var result = GoalFieldValidator.validate('2');
+      expect(result, null);
+    });
+  });
+
 //Authentication testing
   MockFirebaseAuth _auth = MockFirebaseAuth();
   BehaviorSubject<MockFirebaseUser> _user = BehaviorSubject<MockFirebaseUser>();
@@ -77,7 +98,7 @@ void main() {
       expect(_repo.status, Status.Authenticated);
     });
 
-    test("sing in fails with incorrect email and password", () async {
+    test("sign in fails with incorrect email and password", () async {
       bool signedIn = await _repo.signIn("travisscott@email.com", "Kendall123");
       expect(signedIn, false);
       expect(_repo.status, Status.Unauthenticated);
