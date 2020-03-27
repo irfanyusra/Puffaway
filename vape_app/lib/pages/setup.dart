@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vape_app/shared/loading.dart';
 import 'package:vape_app/shared/constants.dart';
 
 //TODO: fix backend 
@@ -9,6 +10,9 @@ class AlwaysDisabledFocusNode extends FocusNode {
 }
 
 class Setup extends StatefulWidget {
+  final Function toggleSetup;
+  Setup({this.toggleSetup});
+
   @override
   _SetupState createState() => _SetupState();
 }
@@ -156,7 +160,9 @@ class _SetupState extends State<Setup> {
                       ),
                     ],
                   ),
-                  onPressed: () => print("next pressed"),
+                  onPressed: () {
+                  widget.toggleSetup();
+                  },
                 ),
               ],
             ),
