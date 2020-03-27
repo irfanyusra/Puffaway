@@ -127,7 +127,7 @@ class _SetupState extends State<Setup> {
                   decoration: inputDecoration.copyWith(
                     hintText: 'Add custom trigger',
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.add),
+                      icon: Icon(Icons.add, key: Key("save-trigger-btn")),
                       onPressed: () async {
                         await _log.createTrigger(triggerTextController.text);
                         triggerTextController.text = "";
@@ -152,6 +152,7 @@ class _SetupState extends State<Setup> {
                         'Next ',
                         style:
                             new TextStyle(fontSize: 20.0, color: Colors.blue),
+                        key: Key("next-btn")
                       ),
                       onPressed: showHelp,
                     ),

@@ -439,13 +439,13 @@ class _SettingsHelperState extends State<SettingsHelper> {
                             //     ),
                             SizedBox(height: 20),
                             TextField(
-                              key: Key('trigger-field'),
+                              key: Key('add-trigger-field'),
                               controller: triggerTextController,
                               style: textFieldStyle,
                               decoration: inputDecoration.copyWith(
                                 hintText: 'Add custom trigger',
                                 suffixIcon: IconButton(
-                                  icon: Icon(Icons.add),
+                                  icon: Icon(Icons.add, key: Key("save-trigger-btn")),
                                   onPressed: () async {
                                     print("Add pressed");
                                     await _log.createTrigger(

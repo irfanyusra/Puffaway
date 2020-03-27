@@ -31,6 +31,7 @@ class _StatisticsState extends State<Statistics> {
               Padding(
                 padding: EdgeInsets.only(right: 20.0),
                 child: GestureDetector(
+                  key: Key("settings-nav-btn"),
                   onTap: () async {
                     Navigator.push(
                         context,
