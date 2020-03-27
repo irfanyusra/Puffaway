@@ -57,7 +57,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
       items.add(
         DropdownMenuItem(
           value: t.trigger,
-          child: Text(t.trigger),
+          child: Text(t.trigger, key: Key("dropdown_${t.trigger}"),),
         ),
       );
     }
@@ -121,6 +121,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                     child: DropdownButton(
                         value: selectedTrigger,
                         items: dropdownTriggerItems,
+                        key: Key("trigger-dropdown"),
                         onChanged: onChangeDropdownTriggerItem,
                         hint: new Text("Select one")),
                   ),

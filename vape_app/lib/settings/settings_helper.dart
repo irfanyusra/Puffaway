@@ -205,7 +205,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                         child: SizedBox(
                           // height: 150.0,
                           child: new TextField(
-                            key: Key('thought-field'),
+                            key: Key('add-trigger-field'),
                             controller: triggerTextController,
                             maxLines: 2,
                             decoration: new InputDecoration(

@@ -1,6 +1,6 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
-
+import 'dart:math';
 void main() {
   group("Puffaway App Test", () {
     final signInPage = find.byType("SignIn");
@@ -11,8 +11,6 @@ void main() {
     // final statsPage = find.byValueKey("dashboard");
     final statsPage = find.byType("Statistics");
     // final statsPage = find.text("Time Since Last Hit");
-    final logNav = find.byValueKey("log-nav");
-    final logTriggerPage = find.byValueKey("log-trigger-page");
     // final logTriggerPage = find.byType("LoggingTrigger");
     final thoughtField = find.byValueKey("thought-field");
     final saveTriggerBtn = find.byValueKey("save-trigger-btn");
@@ -37,9 +35,20 @@ void main() {
     final toggleTrigLogsBtn = find.byValueKey("toggle-trig-logs-btn");
     final allReflectionLogsPage = find.byType("AllReflections");
     final stressorExists = find.text("Stressor: " + stressorText);
-    final progressExists =
-        find.text("Progress: " + progressText + "\n a moment ago");
+    final progressExists = find.text("Progress: " + progressText + "\n a moment ago");
 
+    final settingsNavBtn = find.byValueKey("settings-nav-btn");
+    final addTriggerField = find.byValueKey("add-trigger-field");
+    final settingsPage = find.byType("Settings");
+    final triggerTest = "some trigger";
+    final addTriggerBtn = find.byValueKey("save-trigger-btn");
+    final logNav = find.byValueKey("log-nav");
+    final logTriggerPage = find.byValueKey("log-trigger-page");
+    final triggerDropdown = find.byValueKey("trigger-dropdown");
+    final triggerDropdownValue = find.byValueKey("dropdown_some trigger");
+
+    final registerBtn = find.byValueKey("register_btn");
+    final setupPage = find.byType("Setup");
     FlutterDriver driver;
     setUpAll(() async {
       driver = await FlutterDriver.connect();
@@ -48,7 +57,7 @@ void main() {
     tearDownAll(() async {
       if (driver != null) driver.close();
     });
-    test(
+    /*test(
         "login fails with incorrect email and password, provides text feedback",
         () async {
       await driver.waitFor(signInPage);
@@ -67,13 +76,13 @@ void main() {
     test("logs in with correct email and password", () async {
       // await driver.waitFor(signInPage);
       await driver.tap(emailField);
-      await driver.enterText("test@testmail.com");
+      await driver.enterText("123@123.com");
       await driver.tap(passwordField);
       await driver.enterText("123456");
       await driver.tap(signInButton);
 
       // await driver.waitFor(statsPage);
-      print("wating for stas page");
+      print("wating for stats page");
       await driver.runUnsynchronized(() async {
         await driver.waitFor(statsPage);
         assert(statsPage == null);
@@ -83,7 +92,39 @@ void main() {
       // await new Future.delayed(const Duration(seconds: 10));
     });
 
-    test("Adding Trigger", () async {
+*/
+
+    test("setup page saves values to settings", () async {
+      //random number to create unique email
+      Random random = new Random();
+      int randomNumber = random.nextInt(100);
+
+      await driver.waitFor(signInPage);
+      await driver.runUnsynchronized(() async {
+        await driver.tap(registerBtn);
+        await new Future.delayed(const Duration(seconds: 2));
+        await driver.tap(emailField);
+        await new Future.delayed(const Duration(seconds: 2));
+        await driver.enterText(randomNumber.toString() + "@123.com");
+        await new Future.delayed(const Duration(seconds: 2));
+        await driver.tap(passwordField);
+        await new Future.delayed(const Duration(seconds: 2));
+        await driver.enterText("123456");
+        await new Future.delayed(const Duration(seconds: 2));
+        await driver.tap(registerBtn);
+      });
+
+      print("wating for setup page");
+      await driver.runUnsynchronized(() async {
+        await driver.waitFor(setupPage);
+
+      });
+
+      // await new Future.delayed(const Duration(seconds: 3));
+      // await new Future.delayed(const Duration(seconds: 10));
+    });
+/*
+    test("Adding Log", () async {
       await driver.runUnsynchronized(() async {
         //on the dashboard
         await driver.waitFor(statsPage);
@@ -175,6 +216,44 @@ void main() {
         await driver.waitFor(statsPage);
       });
       await new Future.delayed(const Duration(seconds: 1));
-    });
+    });*/
+
+    /*test("Adding Trigger", () async {
+      //dashboard
+      await driver.runUnsynchronized(() async {
+        //on the dashboard
+        await driver.waitFor(statsPage);
+        assert(statsPage == null);
+        // go to settings page
+        await driver.tap(settingsNavBtn);
+        await Future.delayed(Duration(seconds: 2));
+      });
+
+      //settings page
+      await driver.runUnsynchronized(() async {
+        await driver.waitFor(settingsPage);
+        await driver.tap(addTriggerField);
+        await Future.delayed(Duration(seconds: 2));
+        await driver.enterText(triggerTest);
+        await Future.delayed(Duration(seconds: 2));
+        // save the trigger
+        await driver.tap(addTriggerBtn);
+        await Future.delayed(Duration(seconds: 2));
+        //back from the settings page
+        await driver.tap(find.pageBack());
+        await Future.delayed(Duration(seconds: 2));
+      });
+
+      //log trigger page
+      await driver.runUnsynchronized(() async {
+        await driver.tap(logNav);
+        await driver.waitFor(logTriggerPage);
+        await driver.tap(triggerDropdown);
+        await Future.delayed(Duration(seconds: 2));
+        await driver.tap(triggerDropdownValue);
+      });
+    });*/
   });
+
+
 }
