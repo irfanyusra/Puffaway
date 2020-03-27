@@ -38,17 +38,27 @@ void main() {
     final progressExists = find.text("Progress: " + progressText + "\n a moment ago");
 
     final settingsNavBtn = find.byValueKey("settings-nav-btn");
-    final addTriggerField = find.byValueKey("add-trigger-field");
+    //final addTriggerField = find.byValueKey("add-trigger-field");
     final settingsPage = find.byType("Settings");
-    final triggerTest = "some trigger";
-    final addTriggerBtn = find.byValueKey("save-trigger-btn");
+    //final triggerTest = "some trigger";
+    //final addTriggerBtn = find.byValueKey("save-trigger-btn");
     final logNav = find.byValueKey("log-nav");
     final logTriggerPage = find.byValueKey("log-trigger-page");
     final triggerDropdown = find.byValueKey("trigger-dropdown");
     final triggerDropdownValue = find.byValueKey("dropdown_some trigger");
 
-    final registerBtn = find.byValueKey("register_btn");
+    final registerBtn = find.byValueKey("register-btn");
     final setupPage = find.byType("Setup");
+    final nameField = find.byValueKey("name-field");
+    final nameTest = "some name";
+    final dobField = find.byValueKey("dob-field");
+    final goalField = find.byValueKey("goal-field");
+    final goalTest = "5";
+    final addTriggerField = find.byValueKey("add-trigger-field");
+    final triggerTest = "some trigger";
+    final addTriggerBtn = find.byValueKey("save-trigger-btn");
+    final nextBtn = find.byValueKey("next-btn");
+
     FlutterDriver driver;
     setUpAll(() async {
       driver = await FlutterDriver.connect();
@@ -117,7 +127,33 @@ void main() {
       print("wating for setup page");
       await driver.runUnsynchronized(() async {
         await driver.waitFor(setupPage);
+        await driver.tap(nameField);
+        await driver.enterText(nameTest);
+        await driver.tap(dobField);
+        await new Future.delayed(const Duration(seconds: 2));
+        await driver.tap(find.text('15'));
+        await driver.tap(find.text('OK'));
+        await driver.tap(goalField);
+        await driver.enterText(goalTest);
+        await driver.tap(addTriggerField);
+        await driver.enterText(triggerTest);
+        await driver.tap(addTriggerBtn);
+        await driver.tap(nextBtn);
+      });
 
+      print("waiting for dashboard");
+      await driver.runUnsynchronized(() async {
+        //on the dashboard
+        await driver.waitFor(statsPage);
+        assert(statsPage == null);
+        // go to settings page
+        await driver.tap(settingsNavBtn);
+        await Future.delayed(Duration(seconds: 2));
+      });
+
+      //settings page
+      await driver.runUnsynchronized(() async {
+        await driver.waitFor(settingsPage);
       });
 
       // await new Future.delayed(const Duration(seconds: 3));

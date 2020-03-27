@@ -41,9 +41,8 @@ class _SignInState extends State<SignIn> {
                 //Widget used to allow user to toggle between register and sign in
                 actions: <Widget>[
                   FlatButton.icon(
-                      key: Key("register-btn"),
                       icon: Icon(Icons.person),
-                      label: Text('Register'),
+                      label: Text('Register', key: Key("register-btn")),
                       onPressed: () {
                         //Toggle register screen
                         widget.toggleView();
