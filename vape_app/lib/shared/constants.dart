@@ -49,13 +49,25 @@ Widget buttonThemeAuth(context, child) {
 }
 
 //font style for authentication text fields
-final TextStyle fieldStyle = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0, letterSpacing: 2.0);
+final TextStyle fieldStyle =
+    TextStyle(fontFamily: 'Montserrat', fontSize: 20.0, letterSpacing: 2.0);
 //font style for other text fields
-final TextStyle textStyle = TextStyle(fontFamily: 'Montserrat', fontSize: 18.0, letterSpacing: 2.0);
-final TextStyle textFieldStyle = TextStyle(fontFamily: 'Montserrat', fontSize: 16.0, letterSpacing: 2.0);
+final TextStyle textStyle =
+    TextStyle(fontFamily: 'Montserrat', fontSize: 18.0, letterSpacing: 2.0);
+final TextStyle textFieldStyle =
+    TextStyle(fontFamily: 'Montserrat', fontSize: 16.0, letterSpacing: 2.0);
 
 final InputDecoration inputDecoration = InputDecoration(
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
-                            ));
+    border: new OutlineInputBorder(
+  borderRadius: new BorderRadius.circular(25.0),
+  borderSide: new BorderSide(),
+));
+
+differenceInTimeLastHitAndNow(logs) {
+  var lastHitTime = logs.length > 0
+      ? DateTime.parse(logs.first.dateTime.toDate().toString())
+      : new DateTime.now(); //last log time goes here
+  var current = new DateTime.now();
+  var diff = current.difference(lastHitTime);
+  return diff;
+}
