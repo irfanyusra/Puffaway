@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:vape_app/Models/Trigger.dart';
 import 'package:vape_app/pages/recommendation_page.dart';
 import 'package:vape_app/services/auth.dart';
-import 'package:http/http.dart';
+import 'package:vape_app/shared/ReusableFlatButton.dart';
 import 'package:vape_app/services/logs.dart';
 import 'package:vape_app/shared/constants.dart';
 
@@ -18,7 +17,6 @@ class LogsPageHelper extends StatefulWidget {
 class LogsPageHelperState extends State<LogsPageHelper> {
   final LogsService _log = LogsService();
 
-  String serverResponse = '';
   // List<String> triggers = [
   //   'Select one',
   //   'Time of day',
@@ -178,18 +176,12 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                         style: fieldStyle.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold)),
                     onPressed: () async {
-                      String trigger;
-                      _makePostRequest(selectedTrigger);
-    
                       dynamic result = await _log.documentLog(
                           selectedTrigger, thoughtTextController.text);
-                      setState(() {
-                        trigger = selectedTrigger;
-                      });
                       Navigator.push(
                           context,
                           new MaterialPageRoute<void>(
-                              builder: (context) => Recommendation(trigger:trigger)));
+                              builder: (context) => Recommendation()));
 
                       setState(() {
                         thoughtTextController.text = "";
@@ -205,20 +197,4 @@ class LogsPageHelperState extends State<LogsPageHelper> {
       ),
     );
   }
-
-    _makePostRequest(String trigger) async {
-    Map<String, String> headers = {"Content-type": "application/json"};
-     String json = '{"trigger": "$trigger"}';
-    Response response = await post(_localhost(),headers: headers,body:json);
-    return response.body;
-  }
-
-  String _localhost() {
-    if (Platform.isAndroid)
-      return 'http://10.0.2.2:5000/predict';
-    else // for iOS simulator
-      return 'http://localhost:5000/predict';
-  }
 }
-
-
