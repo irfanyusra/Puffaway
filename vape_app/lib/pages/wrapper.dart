@@ -11,16 +11,16 @@ class Wrapper extends StatefulWidget {
 }
 
 class _WrapperState extends State<Wrapper> {
-  bool showSetup = true;
+  bool showSetup = false;
 
   void toggleSetup() {
     //Toggle with a not
-    setState(() => showSetup = false);
+    setState(() => showSetup = !showSetup);
   }
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    return user == null ? Authenticate() : showSetup ? Setup(toggleSetup: toggleSetup) : Home();
+    return user == null ? Authenticate(toggleSetup: toggleSetup) : !showSetup ? Setup(toggleSetup: toggleSetup) : Home();
   }
 }
