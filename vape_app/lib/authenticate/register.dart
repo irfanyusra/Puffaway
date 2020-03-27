@@ -9,8 +9,8 @@ import 'package:vape_app/helper_functions/validation.dart';
 class Register extends StatefulWidget {
   // function from authenticate file
   final Function toggleView;
-
   Register({this.toggleView});
+
   @override
   _RegisterState createState() => _RegisterState();
 }

@@ -22,9 +22,6 @@ class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    // return user == null
-    //     ? Authenticate(toggleSetup: toggleSetup)
-    //     : !showSetup ? Setup(toggleSetup: toggleSetup) : Home();
 
     if (user == null) {
       return Authenticate(toggleSetup: toggleSetup);
@@ -32,9 +29,7 @@ class _WrapperState extends State<Wrapper> {
       if (showSetup)
         return StreamProvider<UserData>.value(
             value: DatabaseService(uid: user.uid).userData,
-            child: Setup(toggleSetup: toggleSetup) // AchievementsHelper(),
-            );
-      // return Setup(toggleSetup: toggleSetup);
+            child: Setup(toggleSetup: toggleSetup));
       else
         return Home();
     }
