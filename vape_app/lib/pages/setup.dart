@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vape_app/Models/User.dart';
+import 'package:vape_app/services/auth.dart';
+import 'package:vape_app/services/logs.dart';
+import 'package:vape_app/shared/loading.dart';
 import 'package:vape_app/shared/constants.dart';
 
-//TODO: fix recommendations
+//TODO: fix backend
+
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
 }
 
 class Setup extends StatefulWidget {
+  final Function toggleSetup;
+  Setup({this.toggleSetup});
+
   @override
   _SetupState createState() => _SetupState();
 }
@@ -65,6 +74,10 @@ class _SetupState extends State<Setup> {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = AuthService();
+    final userData = Provider.of<UserData>(context);
+
+    final LogsService _log = LogsService();
     return Scaffold(
       appBar: AppBar(
         title: Text('Setup'),
@@ -115,9 +128,10 @@ class _SetupState extends State<Setup> {
                     hintText: 'Add custom trigger',
                     suffixIcon: IconButton(
                       icon: Icon(Icons.add),
-                      onPressed: () {
+                      onPressed: () async {
+                        await _log.createTrigger(triggerTextController.text);
                         triggerTextController.text = "";
-                        //add it to the database here
+
                         print("Add pressed");
                         Scaffold.of(context).showSnackBar(SnackBar(
                             content: Text("Trigger added"),
@@ -129,59 +143,15 @@ class _SetupState extends State<Setup> {
                 SizedBox(
                   height: 20.0,
                 ),
-                // TextField(
-                //   key: Key('recommendation-field'),
-                //   controller: recommendationTextController,
-                //   decoration: new InputDecoration(
-                //     border: new OutlineInputBorder(
-                //       borderRadius: new BorderRadius.circular(20.0),
-                //       borderSide: new BorderSide(),
-                //     ),
-                //     hintText: 'Add custom recommendation',
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 20.0,
-                // ),
-                // FlatButton(
-                //   child: Text(
-                //     'Add ',
-                //     style: new TextStyle(fontSize: 20.0, color: Colors.blue),
-                //   ),
-                //   color: Colors.grey[200],
-                //   shape: RoundedRectangleBorder(
-                //       borderRadius: new BorderRadius.circular(10.0),
-                //       side: BorderSide(color: Colors.blue)),
-                //   onPressed: () {
-                //     triggerTextController.text = "";
-                //     recommendationTextController.text = "";
-                //     print("Add pressed");
-                //     Scaffold.of(context).showSnackBar(SnackBar(
-                //         content: Text("Trigger added"),
-                //         duration: Duration(milliseconds: 500)));
-                //   },
-                // ),
-                // SizedBox(
-                //   height: 20.0,
-                // ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlatButton(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Help ",
-                            style: TextStyle(fontSize: 20, color: Colors.blue),
-                          ),
-                          Icon(
-                            Icons.help,
-                            color: Colors.blue,
-                          ),
-                          
-                        ],
+                FlatButton(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Next ',
+                        style:
+                            new TextStyle(fontSize: 20.0, color: Colors.blue),
                       ),
                       onPressed: showHelp,
                     ),
@@ -201,9 +171,13 @@ class _SetupState extends State<Setup> {
                           ),
                         ],
                       ),
-                      onPressed: () => print("next pressed"),
-                    ),
-                  ],
+                    ],
+                  ),
+                  onPressed: () async {
+                    await _auth.updateUserData(
+                        nameTextController.text, goalTextController.text,dobTextController.text, userData.token);
+                    widget.toggleSetup();
+                  },
                 ),
               ],
             ),
