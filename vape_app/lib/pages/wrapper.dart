@@ -21,6 +21,6 @@ class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    return user == null ? Authenticate(toggleSetup: toggleSetup) : !showSetup ? Setup(toggleSetup: toggleSetup) : Home();
+    return user == null ? Authenticate(toggleSetup: toggleSetup) : showSetup ? Setup(toggleSetup: toggleSetup) : Home();
   }
 }
