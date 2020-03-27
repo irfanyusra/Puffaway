@@ -47,9 +47,9 @@ class _SetupState extends State<Setup> {
       });
   }
 
-  final String helpText = 
-    "The \"Goal in days\" field is where you set how many days you want to go without vaping. We recommend you start with 1 day without vaping, and then slowly increase your goal.\n\n"
-    "You can also add your personal vape triggers. These triggers will be available when logging your vape habit.";
+  final String helpText =
+      "The \"Goal in days\" field is where you set how many days you want to go without vaping. We recommend you start with 1 day without vaping, and then slowly increase your goal.\n\n"
+      "You can also add your personal vape triggers. These triggers will be available when logging your vape habit.";
 
   void showHelp() {
     showDialog(
@@ -58,7 +58,8 @@ class _SetupState extends State<Setup> {
         return AlertDialog(
           title: new Text("Help"),
           content: new Text(helpText),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20))),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Close"),
@@ -143,6 +144,19 @@ class _SetupState extends State<Setup> {
                 SizedBox(
                   height: 20.0,
                 ),
+                // FlatButton(
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     children: <Widget>[
+                //       Text(
+                //         'Next ',
+                //         style:
+                //             new TextStyle(fontSize: 20.0, color: Colors.blue),
+                //         key: Key("next-btn")
+                //       ),
+                //       onPressed: showHelp,
+                //     ),
                 FlatButton(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -152,31 +166,21 @@ class _SetupState extends State<Setup> {
                         'Next ',
                         style:
                             new TextStyle(fontSize: 20.0, color: Colors.blue),
-                        key: Key("next-btn")
                       ),
-                      onPressed: showHelp,
-                    ),
-                    FlatButton(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Next ',
-                            style:
-                                new TextStyle(fontSize: 20.0, color: Colors.blue),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.blue,
-                          ),
-                        ],
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.blue,
                       ),
                     ],
                   ),
+                  // ],
+                  // ),
                   onPressed: () async {
                     await _auth.updateUserData(
-                        nameTextController.text, goalTextController.text,dobTextController.text, userData.token);
+                        nameTextController.text,
+                        goalTextController.text,
+                        dobTextController.text,
+                        userData.token);
                     widget.toggleSetup();
                   },
                 ),
