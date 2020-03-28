@@ -47,6 +47,32 @@ class _SetupState extends State<Setup> {
       });
   }
 
+  final String helpText =
+      "The \"Goal in days\" field is where you set how many days you want to go without vaping. We recommend you start with 1 day without vaping, and then slowly increase your goal.\n\n"
+      "You can also add your personal vape triggers. These triggers will be available when logging your vape habit.";
+
+  void showHelp() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Help"),
+          content: new Text(helpText),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final _auth = AuthService();
@@ -94,7 +120,7 @@ class _SetupState extends State<Setup> {
                       inputDecoration.copyWith(hintText: 'Goal in days'),
                 ),
                 SizedBox(
-                  height: 40.0,
+                  height: 20.0,
                 ),
                 TextField(
                   key: Key('trigger-field'),
@@ -102,7 +128,7 @@ class _SetupState extends State<Setup> {
                   decoration: inputDecoration.copyWith(
                     hintText: 'Add custom trigger',
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.add),
+                      icon: Icon(Icons.add, key: Key("save-trigger-btn")),
                       onPressed: () async {
                         await _log.createTrigger(triggerTextController.text);
                         triggerTextController.text = "";
@@ -118,27 +144,50 @@ class _SetupState extends State<Setup> {
                 SizedBox(
                   height: 20.0,
                 ),
-                FlatButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Next ',
-                        style:
-                            new TextStyle(fontSize: 20.0, color: Colors.blue),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    FlatButton(
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'Help ',
+                            style: TextStyle(fontSize: 20, color: Colors.blue),
+                          ),
+                          Icon(
+                            Icons.help_outline,
+                            color: Colors.blue,
+                          )
+                        ]
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.blue,
+                      onPressed: showHelp,
+                    ),
+                    FlatButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Next ',
+                            style: TextStyle(fontSize: 20.0, color: Colors.blue),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.blue,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  onPressed: () async {
-                    await _auth.updateUserData(
-                        nameTextController.text, goalTextController.text,dobTextController.text, userData.token);
-                    widget.toggleSetup();
-                  },
+                      onPressed: () async {
+                        await _auth.updateUserData(
+                            nameTextController.text,
+                            goalTextController.text,
+                            dobTextController.text,
+                            userData.token);
+                        widget.toggleSetup();
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

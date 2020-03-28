@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vape_app/Reflections/reflections_page.dart';
 import 'package:vape_app/authenticate/register.dart';
 import 'package:vape_app/authenticate/sign_in.dart';
+import 'package:vape_app/settings/settings.dart';
 
 void main() {
   Widget makeTestable({Widget child}) {

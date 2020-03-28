@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vape_app/PodLoader/ProgressBar.dart';
+import 'package:vape_app/pages/setup.dart';
 import 'package:vape_app/services/MessageHandler.dart';
 import 'package:vape_app/PodLoader/ProgressBarUserData.dart';
 import 'package:vape_app/services/database.dart';
@@ -30,6 +31,7 @@ class _StatisticsState extends State<Statistics> {
               Padding(
                 padding: EdgeInsets.only(right: 20.0),
                 child: GestureDetector(
+                  key: Key("settings-nav-btn"),
                   onTap: () async {
                     Navigator.push(
                         context,
