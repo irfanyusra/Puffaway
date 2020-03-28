@@ -9,6 +9,18 @@ import 'package:vape_app/services/auth.dart';
 import 'package:http/http.dart';
 import 'package:vape_app/services/logs.dart';
 import 'package:vape_app/shared/constants.dart';
+import 'dart:convert';
+class MachineLearning {
+  final String trigger;
+
+  MachineLearning({this.trigger});
+
+  factory MachineLearning.fromJson(Map<String, dynamic> json) {
+    return MachineLearning(
+      trigger: json['trigger'],
+    );
+  }
+}
 
 class LogsPageHelper extends StatefulWidget {
   @override
@@ -34,6 +46,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
 
   List<DropdownMenuItem<String>> dropdownTriggerItems;
   String selectedTrigger;
+  String recommendationTrigger;
 
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
@@ -47,9 +60,11 @@ class LogsPageHelperState extends State<LogsPageHelper> {
   }
 
   @override
-  void initState() {
+  void initState(){
     // dropdownTriggerItems = buildDropdownTriggerItems(triggers);
-    // selectedTrigger = dropdownTriggerItems[0].value;
+  
+    selectedTrigger = 'Time of day';
+    recommendationTrigger = 'Time of day';
     super.initState();
   }
 
@@ -66,9 +81,13 @@ class LogsPageHelperState extends State<LogsPageHelper> {
     return items;
   }
 
-  onChangeDropdownTriggerItem(String newTrig) {
+  onChangeDropdownTriggerItem(String newTrig) async{
+     MachineLearning prediction;
+     prediction = await _makePostRequest(newTrig);
+    
     setState(() {
       selectedTrigger = newTrig;
+      recommendationTrigger =prediction.trigger;
     });
   }
 
@@ -76,9 +95,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
     //Retrieve trigger using getter function
     final triggers = Provider.of<List<Trigger>>(context) ?? [];
     final _auth = AuthService();
-
     dropdownTriggerItems = buildDropdownTriggerItems(triggers);
-
     return Scaffold(
       appBar: AppBar(
         key: Key('log-trigger-page'),
@@ -177,18 +194,13 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                         style: fieldStyle.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold)),
                     onPressed: () async {
-                      String trigger;
-                      _makePostRequest(selectedTrigger);
-    
+
                       dynamic result = await _log.documentLog(
                           selectedTrigger, thoughtTextController.text);
-                      setState(() {
-                        trigger = selectedTrigger;
-                      });
                       Navigator.push(
                           context,
                           new MaterialPageRoute<void>(
-                              builder: (context) => Recommendation(trigger:trigger)));
+                              builder: (context) => Recommendation(trigger:recommendationTrigger)));
 
                       setState(() {
                         thoughtTextController.text = "";
@@ -205,11 +217,15 @@ class LogsPageHelperState extends State<LogsPageHelper> {
     );
   }
 
-    _makePostRequest(String trigger) async {
+   Future<MachineLearning> _makePostRequest(String trigger) async {
     Map<String, String> headers = {"Content-type": "application/json"};
-     String json = '{"trigger": "$trigger"}';
-    Response response = await post(_localhost(),headers: headers,body:json);
-    return response.body;
+
+     String jsonB = '{"trigger": "$trigger"}';
+    Response response = await post(_localhost(),headers:headers,body:jsonB);
+    if (response.statusCode == 200) 
+      return MachineLearning.fromJson(json.decode(response.body));
+    else
+     throw Exception('Failed to load trigger');
   }
 
   String _localhost() {

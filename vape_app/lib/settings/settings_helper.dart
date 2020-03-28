@@ -1,6 +1,7 @@
 //TODO: fix all the text fields and buttons (after abdulaziz is done)
 // import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:vape_app/Models/User.dart';
@@ -219,7 +220,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
   //   });
   // }
 
-  Future<Null> _selectDate(BuildContext context) async {
+  Future<DateTime> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -229,8 +230,8 @@ class _SettingsHelperState extends State<SettingsHelper> {
       setState(() {
         selectedDate = picked;
         dobTextController.text = "${selectedDate.toLocal()}".split(' ')[0];
-        
       });
+    return picked;
   }
 
   @override
@@ -349,7 +350,15 @@ class _SettingsHelperState extends State<SettingsHelper> {
                             ),
                             SizedBox(height: 10),
                             TextField(
-                              onTap: () => _selectDate(context),
+                              onTap: () async {
+                                DateTime picked = await _selectDate(context);
+                                if(picked!=null)
+                                await _auth.updateUserData(
+                                    userData.name,
+                                    userData.goal,
+                                  DateFormat('yyyy-MM-dd').format(picked),
+                                    userData.token);
+                              },
                               style: textFieldStyle,
                               key: Key('dob-field'),
                               focusNode: AlwaysDisabledFocusNode(),
@@ -357,7 +366,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
                               decoration: textInputDecoration.copyWith(
                                   hintText: 'Date of Birth'),
                               onChanged: (dob) async {
-                                print("dob");
+                                //print("dob");
                                 //Update name in database
                                 await _auth.updateUserData(userData.name,
                                     userData.goal, dob, userData.token);

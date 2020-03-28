@@ -52,4 +52,3 @@ for i, label in enumerate(target_names):
 
 pickle.dump(model, open('model.pkl','wb'))
 model_pickle = pickle.load(open('model.pkl','rb'))
-print(model_pickle.predict(['smell']))
