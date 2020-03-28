@@ -58,6 +58,7 @@ void main() {
     final triggerTest = "some trigger";
     final addTriggerBtn = find.byValueKey("save-trigger-btn");
     final nextBtn = find.byValueKey("next-btn");
+    final logoutBtn = find.byValueKey("logout-btn");
 
     FlutterDriver driver;
     setUpAll(() async {
@@ -67,7 +68,8 @@ void main() {
     tearDownAll(() async {
       if (driver != null) driver.close();
     });
-    /*test(
+
+    test(
         "login fails with incorrect email and password, provides text feedback",
         () async {
       await driver.waitFor(signInPage);
@@ -96,14 +98,18 @@ void main() {
       await driver.runUnsynchronized(() async {
         await driver.waitFor(statsPage);
         assert(statsPage == null);
+        await driver.tap(settingsNavBtn);
       });
 
-      // await new Future.delayed(const Duration(seconds: 3));
-      // await new Future.delayed(const Duration(seconds: 10));
+      await driver.runUnsynchronized(() async {
+        await driver.waitFor(settingsPage);
+        assert(settingsPage == null);
+        await driver.tap(logoutBtn);
+      });
+
     });
 
 
-*/
     test("Register page fails with duplicate email, succeeds with unique email. Setup page saves values to settings and add trigger saves to dropdown", () async {
 
       //random number to create unique email
@@ -119,6 +125,7 @@ void main() {
         await driver.tap(passwordField);
         await driver.enterText("123456");
         await driver.tap(registerBtn);
+        await new Future.delayed(const Duration(seconds: 2));
         await driver.waitFor(find.text("Email already in use, please use a different email"));
         print("Register page fails with duplicate email test succeeded");
 
@@ -127,7 +134,6 @@ void main() {
         await driver.enterText(randomNumber.toString() + "@123.com");
         await driver.tap(passwordField);
         await driver.enterText("123456");
-        await new Future.delayed(const Duration(seconds: 2));
         await driver.tap(registerBtn);
         print("Register succeeded");
       });
@@ -168,7 +174,6 @@ void main() {
         await driver.tap(find.text(nameTest));
         print("correct name found");
         await new Future.delayed(const Duration(seconds: 2));
-        //await driver.tap(find.text('2020-03-15'));
         expect(find.text('2020-03-15'), anything);
         print("correct date found");
         await new Future.delayed(const Duration(seconds: 2));
@@ -181,23 +186,23 @@ void main() {
         await driver.tap(logNav);
         await driver.waitFor(logTriggerPage);
         await driver.tap(triggerDropdown);
-        await Future.delayed(Duration(seconds: 2));
         await driver.tap(triggerDropdownValue);
         print("setup values saved successfully");
       });
 
     });
-/*
+
     test("Adding Log", () async {
-      await driver.runUnsynchronized(() async {
+      /*await driver.runUnsynchronized(() async {
         //on the dashboard
         await driver.waitFor(statsPage);
         assert(statsPage == null);
         // go to logging trigger page
         await driver.tap(logNav);
-      });
+      });*/
+
       await driver.runUnsynchronized(() async {
-        await driver.waitFor(logTriggerPage);
+        //await driver.waitFor(logTriggerPage);
         await driver.tap(thoughtField);
         await driver.enterText(thoughtText);
         // save the trigger
@@ -212,7 +217,6 @@ void main() {
       });
       await driver.runUnsynchronized(() async {
         await driver.waitFor(statsPage);
-        await new Future.delayed(const Duration(seconds: 1));
         //go to the diary to see the new added trigger
         await driver.tap(diaryNav);
       });
@@ -228,21 +232,23 @@ void main() {
       await driver.runUnsynchronized(() async {
         await driver.waitFor(thoughtExists);
       });
-      await driver.tap(statsNav);
+      /*await driver.tap(statsNav);
 
       await driver.runUnsynchronized(() async {
         await driver.waitFor(statsPage);
       });
-      await new Future.delayed(const Duration(seconds: 1));
+      await new Future.delayed(const Duration(seconds: 1));*/
     });
 
     test("Adding Reflection", () async {
       //on the dashboard
-      await driver.runUnsynchronized(() async {
+      /*await driver.runUnsynchronized(() async {
         await driver.waitFor(statsPage);
         //go to logging trigger page
         await driver.tap(reflectionNav);
-      });
+      });*/
+      await driver.tap(reflectionNav);
+
       await driver.runUnsynchronized(() async {
         await driver.waitFor(logReflectionPage);
         await driver.tap(stressorField);
@@ -276,24 +282,24 @@ void main() {
       //on the dashboard
       await driver.tap(statsNav);
 
-      await driver.runUnsynchronized(() async {
+     /* await driver.runUnsynchronized(() async {
         await driver.waitFor(statsPage);
       });
-      await new Future.delayed(const Duration(seconds: 1));
+      await new Future.delayed(const Duration(seconds: 1));*/
     });
 
     test("Adding Trigger", () async {
-      await driver.tap(emailField);
+     /* await driver.tap(emailField);
       await driver.enterText("123@123.com");
       await driver.tap(passwordField);
       await driver.enterText("123456");
-      await driver.tap(signInButton);
+      await driver.tap(signInButton);*/
 
-      print("wating for stats page");
+
 
       //dashboard
       await driver.runUnsynchronized(() async {
-        //on the dashboard
+        print("wating for stats page");
         await driver.waitFor(statsPage);
         assert(statsPage == null);
         // go to settings page
@@ -322,7 +328,7 @@ void main() {
         await Future.delayed(Duration(seconds: 2));
         await driver.tap(triggerDropdownValue);
       });
-    });*/
+    });
   });
 
 

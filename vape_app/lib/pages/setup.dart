@@ -171,6 +171,7 @@ class _SetupState extends State<Setup> {
                           Text(
                             'Next ',
                             style: TextStyle(fontSize: 20.0, color: Colors.blue),
+                            key: Key("next-btn")
                           ),
                           Icon(
                             Icons.arrow_forward_ios,

@@ -287,7 +287,7 @@ class _SettingsHelperState extends State<SettingsHelper> {
         actions: <Widget>[
           ResuableFlatButton(
             icon: Icon(Icons.person),
-            label: Text("Logout"),
+            label: Text("Logout", key: Key("logout-btn")),
             onPressed: () async {
               Navigator.pop(context);
               await _auth.signOut();

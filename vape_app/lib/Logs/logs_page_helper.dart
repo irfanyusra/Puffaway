@@ -171,7 +171,7 @@ class LogsPageHelperState extends State<LogsPageHelper> {
                 child: buttonThemeAuth(
                   context,
                   FlatButton(
-                    key: (Key('save-trigger-btn')),
+                    key: Key('save-trigger-btn'),
                     color: Colors.blue,
                     child: Text('Log Trigger',
                         textAlign: TextAlign.center,
