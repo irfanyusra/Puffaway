@@ -49,8 +49,8 @@ class _RecommendationState extends State<Recommendation> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
     final _auth = AuthService();
-    print(utf8.encode(widget.trigger));
-    print(utf8.encode(listRecommendations[5].trigger));
+    // print(utf8.encode(widget.trigger));
+    // print(utf8.encode(listRecommendations[5].trigger));
     rec = getRecommendation(widget.trigger);
 
 
@@ -82,10 +82,10 @@ class _RecommendationState extends State<Recommendation> {
                 alignment: Alignment.topLeft,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.blueAccent),
-                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Text(
                     'Recommendation: \n ${rec.recom}',
                     textAlign: TextAlign.left,
