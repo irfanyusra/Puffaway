@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:vape_app/Models/Recommendation.dart';
 import 'package:vape_app/services/auth.dart';
 import 'package:vape_app/shared/constants.dart';
+import 'dart:convert' show utf8;
 
 class Recommendation extends StatefulWidget {
   final String trigger;
@@ -14,8 +15,8 @@ class Recommendation extends StatefulWidget {
 class _RecommendationState extends State<Recommendation> {
   Map data = {};
   List<Recommendations> listRecommendations = [
-    Recommendations(
-        trigger: "Select one", recom: "Please select a trigger next time"),
+    // Recommendations(
+    // trigger: "Select one", recom: "Please select a trigger next time"),
     Recommendations(
         trigger: "Time of day",
         recom:
@@ -48,7 +49,10 @@ class _RecommendationState extends State<Recommendation> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
     final _auth = AuthService();
-    rec =getRecommendation(widget.trigger); 
+    print(utf8.encode(widget.trigger));
+    print(utf8.encode(listRecommendations[5].trigger));
+    rec = getRecommendation(widget.trigger);
+
 
     return Scaffold(
       appBar: AppBar(
