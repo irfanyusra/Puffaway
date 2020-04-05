@@ -12,5 +12,7 @@ Instructions on how to run it:
 
 Please note:
 
-We made a backend for our app using python and flask. This was done as we wanted to do some machine learning to give custom recommendations to every user. Unfortunately, we could not deploy it without a server because it costs money. We thought about deploying it locally but then flutter would have to be installed on the device as we cannot run the backend on a phone, where the apk will run. It all has to be local. So we decided on having one recommendation if the backend is not connected, this was our back up plan just in case the server was not connected. The demonstration of the product with the backend functionality is provided in the demo. 
+We made a backend for our app using python and flask. This was done as we wanted to do some machine learning to give custom recommendations to every user. Unfortunately, we could not deploy it without a server because it costs money. We thought about deploying it locally but then flutter would have to be installed on the device as we cannot run the backend on a phone, where the apk will run. It all has to be local. So we decided on having random recommendation if the backend is not connected for custom triggers, this was our back up plan just in case the server was not connected. The demonstration of the product with the backend functionality is provided in the demo. 
+
+The link to the demo: https://www.youtube.com/watch?v=s0ku6pfA2DE&feature=youtu.be
 
